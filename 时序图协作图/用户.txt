@@ -1,0 +1,23 @@
+@startuml
+actor 用户 as u1
+participant 用户信息数据库 as db1
+participant 用户信息 as userinfo1
+participant 数据平台 as dp1
+participant 数据存储中心 as ds1
+participant 数据请求 as dq1
+
+u1 -> dp1 : 请求注册
+dp1 ->  db1 : 查找用户信息
+db1 --> dp1 : 获取用户信息失败
+dp1 ->  db1 :创建用户信息
+
+u1 -> dp1 : 请求登录
+dp1 ->  db1 : 查找用户信息
+db1 -> userinfo1 : 获取用户信息
+userinfo1--> db1 : 返回用户信息
+db1 --> dp1 : 验证通过登录
+
+dp1 -> dq1 : 发送请求获取相关数据
+dq1 -> ds1 : 获取相关数据
+ds1 --> dq1 : 返回相关数据
+@enduml
