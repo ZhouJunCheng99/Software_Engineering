@@ -3,13 +3,13 @@
     <div class="bg">
       <dv-loading v-if="loading">Loading...</dv-loading>
       <div v-else class="host-body">
-        <!-- 头部样子 -->
+        <!-- 头部样式 -->
         <div class="d-flex jc-center">
           <dv-decoration-10 class="dv-dec-10" />
           <div class="d-flex jc-center">
             <dv-decoration-8 class="dv-dec-8" :color="decorationColor" />
             <div class="title">
-              <span class="title-text">智慧城市大屏可视化</span>
+              <span class="title-text">海洋牧场可视化系统</span>
               <dv-decoration-6
                 class="dv-dec-6"
                 :reverse="true"
@@ -38,21 +38,21 @@
               ></span>
               <router-link to="/index/traffic"
                 ><span class="text" @click="changeTabbarIndex(0)"
-                  >交通情况</span
+                  >主要信息</span
                 ></router-link
               >
             </div>
             <div class="react-left ml-3" :class="{ bgc: tabbarIndex == 1 }">
               <router-link to="/index/population"
                 ><span class="text" @click="changeTabbarIndex(1)"
-                  >城市人口</span
+                  >水下系统</span
                 ></router-link
               >
             </div>
             <div class="react-left ml-3" :class="{ bgc: tabbarIndex == 2 }">
               <router-link to="/index/environment"
                 ><span class="text" @click="changeTabbarIndex(2)"
-                  >环境生态</span
+                  >数据中心</span
                 ></router-link
               >
             </div>
@@ -61,7 +61,7 @@
             <div class="react-right mr-3" :class="{ bgc: tabbarIndex == 3 }">
               <router-link to="/index/economy"
                 ><span class="text fw-b" @click="changeTabbarIndex(3)"
-                  >城市经济</span
+                  >智能中心</span
                 ></router-link
               >
             </div>
