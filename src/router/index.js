@@ -8,6 +8,9 @@ const routes = [
     path: "/login",
     name: "login",
     component: () => import("../views/Login.vue"),
+    meta: {
+      title: '登录界面'
+    }
   },
   {
     path: "/",
@@ -41,6 +44,7 @@ const routes = [
         component: () => import("../views/economy/index.vue"),
       },
     ],
+
   },
 ];
 const router = new VueRouter({
