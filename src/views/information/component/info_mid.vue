@@ -1,18 +1,13 @@
 <template>
   <div class="content">
     <div>
-      <dv-border-box-8 :reverse="true">
-        <div class="head">
-          <div class="head_content">
-            <h1>12344822</h1>
-            <h2>2022年收入情况</h2>
-          </div>
-          <div class="head_content">
-            <h1>45620218</h1>
-            <h2>2022年总支出情况</h2>
-          </div>
-        </div>
-      </dv-border-box-8>
+      <dv-border-box-2 style="padding: 8px">
+          <h2>水文气象</h2>
+          <dv-capsule-chart
+            :config="waterData"
+            width="100%"
+          />
+      </dv-border-box-2>
     </div>
 
     <div class="body">
@@ -25,7 +20,13 @@
             @ready="handler"
             :mapStyle="mapStyle"
             :scroll-wheel-zoom="true"
-          />
+          >
+        <bm-marker
+              v-for="(item, index) of markerPoints"
+              :position="item"
+              :key="index"
+            ></bm-marker>
+        </baidu-map>
         </div>
       </dv-border-box-6>
     </div>
@@ -43,6 +44,42 @@ export default {
       zoom: 3,
       mapStyle: {
         styleJson: mapStyle,
+      },
+      markerPoints: [
+        { lng: 106.505, lat: 29.5332 },
+        { lng: 106.51, lat: 29.5332 },
+        { lng: 106.524, lat: 29.53 },
+      ],
+      waterData: {
+        data: [
+          {
+            name: '南阳',
+            value: 167
+          },
+          {
+            name: '周口',
+            value: 67
+          },
+          {
+            name: '漯河',
+            value: 123
+          },
+          {
+            name: '郑州',
+            value: 55
+          },
+          {
+            name: '西峡',
+            value: 98
+          },
+          {
+            name: '南阳',
+            value: 167
+          },
+        ],
+        colors: ['#e062ae', '#fb7293', '#e690d1', '#32c5e9', '#96bfff', '#e062ae'],
+        unit: '单位',
+        showValue: true
       },
     };
   },
@@ -81,7 +118,7 @@ export default {
 }
 .map-content {
   width: 700px;
-  height: 750px;
+  height: 600px;
   overflow: hidden;
 }
 .map {
