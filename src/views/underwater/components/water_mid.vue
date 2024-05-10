@@ -37,7 +37,7 @@
     <Echart :options="options1" height="400px" width="500px"/>
     <div>
       <dv-border-box-7>
-        <h2 class="title">鱼类数量</h2>
+        <h2 class="title">鱼类重量</h2>
         <Echart :options="options2" height="350px" width="680px" />
       </dv-border-box-7>
     </div>
@@ -138,7 +138,7 @@ options1: {
     options2: {
         xAxis: {
             type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            data: ['种类一', '种类二', '种类三', '种类四', '种类五', '种类六', '种类七']
         },
         yAxis: {
             type: 'value'

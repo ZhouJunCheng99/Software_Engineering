@@ -95,11 +95,13 @@ export default {
       type: 'pie',
        radius: ['40%', '70%'],
       data: [
-        { value: 32, name: '其它' },
-        { value: 21, name: '旅游' },
-        { value: 24, name: '饮食' },
-        { value: 10, name: '服装' },
-        { value: 13, name: '电影' }
+        { value: 32, name: '种类一' },
+        { value: 21, name: '种类二' },
+        { value: 24, name: '种类三' },
+        { value: 10, name: '种类四' },
+        { value: 13, name: '种类五' },
+        { value: 10, name: '种类六' },
+        { value: 15, name: '种类七' },
       ],
       emphasis: {
         itemStyle: {

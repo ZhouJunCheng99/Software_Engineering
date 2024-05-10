@@ -119,7 +119,7 @@ export default {
         },
         title: {
             left: 'center',
-            text: 'Large Ara Chart'
+            text: '鱼群个体数量历史曲线'
         },
         toolbox: {
             feature: {
@@ -136,6 +136,7 @@ export default {
         },
         yAxis: {
             type: 'value',
+            name: "条",
             boundaryGap: [0, '100%']
         },
         dataZoom: [
@@ -151,12 +152,16 @@ export default {
         ],
         series: [
             {
-            name: 'Fake Data',
             type: 'line',
             smooth: true,
             symbol: 'none',
             areaStyle: {},
-            data: data
+            data: data,
+            tooltip: {
+              valueFormatter: function (value) {
+                return value + " 条";
+              },
+            },
             }
         ]
     },

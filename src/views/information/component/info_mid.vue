@@ -53,32 +53,32 @@ export default {
       waterData: {
         data: [
           {
-            name: '南阳',
-            value: 167
+            name: '电池电压(V)',
+            value: 25.90
           },
           {
-            name: '周口',
+            name: '盐度()',
             value: 67
           },
           {
-            name: '漯河',
+            name: '溶解度()',
             value: 123
           },
           {
-            name: '郑州',
+            name: '浊度()',
             value: 55
           },
           {
-            name: '西峡',
+            name: 'pH()',
             value: 98
           },
           {
-            name: '南阳',
+            name: '水温()',
             value: 167
           },
         ],
         colors: ['#e062ae', '#fb7293', '#e690d1', '#32c5e9', '#96bfff', '#e062ae'],
-        unit: '单位',
+        unit: ' ',
         showValue: true
       },
     };

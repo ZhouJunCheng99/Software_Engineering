@@ -6,8 +6,8 @@
     </dv-border-box-6>
       <div class="device_content">
         <dv-border-box-12 style="padding: 20px">
+            <h1>设备状态</h1>
           <div class="air" height="500px" width="600px">
-            <h1>设备信息</h1>
             <h2>设备信息</h2>
             <h2>设备信息</h2>
             <h2>设备信息</h2>
@@ -42,7 +42,7 @@ export default {
           },
         },
         legend: {
-          data: ["人口", "人口增长率"],
+          data: ["pH", "水温"],
         },
         xAxis: [
           {
@@ -70,7 +70,7 @@ export default {
         yAxis: [
           {
             type: "value",
-            name: "万人",
+            name: "℃",
             min: 2700,
             max: 3300,
             interval: 100,
@@ -80,7 +80,7 @@ export default {
           },
           {
             type: "value",
-            name: "万人",
+            name: " ",
             min: 0,
             max: 70,
             interval: 10,
@@ -91,11 +91,11 @@ export default {
         ],
         series: [
           {
-            name: "人口",
+            name: "温度",
             type: "bar",
             tooltip: {
               valueFormatter: function (value) {
-                return value + " 万";
+                return value + " ℃";
               },
             },
             data: [
@@ -104,74 +104,18 @@ export default {
             ],
           },
           {
-            name: "人口增长率",
+            name: "pH",
             type: "line",
             yAxisIndex: 1,
             tooltip: {
               valueFormatter: function (value) {
-                return value + " 万人";
+                return value + " ";
               },
             },
             data: [
               40.21, 59.81, 30.45, 36.15, 32.45, 26.54, 39.94, 33.55, 19.63,
               24.7, 21.09, 3.5, 4.21,
             ],
-          },
-        ],
-      },
-      options2: {
-        tooltip: {
-          trigger: "axis",
-        },
-        legend: {
-          data: ["出生率", "死亡率", "自然增长率"],
-        },
-        grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        toolbox: {
-          feature: {
-            saveAsImage: {},
-          },
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: [
-            "2015",
-            "2016",
-            "2017",
-            "2018",
-            "2019",
-            "2020",
-            "2021",
-            "2022",
-          ],
-        },
-        yAxis: {
-          type: "value",
-          min: -4,
-          max: 14,
-          interval: 2,
-        },
-        series: [
-          {
-            name: "出生率",
-            type: "line",
-            data: [10.8, 11.9, 11.6, 11.5, 10.5, 7.8, 6.5, 6.0],
-          },
-          {
-            name: "死亡率",
-            type: "line",
-            data: [7.3, 7.3, 7.4, 7.8, 7.9, 7.9, 8.1, 8.2],
-          },
-          {
-            name: "自然增长率",
-            type: "line",
-            data: [4, 4.4, 4, 3.8, 3.1, -1, -1.6, -2],
           },
         ],
       },
