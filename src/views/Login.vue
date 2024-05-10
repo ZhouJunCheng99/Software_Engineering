@@ -9,7 +9,7 @@
     <div class="layer">
       <div class="some-space">
         <div class="form">
-          <h2>大数据可视化平台</h2>
+          <h2>海洋牧场监测可视化系统</h2>
           <div class="item">
             <i class="iconfont icon-user"></i>
             <input autocomplete="off"
@@ -108,7 +108,7 @@ export default {
         this.$Toast({
           content: '请输入正确的用户名和密码',
           type: 'error',
-          // hasClose: true
+          hasClose: true
         })
       }
     },

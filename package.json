@@ -10,8 +10,10 @@
   "dependencies": {
     "@jiaminghi/data-view": "^2.10.0",
     "@types/echarts": "^4.9.22",
+    "axios": "^1.6.8",
     "core-js": "^3.37.0",
     "echarts": "^5.5.0",
+    "js-cookie": "^3.0.5",
     "vue": "^2.7.16",
     "vue-awesome": "^4.5.0",
     "vue-baidu-map": "^0.21.22",
