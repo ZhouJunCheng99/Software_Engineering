@@ -153,11 +153,13 @@ export default {
 .admin-main {
   flex: 1;
   padding: 1rem;
+  
 }
 
 .dashboard-users-container {
-  display: flex;
-  justify-content: space-between;
+  display: flex;/* 横向布局 */
+  justify-content: space-between;/* 两个部分左右对齐 */
+  
   gap: 1rem;
 }
 
@@ -166,6 +168,9 @@ export default {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 1rem;
+  min-width: 300px; /* 设置最小宽度 */
+  max-height: 85vh; /* 设置最大高度以防止溢出 */
+  overflow-y: auto; /* 添加垂直滚动条 */
 }
 
 .dashboard-section h2, .users-section h2 {
