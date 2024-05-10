@@ -3,7 +3,7 @@
     <div class="bg">
       <dv-loading v-if="loading">Loading...</dv-loading>
       <div v-else class="host-body">
-        <!-- 头部样子 -->
+        <!-- 头部样式 -->
         <div class="d-flex jc-center">
           <dv-decoration-10 class="dv-dec-10" />
           <div class="d-flex jc-center">
@@ -138,6 +138,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/scss/index.scss";
+
+
+
+
 .mr-3 {
   background-color: #0f1325;
 }
