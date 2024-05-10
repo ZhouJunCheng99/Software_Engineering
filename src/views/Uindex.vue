@@ -9,7 +9,7 @@
           <div class="d-flex jc-center">
             <dv-decoration-8 class="dv-dec-8" :color="decorationColor" />
             <div class="title">
-              <span class="title-text">海洋牧场可视化系统</span>
+              <span class="title-text">海洋牧场监测可视化系统</span>
               <dv-decoration-6
                 class="dv-dec-6"
                 :reverse="true"
@@ -25,7 +25,7 @@
           <dv-decoration-10 class="dv-dec-10-s" />
         </div>
 
-        <!-- 导航栏 -->
+        <!-- 导航栏 -->           
         <div class="d-flex jc-between px-2">
           <div class="d-flex aside-width">
             <div
@@ -36,35 +36,35 @@
                 class="react-left"
                 :class="{ bgc: tabbarIndex == 0 }"
               ></span>
-              <router-link to="/index/traffic"
+              <router-link to="/Uindex/information"
                 ><span class="text" @click="changeTabbarIndex(0)"
                   >主要信息</span
                 ></router-link
               >
             </div>
             <div class="react-left ml-3" :class="{ bgc: tabbarIndex == 1 }">
-              <router-link to="/index/population"
+              <router-link to="/Uindex/underwater"
                 ><span class="text" @click="changeTabbarIndex(1)"
                   >水下系统</span
                 ></router-link
               >
             </div>
             <div class="react-left ml-3" :class="{ bgc: tabbarIndex == 2 }">
-              <router-link to="/index/environment"
+              <router-link to="/Uindex/datacenter"
                 ><span class="text" @click="changeTabbarIndex(2)"
                   >数据中心</span
                 ></router-link
               >
             </div>
-          </div>
-          <div class="d-flex aside-width">
-            <div class="react-right mr-3" :class="{ bgc: tabbarIndex == 3 }">
-              <router-link to="/index/economy"
+            <div class="react-left mr-3" :class="{ bgc: tabbarIndex == 3 }">
+              <router-link to="/Uindex/intelligent"
                 ><span class="text fw-b" @click="changeTabbarIndex(3)"
                   >智能中心</span
                 ></router-link
               >
             </div>
+          </div>
+          <div class="d-flex aside-width">
             <div class="react-right mr-4 react-l-s">
               <span class="react-after"></span>
               <span class="text"
