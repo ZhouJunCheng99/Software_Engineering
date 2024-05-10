@@ -5,23 +5,23 @@
         <h1>管理员界面</h1>
         <nav>
           <ul>
-            <li><a href="#dashboard">仪表盘</a></li>
-            <li><a href="#users">用户管理</a></li>
-            <li><a href="#settings">设置</a></li>
+            <li><router-link to="/Aindex/admin/dashboard">仪表盘</router-link></li>
+            <li><router-link to="/Aindex/admin/users">用户管理</router-link></li>
+            <li><router-link to="/Aindex/admin/settings">设置</router-link></li>
           </ul>
         </nav>
       </div>
     </header>
     <main class="admin-main">
       <div class="dashboard-users-container">
-        <section id="dashboard">
+        <section id="dashboard" class="dashboard-section">
           <h2>仪表盘</h2>
           <!-- 使用 GaugeChart 组件 -->
           <GaugeChart />
           <!-- 使用 Situation 组件 -->
           <Situation />
         </section>
-        <section id="users">
+        <section id="users" class="users-section">
           <h2>用户管理</h2>
           <!-- 使用 Userdata 组件 -->
           <Userdata />
@@ -34,17 +34,29 @@
               <label for="email">邮箱:</label>
               <input type="email" id="email" v-model="newUser.email">
             </div>
+            <div>
+              <label for="userType">用户类别:</label>
+              <select id="userType" v-model="newUser.userType">
+                <option value="" disabled>请选择用户类别</option>
+                <option value="管理员">管理员</option>
+                <option value="普通用户（养殖户）">普通用户（养殖户）</option>
+                <option value="科研工作者">科研工作者</option>
+                <option value="供应链合作伙伴">供应链合作伙伴</option>
+                <option value="投资者及财务分析专家">投资者及财务分析专家</option>
+              </select>
+            </div>
             <button type="submit">添加用户</button>
           </form>
           <ul>
-            <li v-for="user in users" :key="user.id">{{ user.username }} ({{ user.email }})</li>
+            <li v-for="user in users" :key="user.id">
+              {{ user.username }} ({{ user.email }}) - {{ user.userType }}
+              <button @click="deleteUser(user.id)" class="action-button">删除</button>
+              <button @click="resetPassword(user.id)" class="action-button">重置密码</button>
+            </li>
           </ul>
         </section>
       </div>
     </main>
-    <footer class="admin-footer">
-      <p>版权所有 © 2024</p>
-    </footer>
   </div>
 </template>
 
@@ -64,7 +76,8 @@ export default {
     return {
       newUser: {
         username: '',
-        email: ''
+        email: '',
+        userType: '' // 添加用户类别字段
       },
       users: []
     };
@@ -74,6 +87,14 @@ export default {
       this.users.push({ ...this.newUser, id: this.users.length + 1 });
       this.newUser.username = '';
       this.newUser.email = '';
+      this.newUser.userType = ''; // 重置用户类别字段
+    },
+    deleteUser(userId) {
+      this.users = this.users.filter(user => user.id !== userId);
+    },
+    resetPassword(userId) {
+      alert(`密码已重置，用户ID: ${userId}`);
+      // 这里可以加入实际的重置密码逻辑，比如调用API，之后再加
     }
   }
 };
@@ -99,8 +120,8 @@ export default {
 }
 
 .admin-header h1 {
-  margin: 0;
-  font-size: 1.5rem;
+  margin: 0; /* 去掉默认的 h1 外边距 */
+  font-size: 1.5rem; 
 }
 
 .admin-header nav ul {
@@ -115,12 +136,14 @@ export default {
 }
 
 .admin-header nav ul li a {
-  color: #ecf0f1;
-  text-decoration: none;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+  color: #ecf0f1; /* 字体颜色 */
+  text-decoration: none;  /* 去掉下划线 */
+  font-size: 1.2rem;   /* 字体大小 */
+  /* 上下居中 */
+  
+  padding: 0.5rem 1rem; /* 上下左右内边距 */
+  border-radius: 4px; /* 圆角边框 */
+  transition: background-color 0.2s;  /* 鼠标悬停时背景色渐变 */
 }
 
 .admin-header nav ul li a:hover {
@@ -135,11 +158,22 @@ export default {
 .dashboard-users-container {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 }
 
-#dashboard, #users {
+.dashboard-section, .users-section {
   flex: 1;
-  margin: 0 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.dashboard-section h2, .users-section h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  color: #16a5be;
+  border-bottom: 2px solid #2c3e50;
+  padding-bottom: 0.5rem;
 }
 
 .user-form {
@@ -155,7 +189,7 @@ export default {
   margin-bottom: 0.5rem;
 }
 
-.user-form input {
+.user-form input, .user-form select {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #ccc;
@@ -174,6 +208,32 @@ export default {
 
 .user-form button:hover {
   background-color: #34495e;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.action-button {
+  margin-left: 1rem;
+  background-color: #e74c3c;
+  color: #ecf0f1;
+  border: none;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.action-button:hover {
+  background-color: #c0392b;
 }
 
 .admin-footer {

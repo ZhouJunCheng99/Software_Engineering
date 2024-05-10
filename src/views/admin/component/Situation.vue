@@ -13,11 +13,11 @@
       Echart
     },
     data() {
-      const ROOT_PATH = ''; // 如果有需要，设置 ROOT_PATH
+      const ROOT_PATH = ''; // 有需要再设置 ROOT_PATH，这里先不用
       const weatherIcons = {
         TheErrors: ROOT_PATH + '/data/asset/image/situation/errorimage.jpg',
-        Cloudy: ROOT_PATH + '/data/asset/img/weather/cloudy_128.png',
-        Showers: ROOT_PATH + '/data/asset/img/weather/showers_128.png'
+        Fish: ROOT_PATH + '/data/asset/image/situation/fish.jpg',
+        Hardware: ROOT_PATH + '/data/asset/image/situation/hardware.jpg'
       };
       const seriesLabel = {
         show: true
@@ -55,7 +55,7 @@
           yAxis: {
             type: 'category',
             inverse: true,
-            data: ['TheErrors', 'Cloudy', 'Showers'],
+            data: ['TheErrors', 'Fish', 'Hardware'],
             axisLabel: {
               formatter: function (value) {
                 return '{' + value + '| }\n{value|' + value + '}';
@@ -73,18 +73,18 @@
                     image: weatherIcons.TheErrors
                   }
                 },
-                Cloudy: {
+                Fish: {
                   height: 40,
                   align: 'center',
                   backgroundColor: {
-                    image: weatherIcons.Cloudy
+                    image: weatherIcons.Fish
                   }
                 },
-                Showers: {
+                Hardware: {
                   height: 40,
                   align: 'center',
                   backgroundColor: {
-                    image: weatherIcons.Showers
+                    image: weatherIcons.Hardware
                   }
                 }
               }

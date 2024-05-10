@@ -92,7 +92,7 @@ export default {
             },
             data: [
               {
-                value: 0.7,
+                value: 0.95,
                 name: 'Grade Rating'
               }
             ]

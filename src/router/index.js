@@ -76,6 +76,23 @@ const routes = [
         path: "/Aindex/admin",
         name: "admin",
         component: () => import("../views/admin/index.vue"),
+        children: [
+          {
+            path: "/Aindex/admin/dashboard",
+            name: "adminDashboard",
+            component: () => import("../views/admin/component/GaugeChart.vue"),
+          },
+          {
+            path: "/Aindex/admin/users",
+            name: "adminUsers",
+            component: () => import("../views/admin/component/Userdata.vue"),
+          },
+          {
+            path: "/Aindex/admin/situation",
+            name: "adminSituation",
+            component: () => import("../views/admin/component/Situation.vue"),
+          }
+        ]
       },
     ],
 
