@@ -54,7 +54,7 @@ const actions = {
       //   })
       // }
 
-
+      // this.queryResult = result
       commit('setQueryResult', result)
 
       // if(result == true){
@@ -72,6 +72,19 @@ const actions = {
       // // }
     })
   }
+  // 优化queryMessage
+  // queryMessage({commit}, message){
+  //   return new Promise((resolve) => {
+  //     // 执行异步操作，并在操作完成后调用 resolve 或 reject
+  //     // resolve 时将查询结果赋值给 this.queryResult
+  //     // reject 时处理错误
+  //     messageService.queryMessage(message)
+  //     resolve(result => {
+  //       commit('setQueryResult', result)
+  //     })
+  //
+  //   });
+  // }
 }
 
 const mutations = {
