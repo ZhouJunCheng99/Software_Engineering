@@ -29,10 +29,32 @@
                    placeholder="请输入密码" />
           </div>
           <button class="loginBtn"
-                  :disabled="isLoginAble"
-                  @click.stop="login">
+                  @click="query_login"
+                  :disabled="!userName || !userPwd">
             立即登录
           </button>
+<!--          <div v-if="queryResult === 1">-->
+<!--            <router-link to="/index">立即登录</router-link>-->
+<!--          </div>-->
+<!--          <br><br>-->
+<!--          <p v-if="queryResult !== 1">{{ <router-link to="/index">立即登录</router-link> }}</p>-->
+<!--          <div v-else>-->
+<!--            <p>请输入正确的用户名和密码</p>-->
+<!--          </div>-->
+
+          <!--   根据queryResult结果在这里按照login逻辑直接跳转       -->
+<!--          <input-->
+<!--            type="submit"-->
+<!--            value="立即登录"-->
+<!--            @click="queryMessage({ name:userName, password:userPwd })"-->
+<!--            :disabled="!userName || !userName">-->
+          <br><br>
+          <!--打印queryResult-->
+          <div>{{ queryResult }}</div>
+          <br>
+          <!-- 打印全局变量的值 -->
+          <div>{{ globalQueryResult }}</div>
+
           <div class="tip">
             默认用户名：admin ，默认密码：123456 <br />
             没有账户，请先注册哦
@@ -70,6 +92,12 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+// import Vue from "vue";
+
+// Vue.prototype.$globalVar = 0;
+window.globalVar = 'global value';
+// console.log("this:",this.queryResult)
 
 export default {
   name: 'Login',
@@ -79,21 +107,58 @@ export default {
       userName: 'admin',
       userPwd: '123456',
       visible: false,
-      modalContent: '这是一段自定义模态框消息'
+      modalContent: '这是一段自定义模态框消息',
+      // 这里不能加入queryResult属性，因为queryResult是异步获取的，需要在computed中定义
+      globalQueryResult: null,  // 定义全局变量
     }
   },
-  computed: {
-    isLoginAble () {
-      return !(this.userName && this.userPwd);
+  watch: {
+    queryResult(newVal) {
+      this.globalQueryResult = newVal;  // 当 queryResult 的值改变时，更新全局变量的值
     }
   },
+  computed: mapState({
+      messages: state => state.messages.messages,
+      queryResult: state => state.messages.queryResult//.result
+
+  }),
+
   created () { },
   mounted () {
 
   },
   methods: {
+    // ...mapActions('messages', ['queryMessage', 'addMessage', 'deleteMessage']),
+    queryMessage({ name, password }) {
+      this.$store.dispatch('messages/queryMessage', { name, password })
+        .then(result => {
+          /* eslint-disable no-console */
+          console.log("Failed to open the specified link2");
+          console.log(result);  // 打印收到的数据
+          /* eslint-enable no-console */
+          this.queryResult = result
+        })
+    },
+    query_login() {
+      // 先执行 queryMessage，然后再调用 login
+      this.queryMessage({ name: this.userName, password: this.userPwd })
+        .then(() => {
+          console.log(this.globalVar)
+
+          // 在 queryMessage 成功后执行登录逻辑
+          this.login();
+        })
+        .catch(error => {
+          console.error('Error while querying:', error);
+        });
+    },
+
     login () {
-      if (this.userName == 'admin' && this.userPwd == '123456') {
+      // this.queryResult为null
+      // this.queryMessage({name: this.userName, password: this.userPwd});
+      console.log(this.queryResult);
+      if (this.queryResult.result == true) {
+      // if(this.globalQueryResult == 1) {
         this.$router.push({
           path: '/index'
         })
@@ -105,10 +170,29 @@ export default {
         })
       }
     },
+
+    // async login () {
+    //   await this.queryMessage({name: this.userName, password: this.userPwd});
+    //   console.log(this.queryResult);
+    //   if (this.queryResult == true) {
+    //     this.$router.push({
+    //       path: '/index'
+    //     })
+    //   } else {
+    //     this.$Toast({
+    //       content: '请输入正确的用户名和密码',
+    //       type: 'error',
+    //       hasClose: true
+    //     })
+    //   }
+    // },
+
     confirm () {
       this.visible = false;
       console.log('点击确定')
-    }
+    },
+
+    ...mapActions('messages', ['queryMessage', 'addMessage', 'deleteMessage']),
   }
 }
 </script>

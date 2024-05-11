@@ -3,11 +3,13 @@ from rest_framework import serializers
 
 
 class Message(models.Model):
-    subject = models.CharField(max_length=200)
-    body = models.TextField()
+    # subject = models.CharField(max_length=200)
+    # body = models.TextField()
+    name = models.CharField(max_length=200)
+    password = models.TextField()
 
 
-class MessageSerializer(serializers.HyperlinkedModelSerializer):
+class LoginMessageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Message
-        fields = ('url', 'subject', 'body', 'pk')
+        fields = ('url', 'name', 'password', 'pk')
