@@ -29,10 +29,13 @@
                    placeholder="请输入密码" />
           </div>
           <button class="loginBtn"
-                  :disabled="isLoginAble"
-                  @click.stop="login">
+                  @click="query_login"
+                  :disabled="!userName || !userPwd">
             立即登录
           </button>
+
+
+
           <div class="tip">
             默认用户名：user ，默认管理员名：admin ，默认密码：123456
           </div>
@@ -69,6 +72,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Login',
@@ -80,21 +84,44 @@ export default {
       userName: 'user',
       userPwd: '123456',
       visible: false,
-      modalContent: '这是一段自定义模态框消息'
+      modalContent: '这是一段自定义模态框消息',
+      // 这里不能加入queryResult属性，因为queryResult是异步获取的，需要在computed中定义
+
     }
   },
-  computed: {
-    isLoginAble () {
-      return !(this.userName && this.userPwd);
-    }
-  },
+  computed: mapState({
+      messages: state => state.messages.messages,
+      queryResult: state => state.messages.queryResult//.result
+
+  }),
+
   created () { },
   mounted () {
 
   },
   methods: {
+    // ...mapActions('messages', ['queryMessage', 'addMessage', 'deleteMessage']),
+    // 定义 sleep 函数
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
+    async query_login() {
+      // 先执行 queryMessage，然后再调用 login
+      this.queryMessage({ name: this.userName, password: this.userPwd })
+
+      // 这里异步执行,console.log(this.queryResult)太快了,queryResult查询还没返回赋值就判断完了
+      // 暂时先这么解决
+      await this.sleep(500);
+
+      this.login()
+    },
+
     login () {
-      if (this.userName == 'admin' && this.userPwd == '123456') {
+      // this.queryResult为null
+      // this.queryMessage({name: this.userName, password: this.userPwd});
+      console.log(this.queryResult);
+      if (this.queryResult.result == true) {
+      // if(this.globalQueryResult == 1) {
         this.$router.push({
           path: '/Aindex'
         })
@@ -112,10 +139,29 @@ export default {
         })
       }
     },
+
+    // async login () {
+    //   await this.queryMessage({name: this.userName, password: this.userPwd});
+    //   console.log(this.queryResult);
+    //   if (this.queryResult == true) {
+    //     this.$router.push({
+    //       path: '/index'
+    //     })
+    //   } else {
+    //     this.$Toast({
+    //       content: '请输入正确的用户名和密码',
+    //       type: 'error',
+    //       hasClose: true
+    //     })
+    //   }
+    // },
+
     confirm () {
       this.visible = false;
       console.log('点击确定')
-    }
+    },
+
+    ...mapActions('messages', ['queryMessage', 'addMessage', 'deleteMessage']),
   }
 }
 </script>
