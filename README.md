@@ -147,4 +147,8 @@ python manage.py runserver
 
 ## 五、友情链接
 
-https://github.com/BinGeHaoShuai/big-screen-datav
+https://github.com/BinGeHaoShuai/big-screen-datav?tab=readme-ov-file
+
+https://github.com/gtalarico/django-vue-template
+
+https://github.com/goodgoodgreat/Digital-twin-big-screen
