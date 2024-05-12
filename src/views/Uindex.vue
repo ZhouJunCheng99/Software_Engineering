@@ -27,9 +27,9 @@
 
         <!-- 导航栏 -->
         <div class="d-flex jc-between px-2 nav-bar">
-          <div class="d-flex aside-width">
+          <div class="d-flex aside-width nav-items">
             <div
-              class="react-left ml-4 react-l-s"
+              class="react-left react-item"
               :class="{ bgc: tabbarIndex == 0 }"
             >
               <span
@@ -42,21 +42,21 @@
                 ></router-link
               >
             </div>
-            <div class="react-left ml-3" :class="{ bgc: tabbarIndex == 1 }">
+            <div class="react-left react-item" :class="{ bgc: tabbarIndex == 1 }">
               <router-link to="/Uindex/underwater"
                 ><span class="text" @click="changeTabbarIndex(1)"
                   >水下系统</span
                 ></router-link
               >
             </div>
-            <div class="react-left ml-3" :class="{ bgc: tabbarIndex == 2 }">
+            <div class="react-left react-item" :class="{ bgc: tabbarIndex == 2 }">
               <router-link to="/Uindex/datacenter"
                 ><span class="text" @click="changeTabbarIndex(2)"
                   >数据中心</span
                 ></router-link
               >
             </div>
-            <div class="react-left mr-3" :class="{ bgc: tabbarIndex == 3 }">
+            <div class="react-left react-item" :class="{ bgc: tabbarIndex == 3 }">
               <router-link to="/Uindex/intelligent"
                 ><span class="text" @click="changeTabbarIndex(3)"
                   >智能中心</span
@@ -140,6 +140,19 @@ export default {
 .nav-bar {
   width: 100%;
   padding: 0 10px;
+}
+
+.nav-items {
+  display: flex;
+  justify-content: space-between;
+}
+
+.react-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px; /* 统一宽度，具体数值可根据需求调整 */
+  margin-right: 1rem;
 }
 
 .title {
