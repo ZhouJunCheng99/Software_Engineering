@@ -4,7 +4,7 @@
       <dv-loading v-if="loading">Loading...</dv-loading>
       <div v-else class="host-body">
         <!-- 头部样式 -->
-        <div class="d-flex jc-center">
+        <div class="d-flex jc-center  header">
           <dv-decoration-10 class="dv-dec-10" />
           <div class="d-flex jc-center">
             <dv-decoration-8 class="dv-dec-8" :color="decorationColor" />
@@ -27,7 +27,7 @@
 
         <!-- 导航栏 -->
         <div class="d-flex jc-between px-2 nav-bar">
-          <div class="d-flex nav-items">
+          <div class="d-flex aside-width nav-items">
             <div
               class="react-left react-item"
               :class="{ bgc: tabbarIndex == 0 }"
@@ -55,23 +55,26 @@
                   >数据中心</span
                 ></router-link
               >
-            </div>
+            </div>    
+            
             <div class="react-left react-item" :class="{ bgc: tabbarIndex == 3 }">
               <router-link to="/Aindex/intelligent"
                 ><span class="text" @click="changeTabbarIndex(3)"
                   >智能中心</span
                 ></router-link
               >
-            </div>
+            </div> 
           </div>
-          <div class="d-flex justify-end">
-            <div class="react-right react-item" :class="{ bgc: tabbarIndex == 4 }">
+
+                   
+          <div class="d-flex aside-width justify-end">
+            <div class="react-right mr-3" :class="{ bgc: tabbarIndex == 4 }">
               <router-link to="/Aindex/admin"
                 ><span class="text" @click="changeTabbarIndex(4)"
                   >管理员界面</span
                 ></router-link
               >
-            </div>
+            </div>  
             <div class="react-right mr-4 react-l-s">
               <span class="text user-interface">@ 管理员页面 @</span>
               <span class="react-after"></span>
@@ -139,6 +142,29 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/scss/index.scss";
 
+.header {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.nav-bar {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.nav-items {
+  display: flex;
+  justify-content: space-between;
+}
+
+.react-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px; /* 统一宽度，具体数值可根据需求调整 */
+  margin-right: 1rem;
+}
+
 .title {
   display: flex;
   align-items: center;
@@ -155,40 +181,18 @@ export default {
   line-height: 2rem; /* 增加行高，确保文本不会被遮挡 */
 }
 
-.nav-bar {
-  width: 100%;
-  padding: 0 10px;
-}
-
-.nav-items {
-  display: flex;
-}
-
-.react-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 120px; /* 统一宽度，具体数值可根据需求调整 */
-  margin-right: 1rem;
-}
-
 .mr-3 {
   background-color: #0f1325;
 }
-
 .bgc {
   background-color: #1a5cd7 !important;
 }
-
 .text {
   color: #fff;
-}
-
-.justify-end {
-  justify-content: flex-end;
 }
 
 .user-interface {
   margin-right: 50px; /* 调整与时间的间距 */
 }
+
 </style>
