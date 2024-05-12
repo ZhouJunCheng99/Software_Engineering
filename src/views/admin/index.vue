@@ -5,7 +5,7 @@
         <h1>管理员界面</h1>
         <nav>
           <ul>
-            <li><router-link to="/Aindex/admin/dashboard">仪表盘</router-link></li>
+            <li><router-link to="/Aindex/admin/dashboard">海洋牧场总体得分</router-link></li>
             <li><router-link to="/Aindex/admin/users">用户管理</router-link></li>
             <li><router-link to="/Aindex/admin/settings">设置</router-link></li>
           </ul>
@@ -15,7 +15,7 @@
     <main class="admin-main">
       <div class="dashboard-users-container">
         <section id="dashboard" class="dashboard-section">
-          <h2>仪表盘</h2>
+          <h2>海洋牧场总体得分</h2>
           <!-- 使用 GaugeChart 组件 -->
           <GaugeChart />
           <!-- 使用 Situation 组件 -->
@@ -172,7 +172,7 @@ export default {
 }
 
 .dashboard-section {
-  margin-right: 1rem;/* 仪表盘部分右边距 */
+  margin-right: 1rem;/* 海洋牧场总体得分部分右边距 */
 }
 
 .dashboard-section h2, .users-section h2 {
