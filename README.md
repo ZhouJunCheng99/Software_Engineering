@@ -26,16 +26,15 @@
 ### 后端主要文件介绍
 | 文件                | 作用/功能                                                              |
 | ------------------- | --------------------------------------------------------------------- |
-| urls.py             | 主目录文件，引入 Echart/DataV 等文件                                    |
-| wsgi.py             | 主目录文件，引入 Echart/DataV 等文件                                    |
-| api/admin.py             | 主目录文件，引入 Echart/DataV 等文件                                    |
-| api/admin.py             | 主目录文件，引入 Echart/DataV 等文件                                    |
-| api/admin.py             | 主目录文件，引入 Echart/DataV 等文件                                    |
-| api/admin.py             | 主目录文件，引入 Echart/DataV 等文件                                    |
-| api/admin.py             | 主目录文件，引入 Echart/DataV 等文件                                    |
-| api/migrations             | 主目录文件，引入 Echart/DataV 等文件                                    |
-| settings/dev.py             | 主目录文件，引入 Echart/DataV 等文件                                    |
-| settings/prod.py             | 主目录文件，引入 Echart/DataV 等文件                                    |
+| urls.py             | URL配置                                    |
+| wsgi.py             | WSGI配置                                    |
+| api/admin.py             | 管理员相关视图                                    |
+| api/apps.py             | 应用配置                                    |
+| api/models.py             | 数据库模块                                    |
+| api/tests.py             | 测试文件                                    |
+| api/views.py             | 视图处理函数                                    |
+| api/migrations             | 数据库迁移目录                                    |
+| settings/             | 开发环境配置                                    |                           |
 
 
 ## 三、功能实现
