@@ -58,7 +58,7 @@
             </div>
             <div class="react-left mr-3" :class="{ bgc: tabbarIndex == 3 }">
               <router-link to="/Uindex/intelligent"
-                ><span class="text fw-b" @click="changeTabbarIndex(3)"
+                ><span class="text" @click="changeTabbarIndex(3)"
                   >智能中心</span
                 ></router-link
               >
@@ -66,6 +66,7 @@
           </div>
           <div class="d-flex aside-width justify-end">
             <div class="react-right mr-4 react-l-s">
+              <span class="text user-interface">@ 普通用户页面 @</span>
               <span class="react-after"></span>
               <span class="text"
                 >{{ dateYear }} {{ dateWeek }} {{ dateDay }}</span
@@ -154,6 +155,7 @@ export default {
   font-size: 1.5rem; /* 根据需要调整字体大小 */
   color: #fff;
   margin: 0 10px; /* 根据需要调整左右间距 */
+  line-height: 2rem; /* 增加行高，确保文本不会被遮挡 */
 }
 
 .mr-3 {
@@ -170,5 +172,9 @@ export default {
 
 .justify-end {
   justify-content: flex-end;
+}
+
+.user-interface {
+  margin-right: 50px; /* 调整与时间的间距 */
 }
 </style>
