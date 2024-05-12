@@ -1,7 +1,7 @@
 <template>
   <div class="column_content">
     <dv-border-box-6 style="padding-top: 20px">
-      <h2 class="title">2010-2022年重庆市常住人口及增量</h2>
+      <h2 class="title">2010-2022年鱼群数量及增量</h2>
       <Echart :options="options1" height="500px" width="600px" />
     </dv-border-box-6>
       <div class="device_content">

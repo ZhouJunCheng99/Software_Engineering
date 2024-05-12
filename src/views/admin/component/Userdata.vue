@@ -21,15 +21,15 @@
           },
           legend: {
             data: [
-              'Direct',
-              'Marketing',
-              'Search Engine',
-              'Email',
-              'Union Ads',
-              'Video Ads',
-              'Baidu',
-              'Google',
-              'Bing',
+              'Farmer',
+              'Researcher',
+              'Economist',
+              'Emma',
+              'Zhou',
+              'Yang',
+              'Zhu',
+              'Gao',
+              'Feng',
               'Others'
             ]
           },
@@ -47,9 +47,9 @@
                 show: false
               },
               data: [
-                { value: 1548, name: 'Search Engine' },
-                { value: 775, name: 'Direct' },
-                { value: 679, name: 'Marketing', selected: true }
+                { value: 1548, name: 'Economist' },
+                { value: 775, name: 'Farmer' },
+                { value: 679, name: 'Researcher', selected: true }
               ]
             },
             {
@@ -93,13 +93,13 @@
                 }
               },
               data: [
-                { value: 1048, name: 'Baidu' },
-                { value: 335, name: 'Direct' },
-                { value: 310, name: 'Email' },
-                { value: 251, name: 'Google' },
-                { value: 234, name: 'Union Ads' },
-                { value: 147, name: 'Bing' },
-                { value: 135, name: 'Video Ads' },
+                { value: 1048, name: 'Zhu' },
+                { value: 335, name: 'Farmer' },
+                { value: 310, name: 'Emma' },
+                { value: 251, name: 'Gao' },
+                { value: 234, name: 'Zhou' },
+                { value: 147, name: 'Feng' },
+                { value: 135, name: 'Yang' },
                 { value: 102, name: 'Others' }
               ]
             }

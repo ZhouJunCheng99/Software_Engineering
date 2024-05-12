@@ -9,7 +9,7 @@
     <div class="layer">
       <div class="some-space">
         <div class="form">
-          <h2>海洋牧场可视化系统</h2>
+          <h2>海洋牧场监测可视化系统</h2>
           <div class="item">
             <i class="iconfont icon-user"></i>
             <input autocomplete="off"

@@ -34,7 +34,7 @@
             }
           },
           legend: {
-            data: ['City Alpha', 'City Beta', 'City Gamma']
+            data: ['区域 A', '区域 B', '区域 C']
           },
           grid: {
             left: 100
@@ -92,7 +92,7 @@
           },
           series: [
             {
-              name: 'City Alpha',
+              name: '区域 A',
               type: 'bar',
               data: [165, 170, 30],
               label: seriesLabel,
@@ -133,19 +133,19 @@
                   }
                 },
                 data: [
-                  { type: 'max', name: 'max days: ' },
-                  { type: 'min', name: 'min days: ' }
+                  { type: 'max', name: '最大值: ' },
+                  { type: 'min', name: '最小值: ' }
                 ]
               }
             },
             {
-              name: 'City Beta',
+              name: '区域 B',
               type: 'bar',
               label: seriesLabel,
               data: [150, 105, 110]
             },
             {
-              name: 'City Gamma',
+              name: '区域 C',
               type: 'bar',
               label: seriesLabel,
               data: [220, 82, 63]
