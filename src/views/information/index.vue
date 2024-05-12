@@ -1,35 +1,25 @@
 <template>
   <div>
-    <div class="center">
+    <div class="env_content">
       <left-content />
       <center-map />
       <right-content />
-    </div>
-    <div class="bottom">
-      <bottom />
     </div>
   </div>
 </template>
 
 <script>
-import bottom from './component/bottom.vue';
-import centerMap from "./component/centerMap.vue";
-import leftContent from "./component/leftContent.vue";
-import rightContent from "./component/rightContent.vue";
+import centerMap from "./component/info_mid.vue";
+import leftContent from "./component/info_left.vue";
+import rightContent from "./component/info_right.vue";
 export default {
-  components: { centerMap, leftContent, rightContent,bottom },
+  components: { centerMap, leftContent, rightContent},
 };
 </script>
 
 <style lang="scss" scoped>
-.center {
+.env_content {
   display: flex;
   justify-content: space-between;
-}
-.bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 30px;
 }
 </style>

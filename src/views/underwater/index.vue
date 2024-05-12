@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import centerLeft from "./components/centerLeft.vue";
-import centerRight from "./components/centerRight.vue";
-import centerMap from "./components/centerMap.vue";
+import centerLeft from "./components/water_left.vue";
+import centerRight from "./components/water_right.vue";
+import centerMap from "./components/water_mid.vue";
 export default {
   components: { centerMap, centerLeft, centerRight },
 };
