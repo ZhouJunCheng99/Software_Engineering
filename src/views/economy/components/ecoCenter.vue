@@ -3,30 +3,77 @@
     <div>
       <dv-border-box-8 :reverse="true">
         <div class="head">
-          <div class="head_content">
-            <h1>12344822</h1>
-            <h2>2022年收入情况</h2>
+          <div class="video-container">
+          <h3>识别效果</h3>
+          <video autoplay="autoplay" width="100%" height="95%">
+              <source src="../../../assets/webm/CAMERAV.webm" type="video/mp4"/>
+          </video>
           </div>
-          <div class="head_content">
-            <h1>45620218</h1>
-            <h2>2022年总支出情况</h2>
+          <div class="side-videos">
+          <h3>左目镜头</h3>
+          <video autoplay="autoplay" width="100%" height="95%">
+              <source src="../../../assets/webm/CAMERAV.webm" type="video/mp4"/>
+          </video>
+          <h3>右目镜头</h3>
+          <video autoplay="autoplay" width="100%" height="95%">
+              <source src="../../../assets/webm/CAMERAV.webm" type="video/mp4"/>
+          </video>
           </div>
         </div>
       </dv-border-box-8>
     </div>
 
     <div class="body">
-      <!-- 温度监测表 -->
       <dv-border-box-6 style="padding:10px">
-        <div class="map-content">
-          <baidu-map
-            class="map"
-            :center="center"
-            :zoom="zoom"
-            @ready="handler"
-            :mapStyle="mapStyle"
-            :scroll-wheel-zoom="true"
-          />
+        <div class="fish-content">
+          <div class="fish-info">
+            <div>
+            <p>编号</p>
+            <p>fish-9527</p>
+            </div>
+          </div>
+          <div class="fish-info">
+          <div>
+            <p>鱼种</p>
+            <p>moonfish</p>
+            </div>
+          </div>
+          <div class="fish-info">
+            <div>
+            <p>体长</p>
+            <p>10寸</p>
+            </div>
+          </div>
+          <div class="fish-info">
+            <div>
+            <p>体重</p>
+            <p>5kg</p>
+            </div>
+          </div>
+          <div class="fish-info">
+            <div>
+            <p>健康状况</p>
+            <p>疑似患病(眼)</p>
+            </div>
+          </div>
+          <div class="fish-info">
+            <div>
+            <p>鱼群状况</p>
+            <p>异常(集群)</p>
+            </div>
+          </div>
+          <div class="fish-info">
+            <div>
+            <p>是否进入繁殖期</p>
+            <p>否</p>
+            </div>
+          </div>
+          <div class="fish-info">
+            <div>
+            <p>鱼群总量</p>
+            <p>10t</p>
+            </div>
+          </div>
         </div>
       </dv-border-box-6>
     </div>
@@ -60,33 +107,56 @@ export default {
 
 <style scoped>
 .content {
-  width: 38%;
+  width: 65%;
 }
 .head {
   padding: 10px;
-  height: 80px;
+  height: 560px;
   display: flex;
   justify-content: space-around;
 }
-.head_content {
+
+.video-container {
+  width: 66.66%; /* 第一组视频占据 2/3 宽度 */
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* 垂直排列 */
 }
+
+
+.side-videos {
+  width: 33.33%; /* 右侧视频占据 1/3 宽度 */
+  height: 45%;
+  display: flex;
+  flex-direction: column; /* 垂直排列 */
+  margin:20px;
+}
+
+.side-videos > div {
+  margin-bottom: 20px;
+}
+
 .body {
   margin-top: 10px;
 }
-.body_table1 {
-  display: flex;
-}
-.map-content {
-  width: 700px;
-  height: 750px;
-  overflow: hidden;
-}
-.map {
+.fish-content {
   width: 100%;
-  height: 100%;
+  height: 320px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.fish-info {
+  width: 25%;
+  height: 50%;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.fish-info p {
+  margin: 5px 0;
+  font-size: 24px;
 }
 </style>

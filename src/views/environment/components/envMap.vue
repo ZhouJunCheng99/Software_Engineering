@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <p class="title">数据中心分布</p>
     <baidu-map
       class="map"
       :center="center"
@@ -50,11 +51,16 @@ export default {
 
 <style scoped>
 .content {
-  width: 52%;
-  height: 75vh;
+  width: 100%;
+  height: 55%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.title {
+  margin-bottom: 10px;
+  font-size: 28px;
 }
 .map {
   width: 100%;
