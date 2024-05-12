@@ -34,10 +34,6 @@
             立即登录
           </button>
 
-<!--          <br><br>-->
-<!--          &lt;!&ndash;打印queryResult&ndash;&gt;-->
-<!--          <div>{{ queryResult }}</div>-->
-<!--          <br>-->
 
 
           <div class="tip">
@@ -89,7 +85,7 @@ export default {
       visible: false,
       modalContent: '这是一段自定义模态框消息',
       // 这里不能加入queryResult属性，因为queryResult是异步获取的，需要在computed中定义
-      globalQueryResult: null,  // 定义全局变量
+
     }
   },
   computed: mapState({

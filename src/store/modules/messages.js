@@ -40,36 +40,11 @@ const actions = {
       console.log("Failed to open the specified link1");
       console.log(result);  // 打印收到的数据
 
-      // if(result.result == true){
-      //   console.log("res:",result);  // 打印收到的数据
-      //   this.$router.push({
-      //     path: '/index'
-      //   })
-      // }
-      // else{
-      //     this.$Toast({
-      //     content: '请输入正确的用户名和密码',
-      //     type: 'error',
-      //     hasClose: true
-      //   })
-      // }
 
       // this.queryResult = result
       commit('setQueryResult', result)
 
-      // if(result == true){
-      //   console.log("res:",result);  // 打印收到的数据
-      //   this.$router.push({
-      //     path: '/index'
-      //   })
-      // }
-      // // else{
-      // //     this.$Toast({
-      // //     content: '请输入正确的用户名和密码',
-      // //     type: 'error',
-      // //     hasClose: true
-      // //   })
-      // // }
+
     })
   }
   // 优化queryMessage
