@@ -167,6 +167,7 @@ export default {
   border-radius: 8px;
   padding: 1rem;
   min-width: 300px; /* 设置最小宽度 */
+  max-height: 800px; /* 设置最大高度 */
   overflow-y: auto; /* 添加垂直滚动条 */
 }
 
