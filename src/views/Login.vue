@@ -9,7 +9,7 @@
     <div class="layer">
       <div class="some-space">
         <div class="form">
-          <h2>大数据可视化平台</h2>
+          <h2>海洋牧场监测可视化系统</h2>
           <div class="item">
             <i class="iconfont icon-user"></i>
             <input autocomplete="off"
@@ -34,7 +34,7 @@
             立即登录
           </button>
           <div class="tip">
-            默认用户名：admin ，默认密码：123456
+            默认用户名：user ，默认管理员名：admin ，默认密码：123456
           </div>
         </div>
       </div>
@@ -75,7 +75,9 @@ export default {
   components: {},
   data () {
     return {
-      userName: 'admin',
+      // adminName: 'admin',
+      // adminPwd: '123456',
+      userName: 'user',
       userPwd: '123456',
       visible: false,
       modalContent: '这是一段自定义模态框消息'
@@ -94,13 +96,19 @@ export default {
     login () {
       if (this.userName == 'admin' && this.userPwd == '123456') {
         this.$router.push({
-          path: '/index'
+          path: '/Aindex'
         })
-      } else {
+      } 
+      else if (this.userName == 'user' && this.userPwd == '123456'){
+        this.$router.push({
+          path: '/Uindex'
+        })
+      }
+      else {
         this.$Toast({
           content: '请输入正确的用户名和密码',
           type: 'error',
-          // hasClose: true
+          hasClose: true
         })
       }
     },

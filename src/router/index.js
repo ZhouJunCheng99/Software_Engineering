@@ -8,39 +8,77 @@ const routes = [
     path: "/login",
     name: "login",
     component: () => import("../views/Login.vue"),
+    meta: {
+      title: '登录界面'
+    }
   },
   {
     path: "/",
     redirect: "/login",
   },
   {
-    path: "/index",
-    name: "index",
-    redirect: "/index/traffic",
+    path: "/Uindex",
+    name: "Uindex",
+    redirect: "/Uindex/information",
 
-    component: () => import("../views/index.vue"),
+    component: () => import("../views/Uindex.vue"),
     children: [
       {
-        path: "/index/traffic",
-        name: "traffic",
-        component: () => import("../views/traffic/index.vue"),
+        path: "/Uindex/information",
+        name: "information",
+        component: () => import("../views/information/index.vue"),
       },
       {
-        path: "/index/population",
-        name: "population",
-        component: () => import("../views/population/index.vue"),
+        path: "/Uindex/underwater",
+        name: "underwater",
+        component: () => import("../views/underwater/index.vue"),
       },
       {
-        path: "/index/environment",
-        name: "environment",
-        component: () => import("../views/environment/index.vue"),
+        path: "/Uindex/datacenter",
+        name: "datacenter",
+        component: () => import("../views/datacenter/index.vue"),
       },
       {
-        path: "/index/economy",
-        name: "economy",
-        component: () => import("../views/economy/index.vue"),
+        path: "/Uindex/intelligent",
+        name: "intelligent",
+        component: () => import("../views/intelligent/index.vue"),
       },
     ],
+  },
+  {
+    path: "/Aindex",
+    name: "Aindex",
+    redirect: "/Aindex/information",
+
+    component: () => import("../views/Aindex.vue"),
+    children: [
+      {
+        path: "/Aindex/information",
+        name: "information",
+        component: () => import("../views/information/index.vue"),
+      },
+      {
+        path: "/Aindex/underwater",
+        name: "underwater",
+        component: () => import("../views/underwater/index.vue"),
+      },
+      {
+        path: "/Aindex/datacenter",
+        name: "datacenter",
+        component: () => import("../views/datacenter/index.vue"),
+      },
+      {
+        path: "/Aindex/intelligent",
+        name: "intelligent",
+        component: () => import("../views/intelligent/index.vue"),
+      },
+      {
+        path: "/Aindex/admin",
+        name: "admin",
+        component: () => import("../views/admin/index.vue"),
+      },
+    ],
+
   },
 ];
 const router = new VueRouter({

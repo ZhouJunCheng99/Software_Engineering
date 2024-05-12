@@ -29,9 +29,9 @@ export default {
         styleJson: mapStyle,
       },
       markerPoints: [
-        { lng: 113.28064, lat: 23.125177 }, // 广州
-        { lng: 116.407526, lat: 39.90403 }, // 北京
-        { lng: 121.473701, lat: 31.230416 }, // 上海
+        { lng: 106.505, lat: 29.5332 },
+        { lng: 106.51, lat: 29.5332 },
+        { lng: 106.524, lat: 29.53 },
       ],
     };
   },
@@ -40,9 +40,9 @@ export default {
   methods: {
     handler({ BMap, map }) {
       console.log(BMap, map);
-      this.center.lng = 104.195397;
-      this.center.lat = 35.86166;
-      this.zoom = 5;
+      this.center.lng = 106.505;
+      this.center.lat = 29.5332;
+      this.zoom = 15;
     },
   },
 };
