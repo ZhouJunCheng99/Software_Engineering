@@ -2,33 +2,70 @@
   <div class="content">
     <div>
       <dv-border-box-8 :reverse="true" style="padding: 10px">
-        <div>
-          <Echart :options="options1" height="400px" />
+        <div class="evaluate">
+          <div class="ai-decision">
+              <h1>AI决策</h1>
+          </div>
+          <div class="recommendations">
+            <p>温度:10~20</p>
+            <p>光照:20~100</p>
+            <p>溶解氧:0.2~0.5</p>
+            <p>PH:8~8.7</p>
+            <p>盐度:0.01~0.03</p>
+          </div>
         </div>
       </dv-border-box-8>
     </div>
 
+    <div class="suggestion">
+    <dv-border-box-6 style="padding: 10px">
+      <p>提示:</p>
+      <p>未来几天可能降雨</p>
+      <p>请确保温度、风度正常</p>
+      </dv-border-box-6>
+    </div>
+
     <div class="body">
-      <!-- 城市农作物比例占比 -->
       <div class="body_table1">
         <dv-border-box-6 style="padding: 10px">
-          <h2>主要农作物物分布</h2>
-          <Echart
-            :options="options2"
-            height="400px"
-            width="400px"
-            style="margin: auto"
-          />
+          <div class="weather">
+            <div class="weather-title">
+            <h1>气象数据</h1>
+            </div>
+            <div class="weather-data">
+              <p>温度:10~20</p>
+              <p>光照:20~100</p>
+              <p>溶解氧:0.2~0.5</p>
+              <p>PH:8~8.7</p>
+              <p>盐度:0.01~0.03</p>
+            </div>
+          </div>
         </dv-border-box-6>
       </div>
+    </div>
+    
+    <div>
+      <dv-border-box-8 :reverse="true" style="padding: 10px">
+        <div class="weather-alarm">
+          <div class="weatheralarm-title">
+          <h1>海啸警报</h1>
+          </div>
+          <div class="weatheralarm-data">
+          <p>国家海洋局南海预报中心</p>
+          <p>2024年5月11日9时11分</p>
+          <p>二级警报</p>
+          <p>影响南海部分沿海地区</p>
+          <p>预计海啸波高度将达到1-3米</p>
+          </div>
+        </div>
+      </dv-border-box-8>
     </div>
   </div>
 </template>
 
 <script>
-import Echart from "@/common/echart/index.vue";
 export default {
-  components: { Echart },
+  components: {  },
   data() {
     return {
       options1: {
@@ -89,7 +126,7 @@ export default {
 
 <style scoped>
 .content {
-  width: 30%;
+  width: 15%;
 }
 .head {
   padding: 10px;
@@ -108,5 +145,80 @@ export default {
 }
 .body_table1 {
   display: flex;
+}
+.evaluate {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-decision {
+  height: 40px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recommendations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.recommendations p {
+  margin: 5px 0;
+  font-size: 22px;
+}
+.suggestion {
+  height:160px;
+  text-align: left;
+}
+.suggestion p {
+  margin: 5px 0;
+  font-size: 22px;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+.weather {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.weather-title {
+  height: 40px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.weather-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.weather-data p {
+  margin: 5px 0;
+  font-size: 22px;
+}
+.weather-alarm {
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+.weatheralarm-title {
+  height: 40px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.weatheralarm-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.weatheralarm-data p {
+  margin: 5px 0;
+  font-size: 20px;
 }
 </style>

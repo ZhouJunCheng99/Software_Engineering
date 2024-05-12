@@ -30,10 +30,18 @@ class LoginMessageViewSet(viewsets.ModelViewSet):
         # print(subject)
         # print(body)
 
-        login_message = Message.objects.filter(name=name, password=password)
+        # login_message = Message.objects.filter(name=name, password=password)
+        # 这里先取第一个,因为注册还没有设置不能重复
+        login_message = Message.objects.filter(name=name, password=password).first()
 
-        if login_message:
-            return JsonResponse({'result': True})
+        # 注意需要先检查 login_message 是否包含任何 Message 实例!!!
+        # 如果 QuerySet 为空，first() 方法将返回 None
+        if login_message is None:
+            return JsonResponse({'result': False})
+        elif login_message.permission == 0:
+            return JsonResponse({'result': "user"})
+        elif login_message.permission == 1:
+            return JsonResponse({'result': "admin"})
         else:
             return JsonResponse({'result': False})
 

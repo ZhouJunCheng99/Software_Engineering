@@ -17,6 +17,14 @@ const routes = [
     redirect: "/login",
   },
   {
+    path: "/register",
+    name: "register",
+    component: () => import("../views/Register.vue"),
+    meta: {
+      title: '注册界面'
+    }
+  },
+  {
     path: "/Uindex",
     name: "Uindex",
     redirect: "/Uindex/information",
