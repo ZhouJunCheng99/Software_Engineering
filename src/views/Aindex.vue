@@ -3,7 +3,7 @@
     <div class="bg">
       <dv-loading v-if="loading">Loading...</dv-loading>
       <div v-else class="host-body">
-        <!-- 头部样子 -->
+        <!-- 头部样式 -->
         <div class="d-flex jc-center">
           <dv-decoration-10 class="dv-dec-10" />
           <div class="d-flex jc-center">
@@ -138,6 +138,22 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/scss/index.scss";
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap; /* 强制文本在一行内显示 */
+  overflow: hidden; /* 防止文本溢出 */
+  text-overflow: ellipsis; /* 添加省略号来处理溢出的文本 */
+}
+
+.title-text {
+  font-size: 1.5rem; /* 根据需要调整字体大小 */
+  color: #fff;
+  margin: 0 10px; /* 根据需要调整左右间距 */
+}
+
 .mr-3 {
   background-color: #0f1325;
 }

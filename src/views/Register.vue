@@ -9,14 +9,14 @@
     <div class="layer">
       <div class="some-space">
         <div class="form">
-          <h2>海洋牧场监测可视化系统</h2>
+          <h2>可视化系统注册界面</h2>
           <div class="item">
             <i class="iconfont icon-user"></i>
             <input autocomplete="off"
                    type="text"
                    class="input"
                    v-model="userName"
-                   placeholder="请输入用户名" />
+                   placeholder="请输入注册用户名" />
           </div>
           <div class="item">
             <i class="iconfont icon-password"></i>
@@ -26,20 +26,17 @@
                    v-model="userPwd"
                    maxlength="20"
                    @keyup.enter="login"
-                   placeholder="请输入密码" />
+                   placeholder="请输入注册密码" />
           </div>
           <button class="loginBtn"
-                  @click="query_login"
+                  @click="register"
                   :disabled="!userName || !userPwd">
-            立即登录
+            立即注册
           </button>
 
-          <br><br>
-          没有账户,请先点击注册:
-          <router-link to="/register" class="register-link">注册界面</router-link>
 
           <div class="tip">
-            默认用户名：user ，管理员名：admin ，密码：123456
+
           </div>
         </div>
       </div>
@@ -83,12 +80,12 @@ export default {
     return {
       // adminName: 'admin',
       // adminPwd: '123456',
-      userName: 'user',
-      userPwd: '123456',
+      userName: '',
+      userPwd: '',
       visible: false,
       modalContent: '这是一段自定义模态框消息',
       // 这里不能加入queryResult属性，因为queryResult是异步获取的，需要在computed中定义
-
+      permission: 0, // 0为普通用户，1为管理员
     }
   },
   computed: mapState({
@@ -102,6 +99,16 @@ export default {
 
   },
   methods: {
+    register() {
+      this.addMessage({ name: this.userName, password: this.userPwd ,permission: this.permission}).then(() => {
+        this.$Toast({
+          content: '注册成功,返回登录界面',
+          type: 'success',  //四种类型：info, success, warning, error
+          hasClose: true
+        })
+        this.$router.push('/login');
+      });
+    },
     // ...mapActions('messages', ['queryMessage', 'addMessage', 'deleteMessage']),
     // 定义 sleep 函数
     sleep(ms) {
@@ -127,7 +134,7 @@ export default {
         this.$router.push({
           path: '/Aindex'
         })
-      } 
+      }
       else if (this.queryResult.result == "user") {
         this.$router.push({
           path: '/Uindex'
@@ -346,19 +353,4 @@ input:-ms-input-placeholder {
     transform: translate(-50%, -40%);
   }
 }
-
-//.register-link {
-//  text-decoration: underline;
-//}
-.register-link {
-  text-decoration: underline;
-  color: #6495ED; /* 改变链接的颜色 */
-  font-size: 14px; /* 改变字体大小 */
-  transition: color 0.3s ease; /* 添加颜色过渡效果 */
-}
-
-.register-link:hover {
-  color: #0090ff; /* 当鼠标悬停时改变链接的颜色 */
-}
-
 </style>

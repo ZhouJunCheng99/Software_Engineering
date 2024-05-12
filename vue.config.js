@@ -11,10 +11,12 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://api.map.baidu.com',//代理的接口地址
+        // target: 'http://api.map.baidu.com',//代理的接口地址
+        target: 'http://localhost:8000',//代理的接口地址
         changeOrigin: true,//允许跨域
         secure: false
       }
-    }
+    },
+    port: 8080 // vue端口,可修改,默认8080
   }
 }

@@ -1,6 +1,6 @@
 <!--
  描述: 金字塔动画
- 作者: Jack Chen
+ 作者: Software Engineering Group
  日期: 2020-04-19
 -->
 

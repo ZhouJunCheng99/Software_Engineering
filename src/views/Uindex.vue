@@ -3,8 +3,8 @@
     <div class="bg">
       <dv-loading v-if="loading">Loading...</dv-loading>
       <div v-else class="host-body">
-        <!-- 头部样子 -->
-        <div class="d-flex jc-center">
+        <!-- 头部样式 -->
+        <div class="d-flex jc-center header">
           <dv-decoration-10 class="dv-dec-10" />
           <div class="d-flex jc-center">
             <dv-decoration-8 class="dv-dec-8" :color="decorationColor" />
@@ -25,8 +25,8 @@
           <dv-decoration-10 class="dv-dec-10-s" />
         </div>
 
-        <!-- 导航栏 -->           
-        <div class="d-flex jc-between px-2">
+        <!-- 导航栏 -->
+        <div class="d-flex jc-between px-2 nav-bar">
           <div class="d-flex aside-width">
             <div
               class="react-left ml-4 react-l-s"
@@ -64,7 +64,7 @@
               >
             </div>
           </div>
-          <div class="d-flex aside-width">
+          <div class="d-flex aside-width justify-end">
             <div class="react-right mr-4 react-l-s">
               <span class="react-after"></span>
               <span class="text"
@@ -130,13 +130,45 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/scss/index.scss";
+
+.header {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.nav-bar {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap; /* 强制文本在一行内显示 */
+  overflow: hidden; /* 防止文本溢出 */
+  text-overflow: ellipsis; /* 添加省略号来处理溢出的文本 */
+}
+
+.title-text {
+  font-size: 1.5rem; /* 根据需要调整字体大小 */
+  color: #fff;
+  margin: 0 10px; /* 根据需要调整左右间距 */
+}
+
 .mr-3 {
   background-color: #0f1325;
 }
+
 .bgc {
   background-color: #1a5cd7 !important;
 }
+
 .text {
   color: #fff;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 </style>

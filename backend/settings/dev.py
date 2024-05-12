@@ -26,7 +26,7 @@ SECRET_KEY = 'verybadsecret!!!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = ['*']
-
+PORT = 8000  # Django可修改此处的端口号,默认8000
 
 # Application definition
 

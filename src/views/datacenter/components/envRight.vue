@@ -4,49 +4,105 @@
       <dv-border-box-8 :reverse="true">
         <div class="head">
           <div class="head_content">
-            <h1>35</h1>
-            <h2>PM2.5(μg/m³)</h2>
+            <h2>平均传输时长</h2>
+            <h2>02:45</h2>
+          </div>
+          <div class="head_uint">
+            <h3>单位 分钟:秒</h3>
           </div>
           <div class="head_content">
-            <h1>75</h1>
-            <h2>PM10(mg/m³)</h2>
-          </div>
-          <div class="head_content">
-            <h1>125</h1>
-            <h2>TSP(mg/m³)</h2>
+            <h2>评价处理时长</h2>
+            <h2>00:02</h2>
           </div>
         </div>
       </dv-border-box-8>
     </div>
 
     <div class="body">
-      <!-- 城市空气污染物比例占比 -->
-      <div class="body_table1">
-        <dv-border-box-6 style="padding: 10px">
-          <h2>主要污染物分布</h2>
-          <Echart
-            :options="options1"
-            height="400px"
-            width="400px"
-            style="margin: auto"
-          />
-        </dv-border-box-6>
-      </div>
-      <!-- 城市空气污染物监测 -->
-      <div>
-        <dv-border-box-6 style="padding: 10px">
-          <h2>空气污染物监测</h2>
-          <Echart :options="options2" height="340px" width="500px" />
-        </dv-border-box-6>
-      </div>
+      <dv-border-box-6 style="padding: 10px">
+        <div class="body_table1">
+          <table>
+          <thead>
+          <tr>
+            <th>设备</th>
+            <th>编号</th>
+            <th>类型</th>
+            <th>大小</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>水底摄像头</td>
+            <td>video-1</td>
+            <td>H.264</td>
+            <td>4Mb</td>
+          </tr>
+          <tr>
+            <td>水底摄像头</td>
+            <td>video-2</td>
+            <td>4CIF</td>
+            <td>128kb</td>
+          </tr>
+          <tr>
+            <td>水面摄像头</td>
+            <td>video-3</td>
+            <td>H.264</td>
+            <td>16Mb</td>
+          </tr>
+          <tr>
+            <td>云台</td>
+            <td>holder-1</td>
+            <td>4CIF</td>
+            <td>4Mb</td>
+          </tr>
+          <tr>
+            <td>声纳</td>
+            <td>sensor-1</td>
+            <td>CSV</td>
+            <td>512kb</td>
+          </tr>
+          <tr>
+            <td>传感器</td>
+            <td>sensor-2</td>
+            <td>4CIF</td>
+            <td>64kb</td>
+          </tr>
+          </tbody>
+          </table>
+        </div>
+      </dv-border-box-6>
+      <dv-border-box-6 style="padding: 10px">
+        <div class="database-info">
+          <div class="info-row">
+            <h2>服务信息</h2>
+          </div>
+          <div class="info-row">
+            <p>数据库: MySQL, HBase</p>
+          </div>
+          <div class="info-row">
+            <p>查询次数: 567890</p>
+          </div>
+          <div class="info-row">
+            <p>成功次数: 567890</p>
+          </div>
+          <div class="info-row">
+            <p>累计查询时间: 573.9s</p>
+          </div>
+          <div class="info-row">
+            <p>单次查询时间: 0.001s</p>
+          </div>
+          <div class="info-title">
+            <span>访问数据服务系统</span>
+          </div>
+        </div>
+      </dv-border-box-6>
     </div>
   </div>
 </template>
 
 <script>
-import Echart from "@/common/echart/index.vue";
 export default {
-  components: { Echart },
+  components: {  },
   data() {
     return {
       options1: {
@@ -155,6 +211,7 @@ export default {
   padding: 10px;
   height: 80px;
   display: flex;
+  margin: 10px;
   justify-content: space-around;
 }
 .head_content {
@@ -163,10 +220,50 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+.head_uint {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-self: flex-end;
+}
 .body {
   margin-top: 10px;
 }
 .body_table1 {
   display: flex;
+  height:450px;
+}
+.table-container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.database-info {
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.database-info p::before {
+  content: "\2022";
+  margin-right: 10px;
+}
+.info-row {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  margin-top: 10px;
+}
+.info-title {
+  font-size: 24px;
+  margin-top: 30px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  margin-top: 10px;
 }
 </style>
