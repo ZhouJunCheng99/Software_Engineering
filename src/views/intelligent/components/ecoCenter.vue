@@ -6,17 +6,17 @@
           <div class="video-container">
           <h3>识别效果</h3>
           <video autoplay="autoplay" width="100%" height="95%">
-              <source src="../../../assets/webm/CAMERAV.webm" type="video/mp4"/>
+              <source src="../../../assets/webm/ocean.mp4" type="video/mp4"/>
           </video>
           </div>
           <div class="side-videos">
           <h3>左目镜头</h3>
           <video autoplay="autoplay" width="100%" height="95%">
-              <source src="../../../assets/webm/CAMERAV.webm" type="video/mp4"/>
+              <source src="../../../assets/webm/ocean.mp4" type="video/mp4"/>
           </video>
           <h3>右目镜头</h3>
           <video autoplay="autoplay" width="100%" height="95%">
-              <source src="../../../assets/webm/CAMERAV.webm" type="video/mp4"/>
+              <source src="../../../assets/webm/ocean.mp4" type="video/mp4"/>
           </video>
           </div>
         </div>

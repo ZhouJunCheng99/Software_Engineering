@@ -12,7 +12,7 @@
 
         <div style="width: 100%; height: 70%">
           <video autoplay="autoplay" width="100%" height="100%">
-              <source src="../../../assets/webm/CAMERAV.webm" type="video/mp4"/>
+              <source src="../../../assets/webm/ocean.mp4" type="video/mp4"/>
           </video>
       </div>
     </div>
