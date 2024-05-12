@@ -169,7 +169,7 @@ export default {
   border-radius: 8px;
   padding: 1rem;
   min-width: 300px; /* 设置最小宽度 */
-  max-height: 85vh; /* 设置最大高度以防止溢出 */
+  max-height: 100vh; /* 设置最大高度以防止溢出 */
   overflow-y: auto; /* 添加垂直滚动条 */
 }
 
