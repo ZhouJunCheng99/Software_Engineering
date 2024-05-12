@@ -1,6 +1,6 @@
 <!--
  描述: 发展历程
- 作者: Jack Chen
+ 作者: Software Engineering Group
  日期: 2020-05-09
 -->
 

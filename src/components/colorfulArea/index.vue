@@ -1,6 +1,6 @@
 <!--
  描述: 多彩轮播面积
- 作者: Jack Chen
+ 作者: Software Engineering Group
  日期: 2020-05-03
 -->
 

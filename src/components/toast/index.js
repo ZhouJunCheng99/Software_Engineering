@@ -1,7 +1,7 @@
 /*
  * 描述: 注册全局消息提示框组件
- * 作者: Jack Chen
- * 日期: 2020-04-18
+ * 作者: Software Engineering Group
+ * 日期: 2024-05
  */
 
 import Vue from 'vue'

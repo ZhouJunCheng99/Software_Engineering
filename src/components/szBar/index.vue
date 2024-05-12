@@ -1,6 +1,6 @@
 <!--
  描述: 双轴柱状图
- 作者: Jack Chen
+ 作者: Software Engineering Group
  日期: 2020-04-27
 -->
 
