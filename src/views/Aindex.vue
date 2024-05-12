@@ -58,7 +58,7 @@
             </div>
             <div class="react-left react-item" :class="{ bgc: tabbarIndex == 3 }">
               <router-link to="/Aindex/intelligent"
-                ><span class="text fw-b" @click="changeTabbarIndex(3)"
+                ><span class="text" @click="changeTabbarIndex(3)"
                   >智能中心</span
                 ></router-link
               >
