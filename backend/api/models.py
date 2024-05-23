@@ -17,7 +17,7 @@ class LoginMessageSerializer(serializers.HyperlinkedModelSerializer):
 
 
 
-class WaterQualityData(models.Model):
+class Water_Quality_Data(models.Model):
     # 监测时间，如果监测时间是日期类型，使用DateTimeField
     # monitoring_time = models.DateTimeField()
     monitoring_time = models.CharField(max_length=30, null=True)
@@ -49,7 +49,7 @@ class WaterQualityData(models.Model):
 
 class WaterQualityDataSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = WaterQualityData
+        model = Water_Quality_Data
         fields = ('url', 'monitoring_time', 'water_quality_category', 'water_temperature', 'pH',
                   'dissolved_oxygen', 'conductivity', 'turbidity', 'permanganate_index',
                   'ammonia_nitrogen', 'total_phosphorus', 'total_nitrogen', 'site_status', 'pk')

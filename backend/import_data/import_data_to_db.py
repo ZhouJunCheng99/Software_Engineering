@@ -9,7 +9,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings.dev")
 
 django.setup()  # 确保在导入任何模型之前调用
 
-from backend.api.models import WaterQualityData
+from backend.api.models import Water_Quality_Data
 
 
 def import_water_quality_data(file_path):
@@ -37,7 +37,7 @@ def import_water_quality_data(file_path):
 
 
         # 创建WaterQualityData模型实例
-        water_data = WaterQualityData(
+        water_data = Water_Quality_Data(
             monitoring_time=monitoring_time,
             water_quality_category=row['水质类别'] if row['水质类别'] != '--' else None,
             water_temperature=row['水温（℃）'] if row['水温（℃）'] != '--' else None,

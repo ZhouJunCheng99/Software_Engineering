@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import action
 
 from .models import Message, LoginMessageSerializer
-from .models import WaterQualityData, WaterQualityDataSerializer
+from .models import Water_Quality_Data, WaterQualityDataSerializer
 
 
 # Serve Vue Application
@@ -52,5 +52,5 @@ class WaterQualityDataViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows water quality data to be viewed or edited.
     """
-    queryset = WaterQualityData.objects.all()
+    queryset = Water_Quality_Data.objects.all()
     serializer_class = WaterQualityDataSerializer
