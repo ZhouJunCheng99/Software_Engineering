@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import action
 
 from .models import Message, LoginMessageSerializer
+from .models import WaterQualityData, WaterQualityDataSerializer
 
 
 # Serve Vue Application
@@ -46,3 +47,10 @@ class LoginMessageViewSet(viewsets.ModelViewSet):
             return JsonResponse({'result': False})
 
 
+
+class WaterQualityDataViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows water quality data to be viewed or edited.
+    """
+    queryset = WaterQualityData.objects.all()
+    serializer_class = WaterQualityDataSerializer
