@@ -5,7 +5,7 @@
         <h1>管理员界面</h1>
         <nav>
           <ul>
-            <li><router-link to="/Aindex/admin/dashboard">仪表盘</router-link></li>
+            <li><router-link to="/Aindex/admin/dashboard">海洋牧场总体得分</router-link></li>
             <li><router-link to="/Aindex/admin/users">用户管理</router-link></li>
             <li><router-link to="/Aindex/admin/settings">设置</router-link></li>
           </ul>
@@ -15,7 +15,7 @@
     <main class="admin-main">
       <div class="dashboard-users-container">
         <section id="dashboard" class="dashboard-section">
-          <h2>仪表盘</h2>
+          <h2>海洋牧场总体得分</h2>
           <!-- 使用 GaugeChart 组件 -->
           <GaugeChart />
           <!-- 使用 Situation 组件 -->
@@ -121,7 +121,7 @@ export default {
 
 .admin-header h1 {
   margin: 0; /* 去掉默认的 h1 外边距 */
-  font-size: 1.5rem; 
+  font-size: 1.5rem;
 }
 
 .admin-header nav ul {
@@ -140,7 +140,6 @@ export default {
   text-decoration: none;  /* 去掉下划线 */
   font-size: 1.2rem;   /* 字体大小 */
   /* 上下居中 */
-  
   padding: 0.5rem 1rem; /* 上下左右内边距 */
   border-radius: 4px; /* 圆角边框 */
   transition: background-color 0.2s;  /* 鼠标悬停时背景色渐变 */
@@ -153,13 +152,12 @@ export default {
 .admin-main {
   flex: 1;
   padding: 1rem;
-  
 }
 
 .dashboard-users-container {
-  display: flex;/* 横向布局 */
-  justify-content: space-between;/* 两个部分左右对齐 */
-  
+  display: flex; /* 横向布局 */
+  justify-content: space-between; /* 两个部分左右对齐 */
+  flex-grow: 1; /* 使容器随着页面高度自适应 */
   gap: 1rem;
 }
 
@@ -169,8 +167,12 @@ export default {
   border-radius: 8px;
   padding: 1rem;
   min-width: 300px; /* 设置最小宽度 */
-  max-height: 100vh; /* 设置最大高度以防止溢出 */
+  max-height: 800px; /* 设置最大高度 */
   overflow-y: auto; /* 添加垂直滚动条 */
+}
+
+.dashboard-section {
+  margin-right: 1rem;/* 海洋牧场总体得分部分右边距 */
 }
 
 .dashboard-section h2, .users-section h2 {

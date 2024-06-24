@@ -27,9 +27,9 @@
 
         <!-- 导航栏 -->
         <div class="d-flex jc-between px-2 nav-bar">
-          <div class="d-flex aside-width">
+          <div class="d-flex aside-width nav-items">
             <div
-              class="react-left ml-4 react-l-s"
+              class="react-left react-item"
               :class="{ bgc: tabbarIndex == 0 }"
             >
               <span
@@ -42,23 +42,23 @@
                 ></router-link
               >
             </div>
-            <div class="react-left ml-3" :class="{ bgc: tabbarIndex == 1 }">
+            <div class="react-left react-item" :class="{ bgc: tabbarIndex == 1 }">
               <router-link to="/Uindex/underwater"
                 ><span class="text" @click="changeTabbarIndex(1)"
                   >水下系统</span
                 ></router-link
               >
             </div>
-            <div class="react-left ml-3" :class="{ bgc: tabbarIndex == 2 }">
+            <div class="react-left react-item" :class="{ bgc: tabbarIndex == 2 }">
               <router-link to="/Uindex/datacenter"
                 ><span class="text" @click="changeTabbarIndex(2)"
                   >数据中心</span
                 ></router-link
               >
             </div>
-            <div class="react-left mr-3" :class="{ bgc: tabbarIndex == 3 }">
+            <div class="react-left react-item" :class="{ bgc: tabbarIndex == 3 }">
               <router-link to="/Uindex/intelligent"
-                ><span class="text fw-b" @click="changeTabbarIndex(3)"
+                ><span class="text" @click="changeTabbarIndex(3)"
                   >智能中心</span
                 ></router-link
               >
@@ -66,6 +66,7 @@
           </div>
           <div class="d-flex aside-width justify-end">
             <div class="react-right mr-4 react-l-s">
+              <span class="text user-interface">@ 普通用户页面 @</span>
               <span class="react-after"></span>
               <span class="text"
                 >{{ dateYear }} {{ dateWeek }} {{ dateDay }}</span
@@ -141,6 +142,19 @@ export default {
   padding: 0 10px;
 }
 
+.nav-items {
+  display: flex;
+  justify-content: space-between;
+}
+
+.react-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px; /* 统一宽度，具体数值可根据需求调整 */
+  margin-right: 1rem;
+}
+
 .title {
   display: flex;
   align-items: center;
@@ -154,6 +168,7 @@ export default {
   font-size: 1.5rem; /* 根据需要调整字体大小 */
   color: #fff;
   margin: 0 10px; /* 根据需要调整左右间距 */
+  line-height: 2rem; /* 增加行高，确保文本不会被遮挡 */
 }
 
 .mr-3 {
@@ -170,5 +185,9 @@ export default {
 
 .justify-end {
   justify-content: flex-end;
+}
+
+.user-interface {
+  margin-right: 50px; /* 调整与时间的间距 */
 }
 </style>
