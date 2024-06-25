@@ -1,5 +1,5 @@
 <!--
- 描述: 登录模板
+ 描述: 注册模板
  作者: Software Engineering Group
  日期: 2024-05
 -->
@@ -19,6 +19,24 @@
                    placeholder="请输入注册用户名" />
           </div>
           <div class="item">
+            <i class="iconfont icon-phone"></i>
+            <input autocomplete="off"
+                   type="text"
+                   class="input"
+                   v-model="userPhone"
+                   placeholder="请输入注册手机号" />
+          </div>
+          <!--  注册还需要选择身份,是养殖户还是食品购买者,这里使用下拉框选择,只有两个选项  -->
+          <div class="item">
+            <i class="iconfont icon-user"></i>
+            <select v-model="userPermission" class="input" >
+              <option value="" disabled>请下拉选择注册身份:养殖户 or 食品购买者</option> <!-- 占位符选项 -->
+              <option value="0">养殖户</option>
+              <option value="2">食品购买者</option>
+
+            </select>
+          </div>
+          <div class="item">
             <i class="iconfont icon-password"></i>
             <input autocomplete="off"
                    type="password"
@@ -28,9 +46,10 @@
                    @keyup.enter="login"
                    placeholder="请输入注册密码" />
           </div>
+
           <button class="loginBtn"
                   @click="register"
-                  :disabled="!userName || !userPwd">
+                  :disabled="!userName || !userPwd || !userPhone || !userPermission">
             立即注册
           </button>
 
@@ -82,6 +101,8 @@ export default {
       // adminPwd: '123456',
       userName: '',
       userPwd: '',
+      userPhone: '',
+      userPermission: '',
       visible: false,
       modalContent: '这是一段自定义模态框消息',
       // 这里不能加入queryResult属性，因为queryResult是异步获取的，需要在computed中定义
@@ -100,7 +121,7 @@ export default {
   },
   methods: {
     register() {
-      this.addMessage({ name: this.userName, password: this.userPwd ,permission: this.permission}).then(() => {
+      this.addMessage({ name: this.userName, password: this.userPwd, phone_number: this.userPhone, permission: this.userPermission}).then(() => {
         this.$Toast({
           content: '注册成功,返回登录界面',
           type: 'success',  //四种类型：info, success, warning, error
