@@ -16,7 +16,7 @@
                    type="text"
                    class="input"
                    v-model="userName"
-                   placeholder="请输入用户名" />
+                   placeholder="请输入用户名或者手机号" />
           </div>
           <div class="item">
             <i class="iconfont icon-password"></i>
@@ -133,9 +133,14 @@ export default {
           path: '/Uindex'
         })
       }
+      else if (this.queryResult.result == "buyer") {
+        this.$router.push({
+          path: '/Buyer_index'
+        })
+      }
       else {
         this.$Toast({
-          content: '请输入正确的用户名和密码',
+          content: '请输入正确的 用户名/手机号 和密码',
           type: 'error',
           hasClose: true
         })

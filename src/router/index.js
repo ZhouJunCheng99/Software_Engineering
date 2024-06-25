@@ -38,7 +38,7 @@ const routes = [
         path: "/Uindex/information",
         name: "information",
         meta: {
-          title: '系统用户界面-信息中心'
+          title: '养殖户界面-信息中心'
         },
         component: () => import("../views/information/index.vue"),
       },
@@ -47,7 +47,7 @@ const routes = [
         name: "underwater",
         component: () => import("../views/underwater/index.vue"),
         meta: {
-          title: '系统用户界面-水下系统'
+          title: '养殖户界面-水下系统'
         },
       },
       {
@@ -55,7 +55,7 @@ const routes = [
         name: "datacenter",
         component: () => import("../views/datacenter/index.vue"),
         meta: {
-          title: '系统用户界面-数据中心'
+          title: '养殖户界面-数据中心'
         },
       },
       {
@@ -63,7 +63,43 @@ const routes = [
         name: "intelligent",
         component: () => import("../views/intelligent/index.vue"),
         meta: {
-          title: '系统用户界面-智能中心'
+          title: '养殖户界面-智能中心'
+        },
+      },
+    ],
+  },
+  {
+    path: "/Buyer_index",
+    name: "Buyer_index",
+    redirect: "/Buyer_index/information",
+    // meta: {
+    //   title: '海洋牧场可视化系统用户界面'
+    // },
+
+    component: () => import("../views/Buyer_index.vue"),
+    children: [
+      {
+        path: "/Buyer_index/information",
+        name: "information",
+        meta: {
+          title: '食品购买者界面-信息中心'
+        },
+        component: () => import("../views/information/index.vue"),
+      },
+      {
+        path: "/Buyer_index/underwater",
+        name: "underwater",
+        component: () => import("../views/underwater/index.vue"),
+        meta: {
+          title: '食品购买者界面-水下系统'
+        },
+      },
+      {
+        path: "/Buyer_index/intelligent",
+        name: "intelligent",
+        component: () => import("../views/intelligent/index.vue"),
+        meta: {
+          title: '食品购买者界面-智能中心'
         },
       },
     ],
