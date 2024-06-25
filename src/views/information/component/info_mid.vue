@@ -57,24 +57,24 @@ export default {
             value: 25.90
           },
           {
-            name: '盐度()',
-            value: 67
+            name: '盐度(‰)',
+            value: 34.16
           },
           {
-            name: '溶解度()',
-            value: 123
+            name: '溶解度(mg/L)',
+            value: 0.00
           },
           {
-            name: '浊度()',
-            value: 55
+            name: '浊度(NTU)',
+            value: 2.05
           },
           {
-            name: 'pH()',
-            value: 98
+            name: 'pH',
+            value: 8.47
           },
           {
-            name: '水温()',
-            value: 167
+            name: '水温(℃)',
+            value: 15
           },
         ],
         colors: ['#e062ae', '#fb7293', '#e690d1', '#32c5e9', '#96bfff', '#e062ae'],

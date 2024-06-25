@@ -5,13 +5,13 @@
       <div class="vedio_content">
         <h2>视频监控</h2>
         <div class="row_content">
-          <button class="vedio_btn" v-for="(option, index) in options" :key="option" @click="select(index)" :round="true">
+          <el-button size="small" class="vedio_btn" v-for="(option, index) in options" :key="option" @click="select(index)" :round="true">
             {{ option }}
-          </button>
+          </el-button>
           
         </div>
         <div style="width: 100%; height: 70%">
-           <video ref="videoPlayer" :key="vedio_src" autoplay="autoplay" width="100%" height="250px">
+           <video ref="videoPlayer" :key="vedio_src" autoplay="autoplay" width="100%" height="400px">
             <source v-bind:src="vedio_src" type="video/mp4"/>
           </video>
         </div>
@@ -20,12 +20,14 @@
     </div>
 
     <div class="content1">
-      <!-- <dv-border-box-8 style="padding: 3px"> -->
+      <dv-border-box-8 style="padding: 3px">
       <div class="content2">
       <h2>附加功能</h2>
-      <div>
-        <div class="row_content" style="padding: 8px">
+        <!-- <div class="row_content" style="padding: 8px">
         <div>
+          <el-switch  v-model="switchValues[0]"  active-color="#13ce66"  inactive-color="#ff4949" @change="toggleSwitch(0)">
+            摄像机
+          </el-switch>
           <label>摄像机:</label>
           <input type="checkbox" v-model="switchValues[0]" @change="toggleSwitch(0)">
         </div>
@@ -36,9 +38,10 @@
         <div>
           <label>清洁刷:</label>
           <input type="checkbox" v-model="switchValues[2]" @change="toggleSwitch(2)">
-        </div>
-        </div>
-        <div class="row_content" style="padding: 8px">
+        </div>--->
+
+
+        <!-- <div class="row_content" style="padding: 8px">
         <div>
           <label>开关4状态:</label>
           <input type="checkbox" v-model="switchValues[3]" @change="toggleSwitch(3)">
@@ -51,10 +54,44 @@
           <label>开关6状态:</label>
           <input type="checkbox" v-model="switchValues[5]" @change="toggleSwitch(5)">
         </div>
+        </div> -->
+        <!-- <div class="row_switch_content">
+          <el-switch  v-model="switchValues[3]" active-text="附加功能4" active-color="#13ce66"  inactive-color="#ff4949" @change="toggleSwitch(3)">
+          </el-switch>
+
+          <el-switch  v-model="switchValues[4]" active-text="附加功能5" active-color="#13ce66"  inactive-color="#ff4949" @change="toggleSwitch(4)">
+          </el-switch>
+
+          <el-switch  v-model="switchValues[5]" active-text="附加功能6" active-color="#13ce66"  inactive-color="#ff4949" @change="toggleSwitch(5)">
+          </el-switch>
+        </div> -->
+        <div class="row_switch_content">
+          <div class="column_switch_content">
+            <el-switch  v-model="switchValues[0]" active-text="摄像机" active-color="#13ce66"  inactive-color="#FF0000" @change="toggleSwitch(0)">
+            </el-switch>
+
+            <el-switch  v-model="switchValues[3]" active-text="附加功能4" active-color="#13ce66"  inactive-color="#FF0000" @change="toggleSwitch(3)">
+            </el-switch>
+          </div>
+
+          <div class="column_switch_content">
+            <el-switch  v-model="switchValues[1]" active-text="灯光" active-color="#13ce66"  inactive-color="#FF0000" @change="toggleSwitch(1)">
+            </el-switch>
+
+            <el-switch  v-model="switchValues[4]" active-text="附加功能5" active-color="#13ce66"  inactive-color="#ff4949" @change="toggleSwitch(4)">
+            </el-switch>
+          </div>
+
+          <div class="column_switch_content">
+            <el-switch  v-model="switchValues[2]" active-text="清洁刷" active-color="#13ce66"  inactive-color="#ff4949" @change="toggleSwitch(2)">
+            </el-switch>
+
+            <el-switch  v-model="switchValues[5]" active-text="附加功能6" active-color="#13ce66"  inactive-color="#ff4949" @change="toggleSwitch(5)">
+            </el-switch>
+          </div>
         </div>
       </div>
-      </div>
-    <!-- </dv-border-box-8> -->
+    </dv-border-box-8>
     </div>
   </div>
 </template>
@@ -114,6 +151,23 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
+.row_switch_content {
+  height: 60%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.column_switch_content{
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
 .vedio_btn {
   width: 20%;
   height: 100px;
@@ -125,11 +179,9 @@ export default {
 
 .content2{
   width: 100%;
-  height: 100px;
-  padding: 8px;
+  height: 200px;
   display: flex;
   flex-direction: column;  
-  flex-shrink: 1;
 }
 h2{
   margin: 10px;
