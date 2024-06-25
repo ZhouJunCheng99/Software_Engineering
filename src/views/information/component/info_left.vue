@@ -5,16 +5,17 @@
       <div class="vedio_content">
         <h2>视频监控</h2>
         <div class="row_content">
-          <button v-for="option in options" :key="option" @click="select(option)" round=true>
+          <button class="vedio_btn" v-for="(option, index) in options" :key="option" @click="select(index)" :round="true">
             {{ option }}
           </button>
+          
         </div>
         <div style="width: 100%; height: 70%">
-          <video autoplay="autoplay" width="100%" height="90%">
-            <source src="../../../assets/webm/ocean.mp4" type="video/mp4"/>
+           <video ref="videoPlayer" :key="vedio_src" autoplay="autoplay" width="100%" height="250px">
+            <source v-bind:src="vedio_src" type="video/mp4"/>
           </video>
         </div>
-      </div>
+      </div> 
     </dv-border-box-8>
     </div>
 
@@ -25,30 +26,30 @@
       <div>
         <div class="row_content" style="padding: 8px">
         <div>
-          <label>开关1状态:</label>
-          <input type="checkbox" v-model="switchValue1" @change="toggleSwitch(1)">
+          <label>摄像机:</label>
+          <input type="checkbox" v-model="switchValues[0]" @change="toggleSwitch(0)">
         </div>
         <div>   
-          <label>开关2状态:</label>
-          <input type="checkbox" v-model="switchValue1" @change="toggleSwitch(2)">
+          <label>灯光:</label>
+          <input type="checkbox" v-model="switchValues[1]" @change="toggleSwitch(1)">
         </div>
         <div>
-          <label>开关3状态:</label>
-          <input type="checkbox" v-model="switchValue1" @change="toggleSwitch(3)">
+          <label>清洁刷:</label>
+          <input type="checkbox" v-model="switchValues[2]" @change="toggleSwitch(2)">
         </div>
         </div>
         <div class="row_content" style="padding: 8px">
         <div>
           <label>开关4状态:</label>
-          <input type="checkbox" v-model="switchValue1" @change="toggleSwitch(4)">
+          <input type="checkbox" v-model="switchValues[3]" @change="toggleSwitch(3)">
         </div>
         <div>   
           <label>开关5状态:</label>
-          <input type="checkbox" v-model="switchValue1" @change="toggleSwitch(5)">
+          <input type="checkbox" v-model="switchValues[4]" @change="toggleSwitch(4)">
         </div>
         <div>
           <label>开关6状态:</label>
-          <input type="checkbox" v-model="switchValue1" @change="toggleSwitch(6)">
+          <input type="checkbox" v-model="switchValues[5]" @change="toggleSwitch(5)">
         </div>
         </div>
       </div>
@@ -65,16 +66,25 @@ export default {
     return {
       options: ['视频1', '视频2', '视频3', '视频4'],
       switchValues: [false, false, false, false, false, false], // 使用一个数组来保存所有开关的状态
+      vedio_src : require("../../../assets/webm/ocean.mp4"),
     };
   },
   methods: {
-    select(option) {
+    select(index) {
       // 选项选择逻辑
-      console.log('选中选项:', option);
+      const videos = [
+        require("../../../assets/webm/ocean.mp4"),
+        require("../../../assets/webm/CAMERAV.webm"),
+        require("../../../assets/webm/ocean.mp4"),
+        require("../../../assets/webm/CAMERAV.webm"),
+      ];
+      this.vedio_src = videos[index];
+      console.log('选中选项:', index);
     },
     toggleSwitch(index) {
-      // 开关切换逻辑
-      console.log('开关', index, '状态:', this.switchValues[index - 1]);
+      // const state = this.switchValues[index] ? '打开' : '关闭';
+      // alert(`开关${index}已经${state}`);
+      console.log('开关', index, '状态:', this.switchValues[index]);
     }
   }
 };
@@ -104,10 +114,9 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-
-button {
-  width: 100px;
-  height: 50px;
+.vedio_btn {
+  width: 20%;
+  height: 100px;
 }
 
 .content1{

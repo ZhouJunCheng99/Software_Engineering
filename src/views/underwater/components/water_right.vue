@@ -24,6 +24,17 @@
             </div>
             </dv-border-box-12>
         </div>
+        <div class="hardware">
+            <h2>硬件2</h2>
+            <dv-border-box-12 style="padding: 20px">
+            <div class="hardware_info">
+                <p>设备信息</p>
+                <p>设备信息</p>
+                <p>设备信息</p>
+                <p>设备信息</p>
+            </div>
+            </dv-border-box-12>
+        </div>
       </dv-border-box-8>
     </div>
 

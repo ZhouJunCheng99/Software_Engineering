@@ -7,11 +7,35 @@
       <div class="device_content">
         <dv-border-box-12 style="padding: 20px">
             <h1>设备状态</h1>
-          <div class="air" height="500px" width="600px">
-            <h2>设备信息</h2>
-            <h2>设备信息</h2>
-            <h2>设备信息</h2>
-            <h2>设备信息</h2>
+        <div class="row_content">
+          <button class="device_button" v-for="(option, index) in device_options" :key="option" @click="select(index)" :round="true">
+            {{ option }}
+          </button>
+          
+        </div>
+          <div class="air" v-if="device_selectid == 0" height="500px" width="600px">
+            <h2>设备信息0</h2>
+            <h2>设备信息0</h2>
+            <h2>设备信息0</h2>
+            <h2>设备信息0</h2>
+          </div>
+          <div class="air" v-if="device_selectid == 1" height="500px" width="600px">
+            <h2>设备信息1</h2>
+            <h2>设备信息1</h2>
+            <h2>设备信息1</h2>
+            <h2>设备信息1</h2>
+          </div>
+          <div class="air" v-if="device_selectid == 2" height="500px" width="600px">
+            <h2>设备信息2</h2>
+            <h2>设备信息2</h2>
+            <h2>设备信息2</h2>
+            <h2>设备信息2</h2>
+          </div>
+          <div class="air" v-if="device_selectid == 3" height="500px" width="600px">
+            <h2>设备信息3</h2>
+            <h2>设备信息3</h2>
+            <h2>设备信息3</h2>
+            <h2>设备信息3</h2>
           </div>
         </dv-border-box-12>
       </div>
@@ -23,6 +47,8 @@ import Echart from "@/common/echart/index.vue";
 export default {
   data() {
     return {
+      device_options: ['主控', '时间校准', '通道', '警告'],
+      device_selectid : 0,
       options1: {
         tooltip: {
           trigger: "axis",
@@ -124,6 +150,14 @@ export default {
   components: {
     Echart,
   },
+  methods: {
+    select(index) {
+      // 选项选择逻辑
+      this.device_selectid = index;
+      console.log('选中选项:', index);
+    },
+
+  }
 };
 </script>
 
@@ -143,4 +177,18 @@ export default {
   flex-grow: 1;
   display: flex;
 }
+.row_content {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.device_button {
+  width: 20%;
+  height: 80%;
+}
+
 </style>

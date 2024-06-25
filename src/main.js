@@ -56,3 +56,8 @@ new Vue({
   store,
   render: (h) => h(App),
 }).$mount('#app');
+
+
+import ElementUI from 'element-ui';                      // 引入element-ui
+import 'element-ui/lib/theme-chalk/index.css';           // element-ui的css样式要单独引入
+App.use(ElementUI)                                         //全局使用element-ui组件
