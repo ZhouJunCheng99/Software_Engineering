@@ -37,15 +37,15 @@
             <h1>气象与水文数据</h1>
             </div>
             <div class="weather-data">
-              <p>水温:{{waterData.water_temperature.toFixed(1)}}℃</p>
-              <p>溶解氧:{{waterData.dissolved_oxygen.toFixed(2)}}mg/L</p>
-              <p>PH:{{waterData.pH.toFixed(2)}}</p>
-              <p>电导率:{{waterData.conductivity.toFixed(1)}}μS/cm</p>
-              <p>浊度:{{waterData.turbidity.toFixed(1)}}NTU</p>
-              <p>高锰酸钾指数:{{waterData.permanganate_index.toFixed(2)}}mg/L</p>
-              <p>氨氮:{{waterData.ammonia_nitrogen.toFixed(3)}}mg/L</p>
-              <p>总磷:{{waterData.total_phosphorus.toFixed(3)}}mg/L</p>
-              <p>总氮:{{waterData.total_nitrogen.toFixed(2)}}mg/L</p>
+              <p>水温:{{waterData.water_temperature ? waterData.water_temperature.toFixed(1) : 'N/A'}}℃</p>
+              <p>溶解氧:{{waterData.dissolved_oxygen ? waterData.dissolved_oxygen.toFixed(2) : 'N/A'}}mg/L</p>
+              <p>PH:{{waterData.pH ? waterData.pH.toFixed(2) : 'N/A'}}</p>
+              <p>电导率:{{waterData.conductivity ? waterData.conductivity.toFixed(1) : 'N/A'}}μS/cm</p>
+              <p>浊度:{{waterData.turbidity ? waterData.turbidity.toFixed(1) : 'N/A'}}NTU</p>
+              <p>高锰酸钾指数:{{waterData.permanganate_index ? waterData.permanganate_index.toFixed(2) : 'N/A'}}mg/L</p>
+              <p>氨氮:{{waterData.ammonia_nitrogen ? waterData.ammonia_nitrogen.toFixed(3) : 'N/A'}}mg/L</p>
+              <p>总磷:{{waterData.total_phosphorus ? waterData.total_phosphorus.toFixed(3) : 'N/A'}}mg/L</p>
+              <p>总氮:{{waterData.total_nitrogen ? waterData.total_nitrogen.toFixed(2) : 'N/A'}}mg/L</p>
             </div>
           </div>
         </dv-border-box-6>
