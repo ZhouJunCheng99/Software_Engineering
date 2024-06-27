@@ -244,7 +244,7 @@ export default {
       }
       return date.toLocaleString('en-US', options);
     },
-    fetchData() {
+    fetchHistoryData() {
       // Get data based on selected time range and update chart options
       const data = {
         '选项1': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130],
@@ -254,14 +254,13 @@ export default {
         '选项5': [30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150],
         '选项6': [35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 155],
       };
-      // const temp_data = [2920, 2950, 2970, 3010, 3040, 3070, 3110, 3150, 3160, 3190, 3210,3220, 3250,];
 
-      // 获取数据
-      // let data1 = []
-      // let data2 = []
+      // 根据时间获取数据
       
+      // let data1 = getData("选项6");
+      // let data2 = getData(selectedOption);
       // 设置图表的第一属性
-
+      // this.options1.series[0].data = data1;
       
 
       // 设置图表的第二属性
@@ -274,16 +273,15 @@ export default {
       this.options1.series[1].data = data[this.selected_data_option];
       this.options1.legend.data = [this.options1.series[0].name, this.options1.series[1].name];
     },
-    
   },
   watch: {
     selected_data_option() {
       console.log("---:",this.selected_data_option);
-      this.fetchData();
+      this.fetchHistoryData();
     }
   },
   mounted() {
-    this.fetchData();
+    this.fetchHistoryData();
     this.setTimeRange('week'); // 默认显示近一周的数据
   }
 };
