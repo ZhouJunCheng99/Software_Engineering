@@ -86,19 +86,26 @@
 
             <div class="react-right mr-4 react-l-s ">
 
-              <span class="text user-interface">@ 管理员页面 @</span>
+              <span class="text user-interface">@管理员页面@</span>
               <span class="react-after"></span>
               <span class="text"
                 >{{ dateYear }} {{ dateWeek }} {{ dateDay }}</span
               >
 
             </div>
-            <div class="container">
-              <!-- 其他代码 -->
-              <button @click="triggerFileUpload" class="upload-button">上传文件</button>
-              <input type="file" ref="fileInput" @change="handleFileUpload" style="display: none;" />
-            </div>
+
+
           </div>
+
+          <div class="container">
+            <!-- 其他代码 -->
+            <button @click="triggerFileUpload" class="upload-button">上传水质数据</button>
+            <input type="file" ref="fileInput" @change="handleFileUpload" style="display: none;" />
+
+            <button @click="exportData" class="upload-button">导出数据</button>
+
+          </div>
+
         </div>
         <!-- 数据内容 -->
         <div class="body-box">
@@ -174,7 +181,30 @@ export default {
           console.error('上传失败:', error);
         }
       }
-    }
+    },
+    async exportData() {
+      try {
+        // 注意这里不要使用get, get的好处在于可以重命名文件,选择存放位置, 但是get是直接把viewset的queryset和serializer返回给前端,
+        // 意味着前端还需要再处理这个json数据, 有点小麻烦, 在后端可以直接用pandas处理,比较方便
+        // 所以这里使用post, 在后端处理好直接下载, 还可以直接导出多张表多个文件
+        const response = await axios.post('/api/export/export_data/', {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+            },
+          responseType: 'blob'
+        });
+        // const url = window.URL.createObjectURL(new Blob([response.data]));
+        // const link = document.createElement('a');
+        // link.href = url;
+        // link.setAttribute('download', 'data.xlsx');
+        // document.body.appendChild(link);
+        // link.click();
+
+        console.log(response.data);
+      } catch (error) {
+        console.error('导出失败:', error);
+      }
+    },
   },
 };
 </script>
@@ -232,14 +262,20 @@ export default {
 }
 
 .user-interface {
-  margin-right: 50px; /* 调整与时间的间距 */
+  margin-right: 20px; /* 调整与时间的间距 */
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .upload-button {
   //修改按钮大小,美化
-  margin-left: 30px;
+
+  //margin-top: 20px;
+  margin: 0px 4px;
   font-size: 18px;
-  padding: 10px 20px;  // 增加内部空间
+  padding: 8px 4px;  // 增加内部空间
 }
 
 </style>

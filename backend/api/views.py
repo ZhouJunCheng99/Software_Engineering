@@ -3,6 +3,9 @@ from django.views.decorators.cache import never_cache
 from rest_framework import viewsets
 from django.http import JsonResponse
 from rest_framework.decorators import action
+import sqlite3  # 或者你使用的其他数据库库
+import pandas as pd
+import os
 
 from .models import Message, LoginMessageSerializer
 from .models import Water_Quality_Data, WaterQualityDataSerializer
@@ -69,3 +72,29 @@ class WaterQualityDataViewSet(viewsets.ModelViewSet):
         import_water_quality_data(file_path)
 
         return JsonResponse({'result': 'upload_water_quality success'})
+
+class ExportDataViewSet(viewsets.ModelViewSet):
+    # queryset = Message.objects.all()
+    # serializer_class = LoginMessageSerializer
+    queryset = Water_Quality_Data.objects.all()
+    serializer_class = WaterQualityDataSerializer
+
+
+    @action(detail=False, methods=['post'])
+    def export_data(self, request):
+        # 假设你使用sqlite数据库
+        conn = sqlite3.connect('db.sqlite3')
+        # query_message = "SELECT * FROM api_message"  # 替换为表名
+        # df_message = pd.read_sql_query(query_message, conn)
+
+        query_water_quality_data = "SELECT * FROM api_water_quality_data"  # 替换为表名
+
+        df_water_quality_data = pd.read_sql_query(query_water_quality_data, conn)
+
+        conn.close()
+
+        # 保存数据到Excel文件
+        file_path_water_quality_data = 'export_water_quality_data.xlsx'
+        df_water_quality_data.to_excel(file_path_water_quality_data, index=False)
+
+        return JsonResponse({'result': 'export success'})
