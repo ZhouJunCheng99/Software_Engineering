@@ -8,10 +8,14 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from .api.views import index_view, LoginMessageViewSet
+from .api.views import index_view, LoginMessageViewSet, GetHistoryData, WaterQualityDataViewSet
 
 router = routers.DefaultRouter()
 router.register('account', LoginMessageViewSet)
+
+# info-history_data
+router.register('history_data', GetHistoryData)
+
 
 urlpatterns = [
 

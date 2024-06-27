@@ -82,7 +82,7 @@
 
 <script>
 import Echart from "@/common/echart/index.vue";
-
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -98,6 +98,14 @@ export default {
         { value: '选项4', label: '浊度', unit: 'NTU' },
         { value: '选项5', label: 'pH', unit: '' },
         { value: '选项6', label: '水温', unit: '℃' }
+      ],
+      history_data: [
+        { label: '电池电压', value:[] },
+        { label: '盐度', value:[] },
+        { label: '溶解度', value:[] },
+        { label: '浊度', value:[] },
+        { label: 'pH', value:[] },
+        { label: '水温', value:[] }
       ],
       options1: {
         tooltip: {
@@ -273,6 +281,21 @@ export default {
       this.options1.series[1].data = data[this.selected_data_option];
       this.options1.legend.data = [this.options1.series[0].name, this.options1.series[1].name];
     },
+    async getHistoryData(){
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/history_data/');
+        if (response.data.length > 0) {
+          // this.history_data = response.data.slice(0, 13); // 获取前 13 条数据
+        } else {
+          console.warn('数据不足 13 条');
+          // this.history_data = response.data; // 如果数据不足 13 条，获取所有数据
+        }
+        console.log("历史数据：", response.data[0]);
+      } 
+      catch (error) {
+        console.error('获取历史数据失败', error);
+      }
+    },
   },
   watch: {
     selected_data_option() {
@@ -283,6 +306,9 @@ export default {
   mounted() {
     this.fetchHistoryData();
     this.setTimeRange('week'); // 默认显示近一周的数据
+  },
+  created(){
+    this.getHistoryData();
   }
 };
 </script>
