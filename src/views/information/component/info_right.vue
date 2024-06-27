@@ -20,7 +20,7 @@
                 placeholder="结束日期"
                 size="mini"
               />
-              <el-button size="mini" @click="fetchData">查询</el-button>
+              <el-button size="mini" @click="setTimeRange('custom')">查询</el-button>
             </div>
 
             <div class="time_buttons">
@@ -52,28 +52,28 @@
           
         </div>
           <div class="air" v-if="device_selectid == 0" height="500px" width="600px">
-            <h2>设备信息0</h2>
-            <h2>设备信息0</h2>
-            <h2>设备信息0</h2>
-            <h2>设备信息0</h2>
+            <h2>设备ID：8D19C331-4F08-47A1</h2>
+            <h2>版本：V0.1.1</h2>
+            <h2>温度：39.64°C</h2>
+            <h2>连接：断开</h2>
           </div>
           <div class="air" v-if="device_selectid == 1" height="500px" width="600px">
-            <h2>设备信息1</h2>
-            <h2>设备信息1</h2>
-            <h2>设备信息1</h2>
-            <h2>设备信息1</h2>
+            <h2>上次校准：2024年06月15日</h2>
+            <h2>下次校准：2025年06月15日</h2>
+            <h2>时钟偏差：+0.002秒</h2>
+            <h2> </h2>
           </div>
           <div class="air" v-if="device_selectid == 2" height="500px" width="600px">
-            <h2>设备信息2</h2>
-            <h2>设备信息2</h2>
-            <h2>设备信息2</h2>
-            <h2>设备信息2</h2>
+            <h2>通道1：正常</h2>
+            <h2>通道2：异常</h2>
+            <h2>通道3：正常</h2>
+            <h2>通道4：正常</h2>
           </div>
           <div class="air" v-if="device_selectid == 3" height="500px" width="600px">
-            <h2>设备信息3</h2>
-            <h2>设备信息3</h2>
-            <h2>设备信息3</h2>
-            <h2>设备信息3</h2>
+            <h2>警告1：温度过高（39.64°C）</h2>
+            <h2>警告2：通信异常（次控断开）</h2>
+            <h2>警告3：通道2断开</h2>
+            <h2> </h2>
           </div>
         </dv-border-box-12>
       </div>
@@ -123,21 +123,7 @@ export default {
         xAxis: [
           {
             type: "category",
-            data: [
-              "2010",
-              "2011",
-              "2012",
-              "2013",
-              "2014",
-              "2015",
-              "2016",
-              "2017",
-              "2018",
-              "2019",
-              "2020",
-              "2021",
-              "2022",
-            ],
+            data: [],
             axisPointer: {
               type: "shadow",
             },
@@ -147,9 +133,9 @@ export default {
           {
             type: "value",
             name: "℃",
-            min: 2700,
-            max: 3300,
-            interval: 100,
+            min: 0,
+            max: 40,
+            interval: 5,
             axisLabel: {
               formatter: "{value}",
             },
@@ -174,7 +160,7 @@ export default {
                 return value + " ℃";
               },
             },
-            data: [2920, 2950, 2970, 3010, 3040, 3070, 3110, 3150, 3160, 3190, 3210,3220, 3250,],
+            data: [15, 35, 32, 12, 17, 25, 26, 16, 16, 14, 27,36, 25,],
           },
           {
             name: "",
@@ -216,10 +202,47 @@ export default {
         case 'year':
           start = new Date(now.setFullYear(now.getFullYear() - 1));
           break;
+        case 'custom':
+          // 用户多选框选择时间
+          start = this.startDate;
+          break;
       }
       this.startDate = start;
       this.endDate = new Date();
-      this.fetchData();
+
+      const interval = (this.endDate.getTime() - this.startDate.getTime()) / 12;
+      let intervals = [];
+      for (let i = 0; i <= 12; i++) {
+        intervals.push(new Date(start.getTime() + interval * i));
+      }
+      const formattedIntervals = intervals.map(interval => this.formatDate(interval, range));
+      this.options1.xAxis[0].data = formattedIntervals;
+      console.log("formattedIntervals: ", formattedIntervals);
+      
+    },
+    formatDate(date, type) {
+      const options = {};
+      switch (type) {
+        case 'day':
+          options.hour = '2-digit';
+          options.minute = '2-digit';
+          break;
+        case 'week':
+          options.weekday = 'short';
+          break;
+        case 'month':
+          options.month = 'short';
+          options.day = '2-digit';
+          break;
+        case 'year':
+          options.month = 'short';
+          break;
+        case 'custom':
+          options.month = 'short';
+          options.day = '2-digit';          
+          break;
+      }
+      return date.toLocaleString('en-US', options);
     },
     fetchData() {
       // Get data based on selected time range and update chart options
@@ -232,19 +255,24 @@ export default {
         '选项6': [35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 155],
       };
       // const temp_data = [2920, 2950, 2970, 3010, 3040, 3070, 3110, 3150, 3160, 3190, 3210,3220, 3250,];
+
+      // 获取数据
+      // let data1 = []
+      // let data2 = []
+      
+      // 设置图表的第一属性
+
       
 
+      // 设置图表的第二属性
       const selectedOption = this.data_options.find(option => option.value === this.selected_data_option);
       this.options1.yAxis[1].name = selectedOption.unit;
-      
       this.options1.yAxis[1].axisLabel.formatter = '{value} ' + selectedOption.unit;
-
       this.options1.yAxis[1].min = 0;
       this.options1.yAxis[1].max = Math.max(...data[this.selected_data_option]);
       this.options1.yAxis[1].interval = Math.round((this.options1.yAxis[0].max - this.options1.yAxis[0].min) / 5);
       this.options1.series[1].data = data[this.selected_data_option];
       this.options1.legend.data = [this.options1.series[0].name, this.options1.series[1].name];
-
     },
     
   },
@@ -256,6 +284,7 @@ export default {
   },
   mounted() {
     this.fetchData();
+    this.setTimeRange('week'); // 默认显示近一周的数据
   }
 };
 </script>
