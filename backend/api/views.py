@@ -7,6 +7,7 @@ from rest_framework.decorators import action
 from .models import Message, LoginMessageSerializer
 from .models import Water_Quality_Data, WaterQualityDataSerializer
 
+from ..import_data.import_data_to_db import import_water_quality_data
 
 # Serve Vue Application
 index_view = never_cache(TemplateView.as_view(template_name='index.html'))
@@ -61,3 +62,10 @@ class WaterQualityDataViewSet(viewsets.ModelViewSet):
     """
     queryset = Water_Quality_Data.objects.all()
     serializer_class = WaterQualityDataSerializer
+
+    @action(detail=False, methods=['post'])
+    def import_file(self, request):
+        file_path = request.data['file']
+        import_water_quality_data(file_path)
+
+        return JsonResponse({'result': 'upload_water_quality success'})

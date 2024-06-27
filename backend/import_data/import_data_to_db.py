@@ -61,7 +61,10 @@ def import_water_quality_data(file_path):
 
 def main():
     # 调用函数
-    import_water_quality_data('water_quality_data.xlsx')
+    # import_water_quality_data('water_quality_data.xlsx')
+
+    # 再次执行相当于插入数据
+    import_water_quality_data('water_test.xlsx')
 
 if __name__ == '__main__':
     main()

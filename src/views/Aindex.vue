@@ -63,24 +63,40 @@
                   >智能中心</span
                 ></router-link
               >
-            </div> 
-          </div>
+            </div>
 
-                   
-          <div class="d-flex aside-width justify-end">
-            <div class="react-right mr-3" :class="{ bgc: tabbarIndex == 4 }">
+            <div class="react-left react-item" :class="{ bgc: tabbarIndex == 4 }">
               <router-link to="/Aindex/admin"
                 ><span class="text" @click="changeTabbarIndex(4)"
                   >管理员界面</span
                 ></router-link
               >
-            </div>  
-            <div class="react-right mr-4 react-l-s">
+            </div>
+          </div>
+
+                   
+          <div class="d-flex aside-width justify-end">
+<!--            <div class="react-right mr-3" :class="{ bgc: tabbarIndex == 4 }">-->
+<!--              <router-link to="/Aindex/admin"-->
+<!--                ><span class="text" @click="changeTabbarIndex(4)"-->
+<!--                  >管理员界面</span-->
+<!--                ></router-link-->
+<!--              >-->
+<!--            </div>  -->
+
+            <div class="react-right mr-4 react-l-s ">
+
               <span class="text user-interface">@ 管理员页面 @</span>
               <span class="react-after"></span>
               <span class="text"
                 >{{ dateYear }} {{ dateWeek }} {{ dateDay }}</span
               >
+
+            </div>
+            <div class="container">
+              <!-- 其他代码 -->
+              <button @click="triggerFileUpload" class="upload-button">上传文件</button>
+              <input type="file" ref="fileInput" @change="handleFileUpload" style="display: none;" />
             </div>
           </div>
         </div>
@@ -96,6 +112,7 @@
 <script>
 import drawMixin from "../utils/drawMixin";
 import { formatTime } from "../utils/index.js";
+import axios from 'axios';
 
 export default {
   mixins: [drawMixin],
@@ -135,6 +152,29 @@ export default {
     changeTabbarIndex(index) {
       this.tabbarIndex = index;
     },
+
+    triggerFileUpload() {
+      this.$refs.fileInput.click();
+    },
+    async handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+          const response = await axios.post('/api/upload_water_quality/import_file/', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+          console.log(response.data);
+          // 可以根据需要添加进一步处理逻辑
+        } catch (error) {
+          console.error('上传失败:', error);
+        }
+      }
+    }
   },
 };
 </script>
@@ -193,6 +233,13 @@ export default {
 
 .user-interface {
   margin-right: 50px; /* 调整与时间的间距 */
+}
+
+.upload-button {
+  //修改按钮大小,美化
+  margin-left: 30px;
+  font-size: 18px;
+  padding: 10px 20px;  // 增加内部空间
 }
 
 </style>
