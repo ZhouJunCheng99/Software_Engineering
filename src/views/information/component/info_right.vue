@@ -92,21 +92,22 @@ export default {
       endDate: null,
       selected_data_option: '选项1',
       data_options: [
-        { value: '选项1', label: '电池电压', unit: 'V' },
+        { value: '选项1', label: '水温', unit: '℃' },
         { value: '选项2', label: '盐度', unit: '‰' },
         { value: '选项3', label: '溶解度', unit: 'mg/L' },
         { value: '选项4', label: '浊度', unit: 'NTU' },
         { value: '选项5', label: 'pH', unit: '' },
-        { value: '选项6', label: '水温', unit: '℃' }
       ],
-      history_data: [
-        { label: '电池电压', value:[] },
-        { label: '盐度', value:[] },
-        { label: '溶解度', value:[] },
-        { label: '浊度', value:[] },
-        { label: 'pH', value:[] },
-        { label: '水温', value:[] }
-      ],
+      allWaterData: [], // 保存所有水质数据
+      history_data: [],
+      dataIndex: 0, // 当前数据索引
+      waterData:{
+        temperature: '',
+        salinity: '',
+        dissolved_oxygen: '',
+        illumination: '',
+        ph: '',
+      },
       options1: {
         tooltip: {
           trigger: "axis",
@@ -260,17 +261,19 @@ export default {
         '选项3': [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140],
         '选项4': [25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145],
         '选项5': [30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150],
-        '选项6': [35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 155],
+      };
+
+      const dataMap = {
+        '选项1': this.history_data.map(d => d.temperature),
+        '选项2': this.history_data.map(d => d.salinity),
+        '选项3': this.history_data.map(d => d.dissolved_oxygen),
+        '选项4': this.history_data.map(d => d.illumination),
+        '选项5': this.history_data.map(d => d.ph),
       };
 
       // 根据时间获取数据
+      this.options1.series[0].data = dataMap['选项1'];
       
-      // let data1 = getData("选项6");
-      // let data2 = getData(selectedOption);
-      // 设置图表的第一属性
-      // this.options1.series[0].data = data1;
-      
-
       // 设置图表的第二属性
       const selectedOption = this.data_options.find(option => option.value === this.selected_data_option);
       this.options1.yAxis[1].name = selectedOption.unit;
@@ -278,24 +281,40 @@ export default {
       this.options1.yAxis[1].min = 0;
       this.options1.yAxis[1].max = Math.max(...data[this.selected_data_option]);
       this.options1.yAxis[1].interval = Math.round((this.options1.yAxis[0].max - this.options1.yAxis[0].min) / 5);
-      this.options1.series[1].data = data[this.selected_data_option];
+      this.options1.series[1].data = dataMap[this.selected_data_option];
       this.options1.legend.data = [this.options1.series[0].name, this.options1.series[1].name];
     },
     async getHistoryData(){
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/history_data/');
         if (response.data.length > 0) {
-          // this.history_data = response.data.slice(0, 13); // 获取前 13 条数据
+          this.allWaterData = response.data; // 保存所有数据
+          this.history_data = [];
+
+          // 仅提取最新的 13 条数据
+          const latestData = this.allWaterData.slice(-13);
+
+          // 根据所选的类型处理历史数据
+          latestData.forEach((dataPoint) => {
+            this.history_data.push({
+              temperature: dataPoint.temperature,
+              salinity: dataPoint.salinity,
+              dissolved_oxygen: dataPoint.dissolved_oxygen,
+              illumination: dataPoint.illumination,
+              ph: dataPoint.ph,
+            });
+          });
         } else {
           console.warn('数据不足 13 条');
-          // this.history_data = response.data; // 如果数据不足 13 条，获取所有数据
+          this.allWaterData = response.data;
+          this.history_data = this.allWaterData; // 如果数据不足 13 条，获取所有数据
         }
-        console.log("历史数据：", response.data[0]);
+        console.log("历史数据：", this.history_data);
       } 
       catch (error) {
         console.error('获取历史数据失败', error);
       }
-    },
+    }
   },
   watch: {
     selected_data_option() {

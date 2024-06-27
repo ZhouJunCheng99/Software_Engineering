@@ -36,10 +36,19 @@
 
 <script>
 import mapStyle from "@/assets/mapStyle.json";
+import axios from 'axios'
 
 export default {
   data() {
     return {
+      todayData:{
+        temperature: '',
+        salinity: '',
+        dissolved_oxygen: '',
+        illumination: '',
+        ph: '',
+      },
+      allWaterData: [],
       center: { lng: 0, lat: 0 },
       zoom: 3,
       mapStyle: {
@@ -52,7 +61,7 @@ export default {
         data: [
           {
             name: '电池电压(V)',
-            value: 0,
+            value: 26,
           },
           {
             name: '盐度(‰)',
@@ -91,7 +100,7 @@ export default {
       this.zoom = 15;
     },
     fetchData() {
-      const data = this.getDayData(); // 调用获取当日数据的方法
+      const data = this.todayData; // 调用获取当日数据的方法
       if (data && data.length === 6) {
         data.forEach((item, index) => {
           // 使用 this.$set 来更新数组中的对象
@@ -108,20 +117,35 @@ export default {
       console.log("data", data);
       console.log("this.waterData.data", this.waterData.data);
     },
-    getDayData() {
-      // 模拟获取当日数据的方法
-      return [
-        { name: '电池电压(V)', value: 25.90 },
-        { name: '盐度(‰)', value: 32.16 },
-        { name: '溶解度(mg/L)', value: 0.00 },
-        { name: '浊度(NTU)', value: 2.05 },
-        { name: 'pH', value: 8.47 },
-        { name: '水温(℃)', value: 15 }
-      ];
-    },
+    async getHistoryData(){
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/history_data/');
+        if (response.data.length > 0) {
+          this.allWaterData = response.data; // 保存所有数据
+          this.todayData = this.allWaterData[-1];
+        } else {
+          console.warn('数据不足');
+        }
+        console.log("历史数据：", this.todayData);
+      } 
+      catch (error) {
+        this.todayData = 
+        {
+        temperature: 15,
+        salinity: 32.16,
+        dissolved_oxygen: 0.00 ,
+        illumination: 2.05,
+        ph: 8.47,
+        };
+        console.error('获取历史数据失败', error);
+      }
+    }
   },
   mounted() {
     this.fetchData();
+  },
+  create(){
+    this.getHistoryData();
   }
 };
 </script>
