@@ -7,37 +7,45 @@
               <h1>AI决策</h1>
           </div>
           <div class="recommendations">
-            <p>温度:10~20</p>
-            <p>光照:20~100</p>
-            <p>溶解氧:0.2~0.5</p>
-            <p>PH:8~8.7</p>
-            <p>盐度:0.01~0.03</p>
+            <p>水温:15~25℃</p>
+            <p>溶解氧:≥5mg/L</p>
+            <p>PH:6.8~8.7</p>
+            <p>电导率:500~1000μS/cm</p>
+            <p>浊度:0.1~10NTU</p>
+            <p>高锰酸钾指数:≤6mg/L</p>
+            <p>氨氮:≤1.0mg/L</p>
+            <p>总磷:≤0.2mg/L</p>
+            <p>总氮:≤10mg/L</p>
           </div>
         </div>
       </dv-border-box-8>
     </div>
 
-    <div class="suggestion">
-    <dv-border-box-6 style="padding: 10px">
-      <p>提示:</p>
-      <p>未来几天可能降雨</p>
-      <p>请确保温度、风度正常</p>
-      </dv-border-box-6>
-    </div>
+<!--    <div class="suggestion">-->
+<!--    <dv-border-box-6 style="padding: 10px">-->
+<!--      <p>提示:</p>-->
+<!--      <p>未来几天可能降雨</p>-->
+<!--      <p>请确保温度、风度正常</p>-->
+<!--      </dv-border-box-6>-->
+<!--    </div>-->
 
     <div class="body">
       <div class="body_table1">
         <dv-border-box-6 style="padding: 10px">
           <div class="weather">
             <div class="weather-title">
-            <h1>气象数据</h1>
+            <h1>气象与水文数据</h1>
             </div>
             <div class="weather-data">
-              <p>温度:10~20</p>
-              <p>光照:20~100</p>
-              <p>溶解氧:0.2~0.5</p>
-              <p>PH:8~8.7</p>
-              <p>盐度:0.01~0.03</p>
+              <p>水温:{{waterData.water_temperature.toFixed(1)}}℃</p>
+              <p>溶解氧:{{waterData.dissolved_oxygen.toFixed(2)}}mg/L</p>
+              <p>PH:{{waterData.pH.toFixed(2)}}</p>
+              <p>电导率:{{waterData.conductivity.toFixed(1)}}μS/cm</p>
+              <p>浊度:{{waterData.turbidity.toFixed(1)}}NTU</p>
+              <p>高锰酸钾指数:{{waterData.permanganate_index.toFixed(2)}}mg/L</p>
+              <p>氨氮:{{waterData.ammonia_nitrogen.toFixed(3)}}mg/L</p>
+              <p>总磷:{{waterData.total_phosphorus.toFixed(3)}}mg/L</p>
+              <p>总氮:{{waterData.total_nitrogen.toFixed(2)}}mg/L</p>
             </div>
           </div>
         </dv-border-box-6>
@@ -52,7 +60,7 @@
           </div>
           <div class="weatheralarm-data">
           <p>国家海洋局南海预报中心</p>
-          <p>2024年5月11日9时11分</p>
+          <p>{{currdate.dateYear}}年{{currdate.dateMonth}}月{{currdate.dateDay-1}}日9时11分</p>
           <p>二级警报</p>
           <p>影响南海部分沿海地区</p>
           <p>预计海啸波高度将达到1-3米</p>
@@ -64,63 +72,61 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   components: {  },
   data() {
     return {
-      options1: {
-        title: {
-          text: "重庆市财务开销",
-        },
-        legend: {
-          data: ["预算分配", "实际开销"],
-        },
-        radar: {
-          // shape: 'circle',
-          indicator: [
-            { name: "管理", max: 6500 },
-            { name: "销售", max: 16000 },
-            { name: "市场", max: 30000 },
-            { name: "研发", max: 38000 },
-            { name: "客服", max: 52000 },
-            { name: "信息技术", max: 25000 },
-          ],
-        },
-        series: [
-          {
-            name: "预算分配 vs 实际开销",
-            type: "radar",
-            data: [
-              {
-                value: [4200, 3000, 20000, 35000, 50000, 18000],
-                name: "实际开销",
-              },
-              {
-                value: [5000, 14000, 28000, 26000, 42000, 21000],
-                name: "预算分配",
-              },
-            ],
-          },
-        ],
+      allWaterData: [], // 保存所有水质数据
+      dataIndex: 0, // 当前数据索引
+      waterData:{
+        temperature: '',
+        illumination: '',
+        dissolved_oxygen: '',
+        ph: '',
+        salinity: ''
       },
-      options2: {
-        legend: {},
-        tooltip: {},
-        dataset: {
-          dimensions: ["product", "小麦", "玉米", "高粱"],
-          source: [
-            { product: "2019", 小麦: 433, 玉米: 858, 高粱: 937 },
-            { product: "2020", 小麦: 831, 玉米: 734, 高粱: 551 },
-            { product: "2021", 小麦: 864, 玉米: 652, 高粱: 825 },
-            { product: "2023", 小麦: 724, 玉米: 539, 高粱: 391 },
-          ],
-        },
-        xAxis: { type: "category" },
-        yAxis: {},
-        series: [{ type: "bar" }, { type: "bar" }, { type: "bar" }],
+      currdate:{
+        dateDay: null,
+        dateYear: null,
+        dateMonth:null,
       },
     };
   },
+  created() {
+    this.setCurrentDate();
+    this.fetchWaterData();
+    this.startDataUpdateInterval();
+  },
+  methods:{
+    async fetchWaterData(){
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/water-data/');
+        if (response.data.length > 0) {
+          // this.waterData = response.data[0];  // 获取第一条数据
+          this.allWaterData = response.data; // 保存所有数据
+          this.updateWaterData(); // 初始化第一次数据
+        }
+      } catch (error) {
+        console.error('Error fetching water data:', error);
+      }
+    },
+    setCurrentDate() {
+      const today = new Date();
+      this.currdate.dateYear = today.getFullYear();
+      this.currdate.dateMonth = today.getMonth() + 1;
+      this.currdate.dateDay = today.getDate();
+    },
+    updateWaterData() {
+      if (this.allWaterData.length > 0) {
+        this.waterData = this.allWaterData[this.dataIndex];
+        this.dataIndex = (this.dataIndex + 1) % this.allWaterData.length;
+      }
+    },
+    startDataUpdateInterval() {
+      setInterval(this.updateWaterData, 10000); // 每隔10秒更新一次数据
+    },
+  }
 };
 </script>
 
@@ -147,7 +153,7 @@ export default {
   display: flex;
 }
 .evaluate {
-  height: 200px;
+  height: 310px;
   display: flex;
   flex-direction: column;
 }
@@ -180,7 +186,7 @@ export default {
   margin-top: 20px;
 }
 .weather {
-  height: 200px;
+  height: 310px;
   display: flex;
   flex-direction: column;
 }

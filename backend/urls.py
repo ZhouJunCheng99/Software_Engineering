@@ -8,10 +8,11 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from .api.views import index_view, LoginMessageViewSet
+from .api.views import index_view, LoginMessageViewSet, WaterQualityDataViewSet
 
 router = routers.DefaultRouter()
 router.register('account', LoginMessageViewSet)
+router.register('water-data', WaterQualityDataViewSet)
 
 urlpatterns = [
 
