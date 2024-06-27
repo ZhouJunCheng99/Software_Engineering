@@ -8,11 +8,11 @@
           <dv-digital-flop :config="config1" style="width:150px;height:50px;" />
           </div>
           <div class="head_content">  
-          <h2>鱼类数量</h2>
+          <h2>今日新增</h2>
           <dv-digital-flop :config="config2" style="width:150px;height:50px;" />
           </div>
           <div class="head_content">  
-          <h2>鱼类数量</h2>
+          <h2>今日死亡</h2>
           <dv-digital-flop :config="config3" style="width:150px;height:50px;" />
           </div>
         </div>
@@ -98,7 +98,7 @@ export default {
             },
             data: [
                 {
-                value: 50,
+                value: 76,
                 name: 'SCORE'
                 }
             ]

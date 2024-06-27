@@ -3,24 +3,35 @@
     <div>
       <dv-border-box-8 :reverse="true" style="padding: 10px">
         <div class="hardware">
-            <h2>硬件1</h2>
+            <h2>网箱信息</h2>
             <dv-border-box-12 style="padding: 20px">
             <div class="hardware_info">
-                <p>设备信息</p>
-                <p>设备信息</p>
-                <p>设备信息</p>
-                <p>设备信息</p>
+                <p>网箱长度：150m</p>
+                <p>网箱宽度：70m</p>
+                <p>网箱深度：40m</p>
+                <p>网箱经度：130.456  网箱纬度：58.789</p>
             </div>
             </dv-border-box-12>
         </div>
         <div class="hardware">
-            <h2>硬件2</h2>
+            <h2>水底传感器</h2>
             <dv-border-box-12 style="padding: 20px">
             <div class="hardware_info">
-                <p>设备信息</p>
-                <p>设备信息</p>
-                <p>设备信息</p>
-                <p>设备信息</p>
+                <p>运行时间：18天6小时29分钟</p>
+                <p>下次检修：40天后</p>
+                <p>上次校准：2023年11月20日</p>
+                <p>保修过期：2034年05月15日</p>
+            </div>
+            </dv-border-box-12>
+        </div>
+        <div class="hardware">
+            <h2>供电系统</h2>
+            <dv-border-box-12 style="padding: 20px">
+            <div class="hardware_info">
+                <p>电池电量：70%</p>
+                <p>上次更换：2023年10月05日</p>
+                <p>下次更换：2024年10月05日</p>
+                <p>保修过期：2034年05月15日</p>
             </div>
             </dv-border-box-12>
         </div>

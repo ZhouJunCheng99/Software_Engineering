@@ -66,6 +66,7 @@ class WaterQualityDataViewSet(viewsets.ModelViewSet):
     queryset = Water_Quality_Data.objects.all()
     serializer_class = WaterQualityDataSerializer
 
+
     @action(detail=False, methods=['post'])
     def import_file(self, request):
         file_path = request.data['file']
@@ -98,3 +99,11 @@ class ExportDataViewSet(viewsets.ModelViewSet):
         df_water_quality_data.to_excel(file_path_water_quality_data, index=False)
 
         return JsonResponse({'result': 'export success'})
+
+    
+    
+class GetHistoryData(viewsets.ModelViewSet):
+    # 获取历史数据
+    queryset = Water_Quality_Data.objects.all()
+    serializer_class = WaterQualityDataSerializer
+
