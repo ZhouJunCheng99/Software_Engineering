@@ -149,3 +149,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Insert Whitenoise Middleware at top but below Security Middleware
 # MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware',)
 # http://whitenoise.evans.io/en/stable/django.html#make-sure-staticfiles-is-configured-correctly
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+]
