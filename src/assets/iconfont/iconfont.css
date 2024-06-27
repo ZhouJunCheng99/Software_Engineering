@@ -19,6 +19,10 @@
   content: "\e66c";
 }
 
+.icon-phone:before {
+  content: "\e66c";
+}
+
 .icon-close:before {
   content: "\e667";
 }

@@ -1,3 +1,18 @@
+<!--<script setup>-->
+
+<!--</script>-->
+
+<!--<template>-->
+
+<!--</template>-->
+
+<!--<style scoped lang="scss">-->
+
+<!--</style>-->
+
+
+
+
 <template>
   <div id="index" ref="appRef">
     <div class="bg">
@@ -36,28 +51,21 @@
                 class="react-left"
                 :class="{ bgc: tabbarIndex == 0 }"
               ></span>
-              <router-link to="/Uindex/information"
+              <router-link to="/Buyer_index/information"
                 ><span class="text" @click="changeTabbarIndex(0)"
                   >主要信息</span
                 ></router-link
               >
             </div>
             <div class="react-left react-item" :class="{ bgc: tabbarIndex == 1 }">
-              <router-link to="/Uindex/underwater"
+              <router-link to="/Buyer_index/underwater"
                 ><span class="text" @click="changeTabbarIndex(1)"
                   >水下系统</span
                 ></router-link
               >
             </div>
-            <div class="react-left react-item" :class="{ bgc: tabbarIndex == 2 }">
-              <router-link to="/Uindex/datacenter"
-                ><span class="text" @click="changeTabbarIndex(2)"
-                  >数据中心</span
-                ></router-link
-              >
-            </div>
             <div class="react-left react-item" :class="{ bgc: tabbarIndex == 3 }">
-              <router-link to="/Uindex/intelligent"
+              <router-link to="/Buyer_index/intelligent"
                 ><span class="text" @click="changeTabbarIndex(3)"
                   >智能中心</span
                 ></router-link
@@ -66,7 +74,7 @@
           </div>
           <div class="d-flex aside-width justify-end">
             <div class="react-right mr-4 react-l-s">
-              <span class="text user-interface">@ 养殖户页面 @</span>
+              <span class="text user-interface">@ 食品购买者页面 @</span>
               <span class="react-after"></span>
               <span class="text"
                 >{{ dateYear }} {{ dateWeek }} {{ dateDay }}</span

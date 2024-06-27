@@ -6,14 +6,15 @@ class Message(models.Model):
     # subject = models.CharField(max_length=200)
     # body = models.TextField()
     name = models.CharField(max_length=200)
+    phone_number = models.CharField(max_length=200, default="123456789")
     password = models.TextField()
-    # 权限设置,0表示普通用户,1表示管理员
+    # 权限设置,0表示普通用户(养殖户) ,1表示管理员, 2表示食品购买者
     permission = models.IntegerField(default=0)
 
 class LoginMessageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Message
-        fields = ('url', 'name', 'password', 'permission', 'pk')
+        fields = ('url', 'name', 'phone_number', 'password', 'permission', 'pk')
 
 
 
