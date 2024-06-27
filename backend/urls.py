@@ -8,7 +8,8 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from .api.views import index_view, LoginMessageViewSet, GetHistoryData, WaterQualityDataViewSet
+
+from .api.views import index_view, LoginMessageViewSet, GetHistoryData, WaterQualityDataViewSet, ExportDataViewSet
 
 router = routers.DefaultRouter()
 router.register('account', LoginMessageViewSet)
@@ -16,6 +17,11 @@ router.register('water-data', WaterQualityDataViewSet)
 
 # info-history_data
 router.register('history_data', GetHistoryData)
+
+router.register('upload_water_quality', WaterQualityDataViewSet)
+router.register('export', ExportDataViewSet)
+
+
 
 
 urlpatterns = [
