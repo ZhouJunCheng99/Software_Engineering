@@ -9,7 +9,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 
-from .api.views import index_view, LoginMessageViewSet, GetHistoryData, WaterQualityDataViewSet, ExportDataViewSet
+from .api.views import index_view, LoginMessageViewSet, GetHistoryData, WaterQualityDataViewSet, ExportDataViewSet, FishDataViewSet
 
 # 确保每个视图集都有唯一的 basename !!!
 # basename 参数用于为视图集提供一个唯一的名称，这个名称在整个应用中必须是唯一的。如果你没有显式地设置 basename，
@@ -23,6 +23,7 @@ router.register('history_data', GetHistoryData, basename='history_data')
 
 # router.register('upload_water_quality', WaterQualityDataViewSet)
 router.register('export', ExportDataViewSet, basename='export_data')
+router.register('fish-data', FishDataViewSet)
 
 
 

@@ -8,7 +8,7 @@ import pandas as pd
 import os
 
 from .models import Message, LoginMessageSerializer
-from .models import Water_Quality_Data, WaterQualityDataSerializer
+from .models import Water_Quality_Data, WaterQualityDataSerializer, Fish_Data, FishDataSerializer
 
 from ..import_data.import_data_to_db import import_water_quality_data
 
@@ -107,3 +107,7 @@ class GetHistoryData(viewsets.ModelViewSet):
     queryset = Water_Quality_Data.objects.all()
     serializer_class = WaterQualityDataSerializer
 
+
+class FishDataViewSet(viewsets.ModelViewSet):
+    queryset = Fish_Data.objects.all()
+    serializer_class = FishDataSerializer
