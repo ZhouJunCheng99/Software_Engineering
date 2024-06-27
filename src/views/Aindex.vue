@@ -170,7 +170,7 @@ export default {
         formData.append('file', file);
 
         try {
-          const response = await axios.post('/api/upload_water_quality/import_file/', formData, {
+          const response = await axios.post('/api/water-data/import_file/', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
