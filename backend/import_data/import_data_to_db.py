@@ -9,7 +9,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings.dev")
 
 django.setup()  # 确保在导入任何模型之前调用
 
-from backend.api.models import Water_Quality_Data
+from backend.api.models import Water_Quality_Data, Fish_Data
 
 
 def import_water_quality_data(file_path):
@@ -55,6 +55,32 @@ def import_water_quality_data(file_path):
         # 保存模型实例到数据库
         water_data.save()
 
+
+# 导入鱼类数据
+def import_fish_data(file_path):
+    # 使用pandas读取Excel文件
+    df = pd.read_excel(file_path, engine='openpyxl')
+
+    # 遍历DataFrame中的每一行
+    for index, row in df.iterrows():
+        # 创建FishData模型实例
+        fish_data = Fish_Data(
+
+            species=row['品种'] if row['品种'] != '--' else None,
+            body_length=row['体长(cm)'] if row['体长(cm)'] != '--' else None,
+            body_weight=row['体重(kg)'] if row['体重(kg)'] != '--' else None,
+            health_status=row['健康状况'] if row['健康状况'] != '--' else None,
+            fish_group_status=row['鱼群状况'] if row['鱼群状况'] != '--' else None,
+            breeding_period=row['繁殖期'] if row['繁殖期'] != '--' else None,
+            fish_group_total=row['鱼群总量(t)'] if row['鱼群总量(t)'] != '--' else None,
+            fry_number=row['鱼苗数量'] if row['鱼苗数量'] != '--' else None,
+            adult_fish_number=row['成鱼数量'] if row['成鱼数量'] != '--' else None
+
+        )
+
+        # 保存模型实例到数据库
+        fish_data.save()
+
 # # 执行数据导入
 # import_water_quality_data('water_quality_data.xlsx')
 
@@ -64,7 +90,10 @@ def main():
     # import_water_quality_data('water_quality_data.xlsx')
 
     # 再次执行相当于插入数据
-    import_water_quality_data('water_test.xlsx')
+    # import_water_quality_data('water_test.xlsx')
+
+    # 导入鱼类数据
+    import_fish_data('fish_data.xlsx')
 
 if __name__ == '__main__':
     main()
