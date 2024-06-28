@@ -174,10 +174,11 @@ export default {
   methods:{
     fetchFishData() {
       this.getFishData();
-      // 过滤并格式化为 [time, data] 格式
+      // 生成时间戳并格式化为 [time, data] 格式
+      const baseYear = 2000;
       const filteredData = this.all_fish_data
-        .filter(d => d.kind === '鲤鱼')
-        .map(d => [new Date(d.timestamp).getTime(), d.count]);
+        .filter(d => d.species === '鲤鱼')
+        .map((d, index) => [(2000 + index), d.fish_group_total]);
 
       // 按时间排序
       filteredData.sort((a, b) => a[0] - b[0]);
@@ -187,10 +188,15 @@ export default {
       this.options2.series[0].data = filteredData;
     },
     async getFishData(){
+      // fields = ('url', 'species', 'body_length', 'body_weight', 'health_status',
+      //     'fish_group_status', 'breeding_period', 'fish_group_total',
+      //     'fry_number', 'adult_fish_number', 'pk')
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/fish_data/');
         if (response.data.length > 0) {
           this.all_fish_data = response.data; // 保存所有数据
+          // 只获取一种species鱼群的fish_group_total总体数据，然后根据一个index索引生成时间戳
+          this.need_fish_data = 
         } else {
           console.warn('数据不足');
         }

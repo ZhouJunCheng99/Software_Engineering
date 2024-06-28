@@ -264,11 +264,11 @@ export default {
       };
 
       const dataMap = {
-        '选项1': this.history_data.map(d => d.temperature),
-        '选项2': this.history_data.map(d => d.salinity),
+        '选项1': this.history_data.map(d => d.water_temperature),
+        '选项2': this.history_data.map(d => d.permanganate_index),
         '选项3': this.history_data.map(d => d.dissolved_oxygen),
-        '选项4': this.history_data.map(d => d.illumination),
-        '选项5': this.history_data.map(d => d.ph),
+        '选项4': this.history_data.map(d => d.turbidity),
+        '选项5': this.history_data.map(d => d.total_phosphorus),
       };
 
       // 根据时间获取数据
@@ -291,17 +291,23 @@ export default {
           this.allWaterData = response.data; // 保存所有数据
           this.history_data = [];
 
-          // 仅提取最新的 13 条数据
-          const latestData = this.allWaterData.slice(-13);
+          // 获取与时间匹配的 13 条数据
+          // 
 
+          // 获取随机13 条数据
+          const latestData = this.allWaterData.slice(-13);
+        // fields = ('url', 'monitoring_time', 'water_quality_category', 'water_temperature', 'pH',
+        //           'dissolved_oxygen', 'conductivity', 'turbidity', 'permanganate_index',
+        //           'ammonia_nitrogen', 'total_phosphorus', 'total_nitrogen', 'site_status', 'pk')
           // 根据所选的类型处理历史数据
           latestData.forEach((dataPoint) => {
             this.history_data.push({
-              temperature: dataPoint.temperature,
-              salinity: dataPoint.salinity,
+              monitoring_time: dataPoint.monitoring_time,
+              water_temperature: dataPoint.water_temperature,
+              permanganate_index: dataPoint.permanganate_index,
               dissolved_oxygen: dataPoint.dissolved_oxygen,
-              illumination: dataPoint.illumination,
-              ph: dataPoint.ph,
+              turbidity: dataPoint.turbidity,
+              total_phosphorus: dataPoint.total_phosphorus,
             });
           });
         } else {

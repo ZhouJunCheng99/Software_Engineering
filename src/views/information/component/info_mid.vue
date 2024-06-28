@@ -60,7 +60,7 @@ export default {
       waterData: {
         data: [
           {
-            name: '电池电压(V)',
+            name: '电导率(μS/cm)',
             value: 26,
           },
           {
@@ -100,13 +100,13 @@ export default {
       this.zoom = 15;
     },
     fetchData() {
-      const data = this.todayData; // 调用获取当日数据的方法
+      const data = this.todayData;
       if (data && data.length === 6) {
         data.forEach((item, index) => {
-          // 使用 this.$set 来更新数组中的对象
+          // 更新
           this.$set(this.waterData.data, index, {
             name: item.name,
-            value: item.value.toFixed(2)  // 假设数据项的值需要保留两位小数
+            value: item.value.toFixed(2)  // 保留两位小数
           });
         });
         // 手动触发重新渲染
@@ -117,12 +117,22 @@ export default {
       console.log("data", data);
       console.log("this.waterData.data", this.waterData.data);
     },
+
     async getHistoryData(){
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/history_data/');
         if (response.data.length > 0) {
           this.allWaterData = response.data; // 保存所有数据
-          this.todayData = this.allWaterData[-1];
+          // 获取最新的水文数据
+
+          this.todayData = {
+              conductivity: this.allWaterData[-1].conductivity,
+              water_temperature: this.allWaterData[-1].water_temperature,
+              permanganate_index: this.allWaterData[-1].permanganate_index,
+              dissolved_oxygen: this.allWaterData[-1].dissolved_oxygen,
+              turbidity: this.allWaterData[-1].turbidity,
+              total_phosphorus: this.allWaterData[-1].total_phosphorus,
+            }
         } else {
           console.warn('数据不足');
         }

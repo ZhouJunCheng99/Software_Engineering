@@ -89,8 +89,8 @@ export default {
       // 鱼类数量
       // 设置图表数据格式为{ value: 32, name: '种类一' }
       const dataMap = this.need_fish_data.map(d => ({
-        value: d.count,
-        name: d.kind
+        value: d.fish_group_total,
+        name: d.species
       }));
       this.options2.series[0].data = dataMap;
     },

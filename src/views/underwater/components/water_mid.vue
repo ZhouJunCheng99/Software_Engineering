@@ -218,9 +218,9 @@ export default {
       
       // 鱼类重量、鱼类尺寸、鱼类数量
       const dataMap = {
-        '鱼类重量': this.need_fish_data.map(d => [d.kind, d.weight]),
-        '鱼类尺寸': this.need_fish_data.map(d => [d.kind, d.size]),
-        '鱼类生命': this.need_fish_data.map(d => [d.kind, d.count]),
+        '鱼类重量': this.need_fish_data.map(d => [d.species, d.body_weight]),
+        '鱼类尺寸': this.need_fish_data.map(d => [d.species, d.body_length]),
+        '鱼类生命': this.need_fish_data.map(d => [d.species, d.fish_group_total]),
       };
       const selectedOption = this.selected_fish_option;
       
