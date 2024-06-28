@@ -54,6 +54,7 @@ export default {
   data() {
     return {
       all_fish_data: [], // 保存所有数据
+      need_fish_data: [],
       options2: {
         title: {
           text: '鱼类统计',
@@ -85,11 +86,10 @@ export default {
       this.getFishData();
       // 还需要对all_fish_data进行处理
       
-
       // 鱼类数量
       // 设置图表数据格式为{ value: 32, name: '种类一' }
-      const dataMap = this.all_fish_data.map(d => ({
-        value: d.count, // 这里使用weight作为示例
+      const dataMap = this.need_fish_data.map(d => ({
+        value: d.count,
         name: d.kind
       }));
       this.options2.series[0].data = dataMap;
@@ -99,6 +99,7 @@ export default {
         const response = await axios.get('http://127.0.0.1:8000/api/fish_data/');
         if (response.data.length > 0) {
           this.all_fish_data = response.data; // 保存所有数据
+          this.need_fish_data = this.all_fish_data.slice(0, 7);
         } else {
           console.warn('数据不足');
         }
