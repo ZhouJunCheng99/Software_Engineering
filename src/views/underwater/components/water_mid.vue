@@ -42,11 +42,12 @@
 
 <script>
 import Echart from "@/common/echart/index.vue";
+import axios from 'axios'
 // import heatMapEcharts from "./echarts/heatMapEcharts.vue";
 export default {
   data() {
     return {
-      fish_info_select: '鱼类重量',
+    fish_info_select: '鱼类重量',
     options1: {
     series: [
     {
@@ -154,6 +155,7 @@ export default {
   created() {
     // 初始化时显示默认数据
     this.fish_info_select = '鱼类重量';
+    this.getFishData();
     this.updateOptions2(this.fish_info_select);
   },
   methods: {
@@ -184,7 +186,7 @@ export default {
               formatter: '{value} 克'
             }
           };
-          this.options2.series[0].data = [820, 932, 901, 934, 1290, 1330, 1320];
+          // this.options2.series[0].data = [820, 932, 901, 934, 1290, 1330, 1320];
           break;
         case '鱼类尺寸':
           this.options2.yAxis = {
@@ -193,7 +195,7 @@ export default {
               formatter: '{value} 厘米'
             }
           };
-          this.options2.series[0].data = [120, 220, 150, 234, 290, 330, 320];
+          // this.options2.series[0].data = [120, 220, 150, 234, 290, 330, 320];
           break;
         case '鱼类生命':
           this.options2.yAxis = {
@@ -202,12 +204,41 @@ export default {
               formatter: '{value}'
             }
           };
-          this.options2.series[0].data = [50, 60, 70, 80, 90, 100, 110];
+          // this.options2.series[0].data = [50, 60, 70, 80, 90, 100, 110];
           break;
         default:
           break;
       }
+      this.fetchFishData();
     },
+    fetchFishData() {
+      // 还需要对all_fish_data进行处理
+      
+      // 鱼类重量、鱼类尺寸、鱼类数量
+      const dataMap = {
+        '鱼类重量': this.all_fish_data.map(d => [d.kind, d.weight]),
+        '鱼类尺寸': this.all_fish_data.map(d => [d.kind, d.size]),
+        '鱼类生命': this.all_fish_data.map(d => [d.kind, d.count]),
+      };
+      const selectedOption = this.selected_fish_option;
+      
+      // 设置图表数据格式为[time, data]
+      this.options2.series[0].data = dataMap[selectedOption];
+    },
+    async getFishData(){
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/fish_data/');
+        if (response.data.length > 0) {
+          this.all_fish_data = response.data; // 保存所有数据
+        } else {
+          console.warn('数据不足');
+        }
+        // console.log("历史数据：", this.all_fish_data);
+      } 
+      catch (error) {
+        console.error('获取历史数据失败', error);
+      }
+    }
   },
 };
 </script>

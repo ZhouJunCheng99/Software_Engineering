@@ -60,3 +60,7 @@ class GetHistoryData(viewsets.ModelViewSet):
     # 获取历史数据
     queryset = Water_Quality_Data.objects.all()
     serializer_class = WaterQualityDataSerializer
+    
+class GetFishData(viewsets.ModelViewSet):
+    # 获取鱼类数据
+    pass
