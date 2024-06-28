@@ -10,7 +10,7 @@ import os
 from .models import Message, LoginMessageSerializer
 from .models import Water_Quality_Data, WaterQualityDataSerializer, Fish_Data, FishDataSerializer
 
-from ..import_data.import_data_to_db import import_water_quality_data
+from ..import_data.import_data_to_db import import_water_quality_data, import_fish_data
 
 # Serve Vue Application
 index_view = never_cache(TemplateView.as_view(template_name='index.html'))
@@ -68,7 +68,7 @@ class WaterQualityDataViewSet(viewsets.ModelViewSet):
 
 
     @action(detail=False, methods=['post'])
-    def import_file(self, request):
+    def import_water_file(self, request):
         file_path = request.data['file']
         import_water_quality_data(file_path)
 
@@ -88,15 +88,21 @@ class ExportDataViewSet(viewsets.ModelViewSet):
         # query_message = "SELECT * FROM api_message"  # 替换为表名
         # df_message = pd.read_sql_query(query_message, conn)
 
-        query_water_quality_data = "SELECT * FROM api_water_quality_data"  # 替换为表名
+        query_water_quality_data = "SELECT * FROM api_water_quality_data"  # 替换表名
 
         df_water_quality_data = pd.read_sql_query(query_water_quality_data, conn)
+
+        query_fish_data = "SELECT * FROM api_fish_data"
+        df_fish_data = pd.read_sql_query(query_fish_data, conn)
 
         conn.close()
 
         # 保存数据到Excel文件
         file_path_water_quality_data = 'export_water_quality_data.xlsx'
         df_water_quality_data.to_excel(file_path_water_quality_data, index=False)
+
+        file_path_fish_data = 'export_fish_data.xlsx'
+        df_fish_data.to_excel(file_path_fish_data, index=False)
 
         return JsonResponse({'result': 'export success'})
 
@@ -111,6 +117,13 @@ class GetHistoryData(viewsets.ModelViewSet):
 class FishDataViewSet(viewsets.ModelViewSet):
     queryset = Fish_Data.objects.all()
     serializer_class = FishDataSerializer
+
+    @action(detail=False, methods=['post'])
+    def import_fish_file(self, request):
+        file_path = request.data['file']
+        import_fish_data(file_path)
+
+        return JsonResponse({'result': 'upload_fish success'})
     
 class GetFishData(viewsets.ModelViewSet):
     # 获取鱼类数据
