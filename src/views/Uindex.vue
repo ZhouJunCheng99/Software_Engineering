@@ -75,11 +75,20 @@
           </div>
 
           <div class="container">
-              <!-- 其他代码 -->
-              <button @click="triggerFileUpload" class="upload-button">上传水质数据</button>
-              <input type="file" ref="fileInput" @change="handleFileUpload" style="display: none;" />
 
-              <button @click="exportData" class="upload-button">导出数据</button>
+<!--            <button @click="triggerFileUpload" class="upload-button">上传水质数据</button>-->
+<!--            <input type="file" ref="fileInput" @change="handleFileUpload_water" style="display: none;" />-->
+
+<!--            <button @click="triggerFileUpload" class="upload-button">上传鱼类数据</button>-->
+<!--            <input type="file" ref="fileInput" @change="handleFileUpload_fish" style="display: none;" />-->
+
+            <button @click="triggerFileUpload('water')" class="upload-button">上传水质数据</button>
+            <input type="file" ref="fileInputWater" @change="handleFileUpload_water" style="display: none;" />
+
+            <button @click="triggerFileUpload('fish')" class="upload-button">上传鱼类数据</button>
+            <input type="file" ref="fileInputFish" @change="handleFileUpload_fish" style="display: none;" />
+
+            <button @click="exportData" class="upload-button">导出数据</button>
 
           </div>
         </div>
@@ -135,17 +144,40 @@ export default {
     changeTabbarIndex(index) {
       this.tabbarIndex = index;
     },
-    triggerFileUpload() {
-      this.$refs.fileInput.click();
+    triggerFileUpload(type) {
+      if (type === 'water') {
+        this.$refs.fileInputWater.click();
+      } else if (type === 'fish') {
+        this.$refs.fileInputFish.click();
+      }
     },
-    async handleFileUpload(event) {
+    async handleFileUpload_water(event) {
       const file = event.target.files[0];
       if (file) {
         const formData = new FormData();
         formData.append('file', file);
 
         try {
-          const response = await axios.post('/api/water-data/import_file/', formData, {
+          const response = await axios.post('/api/water-data/import_water_file/', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+          console.log(response.data);
+          // 可以根据需要添加进一步处理逻辑
+        } catch (error) {
+          console.error('上传失败:', error);
+        }
+      }
+    },
+    async handleFileUpload_fish(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+          const response = await axios.post('/api/fish-data/import_fish_file/', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
