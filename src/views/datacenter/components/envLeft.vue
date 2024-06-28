@@ -11,11 +11,11 @@
           </div>
           <div class="head_content">
             <h4>今日新增</h4>
-            <h4>8</h4>
+            <h4>81</h4>
           </div>
           <div class="head_content">
             <h4>今日处理</h4>
-            <h4>8</h4>
+            <h4>81</h4>
           </div>
         </div>
       </dv-border-box-8>

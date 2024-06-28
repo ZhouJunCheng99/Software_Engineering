@@ -5,14 +5,14 @@
         <div class="head">
           <div class="head_content">
             <h2>平均传输时长</h2>
-            <h2>02:45</h2>
+            <h2>01:21</h2>
           </div>
           <div class="head_uint">
-            <h3>单位 分钟:秒</h3>
+            <h3>分钟:秒</h3>
           </div>
           <div class="head_content">
-            <h2>评价处理时长</h2>
-            <h2>00:02</h2>
+            <h2>平均处理时长</h2>
+            <h2>00:01</h2>
           </div>
         </div>
       </dv-border-box-8>
@@ -77,7 +77,7 @@
             <h2>服务信息</h2>
           </div>
           <div class="info-row">
-            <p>数据库: MySQL, HBase</p>
+            <p>数据库: SQLite</p>
           </div>
           <div class="info-row">
             <p>查询次数: 567890</p>

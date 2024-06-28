@@ -80,6 +80,7 @@ export default {
       config3,
       fish_data: '',
       all_fish_data: [],
+      need_fish_data: [],
       options1: {
         color: ["#80FFA5"],
         title: {
@@ -182,7 +183,7 @@ export default {
       filteredData.sort((a, b) => a[0] - b[0]);
       
       // 设置图表数据格式为[time, data]
-      // 这里需要获取某种鱼类数量
+      // 这里需要获取某种鱼类的历史数量
       this.options2.series[0].data = filteredData;
     },
     async getFishData(){
