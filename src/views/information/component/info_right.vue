@@ -82,7 +82,7 @@
 
 <script>
 import Echart from "@/common/echart/index.vue";
-
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -92,13 +92,22 @@ export default {
       endDate: null,
       selected_data_option: '选项1',
       data_options: [
-        { value: '选项1', label: '电池电压', unit: 'V' },
+        { value: '选项1', label: '水温', unit: '℃' },
         { value: '选项2', label: '盐度', unit: '‰' },
         { value: '选项3', label: '溶解度', unit: 'mg/L' },
         { value: '选项4', label: '浊度', unit: 'NTU' },
         { value: '选项5', label: 'pH', unit: '' },
-        { value: '选项6', label: '水温', unit: '℃' }
       ],
+      allWaterData: [], // 保存所有水质数据
+      history_data: [],
+      dataIndex: 0, // 当前数据索引
+      waterData:{
+        temperature: '',
+        salinity: '',
+        dissolved_oxygen: '',
+        illumination: '',
+        ph: '',
+      },
       options1: {
         tooltip: {
           trigger: "axis",
@@ -244,7 +253,7 @@ export default {
       }
       return date.toLocaleString('en-US', options);
     },
-    fetchData() {
+    fetchHistoryData() {
       // Get data based on selected time range and update chart options
       const data = {
         '选项1': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130],
@@ -252,18 +261,19 @@ export default {
         '选项3': [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140],
         '选项4': [25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145],
         '选项5': [30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150],
-        '选项6': [35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145, 155],
       };
-      // const temp_data = [2920, 2950, 2970, 3010, 3040, 3070, 3110, 3150, 3160, 3190, 3210,3220, 3250,];
 
-      // 获取数据
-      // let data1 = []
-      // let data2 = []
+      const dataMap = {
+        '选项1': this.history_data.map(d => d.water_temperature),
+        '选项2': this.history_data.map(d => d.permanganate_index),
+        '选项3': this.history_data.map(d => d.dissolved_oxygen),
+        '选项4': this.history_data.map(d => d.turbidity),
+        '选项5': this.history_data.map(d => d.total_phosphorus),
+      };
+
+      // 根据时间获取数据
+      this.options1.series[0].data = dataMap['选项1'];
       
-      // 设置图表的第一属性
-
-      
-
       // 设置图表的第二属性
       const selectedOption = this.data_options.find(option => option.value === this.selected_data_option);
       this.options1.yAxis[1].name = selectedOption.unit;
@@ -271,20 +281,65 @@ export default {
       this.options1.yAxis[1].min = 0;
       this.options1.yAxis[1].max = Math.max(...data[this.selected_data_option]);
       this.options1.yAxis[1].interval = Math.round((this.options1.yAxis[0].max - this.options1.yAxis[0].min) / 5);
-      this.options1.series[1].data = data[this.selected_data_option];
+      this.options1.series[1].data = dataMap[this.selected_data_option];
       this.options1.legend.data = [this.options1.series[0].name, this.options1.series[1].name];
     },
-    
+    async getHistoryData(){
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/history_data/');
+        if (response.data.length > 0) {
+          this.allWaterData = response.data; // 保存所有数据
+          this.history_data = [];
+
+          // 获取与时间匹配的 13 条数据
+          // 
+
+          // 获取随机13 条数据
+          const totalData = this.allWaterData.length;
+          const numberOfData = totalData < 13 ? totalData : 13;
+          const randomIndices = [];
+          while (randomIndices.length < numberOfData) {
+            const randomIndex = Math.floor(Math.random() * totalData);
+            if (!randomIndices.includes(randomIndex)) {
+              randomIndices.push(randomIndex);
+            }
+          }
+          const latestData = this.randomIndices.slice(-13);
+          // 根据所选的类型处理历史数据
+          latestData.forEach((dataPoint) => {
+            this.history_data.push({
+              monitoring_time: dataPoint.monitoring_time,
+              water_temperature: dataPoint.water_temperature,
+              permanganate_index: dataPoint.permanganate_index,
+              dissolved_oxygen: dataPoint.dissolved_oxygen,
+              turbidity: dataPoint.turbidity,
+              total_phosphorus: dataPoint.total_phosphorus,
+            });
+          });
+        } else {
+          console.warn('数据不足 13 条');
+          this.allWaterData = response.data;
+          this.history_data = this.allWaterData; // 如果数据不足 13 条，获取所有数据
+        }
+        console.log("历史数据：", this.history_data);
+      } 
+      catch (error) {
+        console.error('获取历史数据失败', error);
+      }
+    }
   },
   watch: {
     selected_data_option() {
       console.log("---:",this.selected_data_option);
-      this.fetchData();
+      this.fetchHistoryData();
     }
   },
   mounted() {
-    this.fetchData();
+    this.fetchHistoryData();
     this.setTimeRange('week'); // 默认显示近一周的数据
+  },
+  created(){
+    this.getHistoryData();
   }
 };
 </script>

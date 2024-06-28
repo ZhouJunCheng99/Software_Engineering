@@ -74,7 +74,7 @@
           </div>
           <div class="d-flex aside-width justify-end">
             <div class="react-right mr-4 react-l-s">
-              <span class="text user-interface">@ 食品购买者页面 @</span>
+              <span class="text user-interface">@食品购买者页面@</span>
               <span class="react-after"></span>
               <span class="text"
                 >{{ dateYear }} {{ dateWeek }} {{ dateDay }}</span
@@ -196,6 +196,6 @@ export default {
 }
 
 .user-interface {
-  margin-right: 50px; /* 调整与时间的间距 */
+  margin-right: 20px; /* 调整与时间的间距 */
 }
 </style>
