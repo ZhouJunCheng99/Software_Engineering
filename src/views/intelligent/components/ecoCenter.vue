@@ -25,53 +25,55 @@
 
     <div class="body">
       <dv-border-box-6 style="padding:10px">
+        <button @click="PreFishData">上一个</button>
+        <button @click="NextFishData">下一个</button>
         <div class="fish-content">
           <div class="fish-info">
             <div>
             <p>编号</p>
-            <p>fish-9527</p>
+            <p>{{currFishdata.pk}}</p>
             </div>
           </div>
           <div class="fish-info">
           <div>
             <p>鱼种</p>
-            <p>moonfish</p>
+            <p>{{currFishdata.species}}</p>
             </div>
           </div>
           <div class="fish-info">
             <div>
             <p>体长</p>
-            <p>10寸</p>
+            <p>{{currFishdata.body_length}}cm</p>
             </div>
           </div>
           <div class="fish-info">
             <div>
             <p>体重</p>
-            <p>5kg</p>
+            <p>{{currFishdata.body_weight}}kg</p>
             </div>
           </div>
           <div class="fish-info">
             <div>
             <p>健康状况</p>
-            <p>疑似患病(眼)</p>
+            <p>{{currFishdata.health_status}}</p>
             </div>
           </div>
           <div class="fish-info">
             <div>
             <p>鱼群状况</p>
-            <p>异常(集群)</p>
+            <p>{{currFishdata.fish_group_status}}</p>
             </div>
           </div>
           <div class="fish-info">
             <div>
-            <p>是否进入繁殖期</p>
-            <p>否</p>
+            <p>繁殖期</p>
+            <p>{{currFishdata.breeding_period}}</p>
             </div>
           </div>
           <div class="fish-info">
             <div>
             <p>鱼群总量</p>
-            <p>10t</p>
+            <p>{{currFishdata.fish_group_total}}t</p>
             </div>
           </div>
         </div>
@@ -83,10 +85,14 @@
 <script>
 // import Echart from "@/common/echart/index.vue";
 import mapStyle from "@/assets/mapStyle.json";
+import axios from "axios";
 export default {
   components: {},
   data() {
     return {
+      currFishdata:'',
+      FishData:[],
+      dataIndex:0,
       center: { lng: 0, lat: 0 },
       zoom: 3,
       mapStyle: {
@@ -94,7 +100,35 @@ export default {
       },
     };
   },
+  created() {
+    this.fetchFishData();
+  },
   methods: {
+    async fetchFishData(){
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/fish-data/');
+        if (response.data.length > 0) {
+          // this.waterData = response.data[0];  // 获取第一条数据
+          console.log('suc',response.data[0]);
+          this.FishData = response.data; // 保存所有数据
+          this.currFishdata = this.FishData[0];
+        }
+      } catch (error) {
+        console.error('Error fetching water data:', error);
+      }
+    },
+    PreFishData(){
+      if(this.dataIndex>0) {
+        this.dataIndex -= 1;
+        this.currFishdata = this.FishData[this.dataIndex];
+      }
+    },
+    NextFishData(){
+      if(this.dataIndex<this.FishData.length-1) {
+        this.dataIndex += 1;
+        this.currFishdata = this.FishData[this.dataIndex];
+      }
+    },
     handler({ BMap, map }) {
       console.log(BMap, map);
       this.center.lng = 106.505;
@@ -111,7 +145,7 @@ export default {
 }
 .head {
   padding: 10px;
-  height: 560px;
+  height: 540px;
   display: flex;
   justify-content: space-around;
 }

@@ -39,7 +39,6 @@
     </div>
 
     <div class="body">
-      <!-- 衣食住行支出比例 -->
       <dv-border-box-6  style="padding: 10px">
         <Echart :options="options2" height="400px"
       /></dv-border-box-6>
@@ -49,83 +48,73 @@
 
 <script>
 import Echart from "@/common/echart/index.vue";
+import axios from 'axios';
 export default {
   components: { Echart },
   data() {
     return {
-      options1: {
+      all_fish_data: [], // 保存所有数据
+      need_fish_data: [],
+      options2: {
+        title: {
+          text: '鱼类统计',
+          left: 'center'
+        },
         tooltip: {
-          trigger: "axis",
+          trigger: 'item'
         },
-        legend: {
-          data: ["收入", "支出"],
-        },
-        grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        toolbox: {
-          feature: {
-            saveAsImage: {},
-          },
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2016", "2017", "2018", "2019", "2020", "2021", "2022"],
-        },
-        yAxis: {
-          type: "value",
-        },
+        color: ['#FF7F50', '#87CEFA', '#DA70D6', '#32CD32', '#6495ED', '#FF69B4', '#BA55D3'],
         series: [
           {
-            name: "收入",
-            type: "line",
-            data: [800, 910, 900, 920, 1400, 1500, 1550],
-          },
-          {
-            name: "支出",
-            type: "line",
-            data: [220, 610, 600, 620, 890, 1000, 1100],
+            name: 'Access From',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            data: [],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            },
           },
         ],
       },
-      options2: {
-  title: {
-    text: '鱼类统计',
-    left: 'center'
-  },
-  tooltip: {
-    trigger: 'item'
-  },
-  series: [
-    {
-      name: 'Access From',
-      type: 'pie',
-       radius: ['40%', '70%'],
-      data: [
-        { value: 32, name: '种类一' },
-        { value: 21, name: '种类二' },
-        { value: 24, name: '种类三' },
-        { value: 10, name: '种类四' },
-        { value: 13, name: '种类五' },
-        { value: 10, name: '种类六' },
-        { value: 15, name: '种类七' },
-      ],
-      emphasis: {
-        itemStyle: {
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)'
-        }
-      }
-    }
-  ]
-}
     };
   },
+  methods:{
+    fetchFishData() {
+      this.getFishData();
+
+      // 还需要对all_fish_data进行处理
+      // 鱼类数量
+      // 设置图表数据格式为{ value: 32, name: '种类一' }
+
+    },
+    async getFishData(){
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/fish_data/');
+        if (response.data.length > 0) {
+          this.all_fish_data = response.data; // 保存所有数据
+          this.need_fish_data = this.all_fish_data.slice(0, 7);
+          const dataMap = this.need_fish_data.map(d => ({
+            value: d.fish_group_total,
+            name: d.species
+          }));
+          this.options2.series[0].data = dataMap;
+        } else {
+          console.warn('数据不足');
+        }
+        // console.log("历史数据：", this.all_fish_data);
+      } 
+      catch (error) {
+        console.error('获取历史数据失败', error);
+      }
+    }
+  },
+  created() {
+    this.fetchFishData(); // 在组件创建时获取数据
+  }
 };
 </script>
 
