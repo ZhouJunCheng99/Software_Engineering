@@ -48,6 +48,7 @@ export default {
   data() {
     return {
     fish_info_select: '鱼类重量',
+    need_fish_data: [],
     options1: {
     series: [
     {
@@ -155,7 +156,7 @@ export default {
   created() {
     // 初始化时显示默认数据
     this.fish_info_select = '鱼类重量';
-    this.getFishData();
+    this.fetchFishData();
     this.updateOptions2(this.fish_info_select);
   },
   methods: {
@@ -212,13 +213,14 @@ export default {
       this.fetchFishData();
     },
     fetchFishData() {
-      // 还需要对all_fish_data进行处理
+      this.getFishData();
+      // 还需要对need_fish_data进行处理
       
       // 鱼类重量、鱼类尺寸、鱼类数量
       const dataMap = {
-        '鱼类重量': this.all_fish_data.map(d => [d.kind, d.weight]),
-        '鱼类尺寸': this.all_fish_data.map(d => [d.kind, d.size]),
-        '鱼类生命': this.all_fish_data.map(d => [d.kind, d.count]),
+        '鱼类重量': this.need_fish_data.map(d => [d.kind, d.weight]),
+        '鱼类尺寸': this.need_fish_data.map(d => [d.kind, d.size]),
+        '鱼类生命': this.need_fish_data.map(d => [d.kind, d.count]),
       };
       const selectedOption = this.selected_fish_option;
       
@@ -230,6 +232,8 @@ export default {
         const response = await axios.get('http://127.0.0.1:8000/api/fish_data/');
         if (response.data.length > 0) {
           this.all_fish_data = response.data; // 保存所有数据
+          // 需要七个不同种类的鱼类数据
+          this.need_fish_data = this.all_fish_data.slice(0, 7);
         } else {
           console.warn('数据不足');
         }
