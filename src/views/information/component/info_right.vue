@@ -295,10 +295,16 @@ export default {
           // 
 
           // 获取随机13 条数据
-          const latestData = this.allWaterData.slice(-13);
-        // fields = ('url', 'monitoring_time', 'water_quality_category', 'water_temperature', 'pH',
-        //           'dissolved_oxygen', 'conductivity', 'turbidity', 'permanganate_index',
-        //           'ammonia_nitrogen', 'total_phosphorus', 'total_nitrogen', 'site_status', 'pk')
+          const totalData = this.allWaterData.length;
+          const numberOfData = totalData < 13 ? totalData : 13;
+          const randomIndices = [];
+          while (randomIndices.length < numberOfData) {
+            const randomIndex = Math.floor(Math.random() * totalData);
+            if (!randomIndices.includes(randomIndex)) {
+              randomIndices.push(randomIndex);
+            }
+          }
+          const latestData = this.randomIndices.slice(-13);
           // 根据所选的类型处理历史数据
           latestData.forEach((dataPoint) => {
             this.history_data.push({
