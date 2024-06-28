@@ -156,7 +156,7 @@ export default {
   created() {
     // 初始化时显示默认数据
     this.fish_info_select = '鱼类重量';
-    this.fetchFishData();
+    this.getFishData();
     this.updateOptions2(this.fish_info_select);
   },
   methods: {
@@ -213,7 +213,7 @@ export default {
       this.fetchFishData();
     },
     fetchFishData() {
-      this.getFishData();
+      // this.getFishData();
       // 还需要对need_fish_data进行处理
       
       // 鱼类重量、鱼类尺寸、鱼类数量
@@ -222,10 +222,11 @@ export default {
         '鱼类尺寸': this.need_fish_data.map(d => [d.species, d.body_length]),
         '鱼类生命': this.need_fish_data.map(d => [d.species, d.fish_group_total]),
       };
-      const selectedOption = this.selected_fish_option;
+      const selectedOption = this.fish_info_select;
+      console.log('s',dataMap[selectedOption])
       
       // 设置图表数据格式为[time, data]
-      this.options2.series[0].data = dataMap[selectedOption];
+      this.options2.series[0].data = dataMap[selectedOption].map(item => item[1]);
     },
     async getFishData(){
       try {
@@ -234,6 +235,7 @@ export default {
           this.all_fish_data = response.data; // 保存所有数据
           // 需要七个不同种类的鱼类数据
           this.need_fish_data = this.all_fish_data.slice(0, 7);
+          this.fetchFishData();
         } else {
           console.warn('数据不足');
         }
