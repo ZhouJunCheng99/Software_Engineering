@@ -3,7 +3,7 @@
     <div>
       <dv-border-box-8 :reverse="true" style="padding: 10px">
         <div class="grade">
-          <h2>海洋牧场环境感知得分</h2>
+          <h2>海洋牧场环境温度感知</h2>
           <Echart :options="options1" ref="myChart" height="350px" />
         </div>
       </dv-border-box-8>
