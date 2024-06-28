@@ -34,6 +34,7 @@
 
 <script>
 import Echart from "@/common/echart/index.vue";
+import axios from 'axios'
 // import * as echarts from "echarts";
 
 function formatter (number) {
@@ -77,6 +78,9 @@ export default {
       config1,
       config2,
       config3,
+      fish_data: '',
+      all_fish_data: [],
+      need_fish_data: [],
       options1: {
         color: ["#80FFA5"],
         title: {
@@ -156,7 +160,7 @@ export default {
             smooth: true,
             symbol: 'none',
             areaStyle: {},
-            data: data,
+            data: [],
             tooltip: {
               valueFormatter: function (value) {
                 return value + " 条";
@@ -167,6 +171,39 @@ export default {
     },
     };
   },
+  methods:{
+    fetchFishData() {
+      this.getFishData();
+      // 过滤并格式化为 [time, data] 格式
+      const filteredData = this.all_fish_data
+        .filter(d => d.kind === '鲤鱼')
+        .map(d => [new Date(d.timestamp).getTime(), d.count]);
+
+      // 按时间排序
+      filteredData.sort((a, b) => a[0] - b[0]);
+      
+      // 设置图表数据格式为[time, data]
+      // 这里需要获取某种鱼类的历史数量
+      this.options2.series[0].data = filteredData;
+    },
+    async getFishData(){
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/fish_data/');
+        if (response.data.length > 0) {
+          this.all_fish_data = response.data; // 保存所有数据
+        } else {
+          console.warn('数据不足');
+        }
+        // console.log("历史数据：", this.all_fish_data);
+      } 
+      catch (error) {
+        console.error('获取历史数据失败', error);
+      }
+    }
+  },
+  created(){
+    this.fetchFishData();
+  }
 };
 </script>
 

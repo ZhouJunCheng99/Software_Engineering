@@ -111,3 +111,8 @@ class GetHistoryData(viewsets.ModelViewSet):
 class FishDataViewSet(viewsets.ModelViewSet):
     queryset = Fish_Data.objects.all()
     serializer_class = FishDataSerializer
+    
+class GetFishData(viewsets.ModelViewSet):
+    # 获取鱼类数据
+    queryset = Fish_Data.objects.all()
+    serializer_class = FishDataSerializer
