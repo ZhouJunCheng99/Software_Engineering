@@ -60,28 +60,28 @@ export default {
       waterData: {
         data: [
           {
-            name: '电导率(μS/cm)',
-            value: 26,
+            name: '电导率(mS/cm)',
+            value: 0.987,
           },
           {
             name: '盐度(‰)',
-            value: 0,
+            value: 4,
           },
           {
-            name: '溶解度(mg/L)',
-            value: 0,
+            name: '溶解氧(mg/L)',
+            value: 12.49,
           },
           {
             name: '浊度(NTU)',
-            value: 0,
+            value: 12.5,
           },
           {
             name: 'pH',
-            value: 0,
+            value: 8.33,
           },
           {
             name: '水温(℃)',
-            value: 0,
+            value: 17.5,
           },
         ],
         colors: ['#e062ae', '#fb7293', '#e690d1', '#32c5e9', '#96bfff', '#e062ae'],
@@ -100,9 +100,9 @@ export default {
       this.zoom = 15;
     },
     fetchData() {
-      const data = this.todayData;
-      if (data && data.length === 6) {
-        data.forEach((item, index) => {
+      const tdata = this.todayData;
+      if (tdata && tdata.length === 6) {
+        tdata.forEach((item, index) => {
           // 更新
           this.$set(this.waterData.data, index, {
             name: item.name,
@@ -114,7 +114,7 @@ export default {
       } else {
         console.error('获取当日数据失败或数据格式不正确');
       }
-      console.log("data", data);
+      console.log("data", tdata);
       console.log("this.waterData.data", this.waterData.data);
     },
 
@@ -124,19 +124,19 @@ export default {
         if (response.data.length > 0) {
           this.allWaterData = response.data; // 保存所有数据
           // 获取最新的水文数据
-
           this.todayData = {
-              conductivity: this.allWaterData[-1].conductivity,
-              water_temperature: this.allWaterData[-1].water_temperature,
-              permanganate_index: this.allWaterData[-1].permanganate_index,
-              dissolved_oxygen: this.allWaterData[-1].dissolved_oxygen,
-              turbidity: this.allWaterData[-1].turbidity,
-              total_phosphorus: this.allWaterData[-1].total_phosphorus,
-            }
+              conductivity: this.allWaterData[this.allWaterData.length-1].conductivity,
+              water_temperature: this.allWaterData[this.allWaterData.length-1].water_temperature,
+              permanganate_index: this.allWaterData[this.allWaterData.length-1].permanganate_index,
+              dissolved_oxygen: this.allWaterData[this.allWaterData.length-1].dissolved_oxygen,
+              turbidity: this.allWaterData[this.allWaterData.length-1].turbidity,
+              total_phosphorus: this.allWaterData[this.allWaterData.length-1].total_phosphorus,
+            };
         } else {
           console.warn('数据不足');
         }
         console.log("历史数据：", this.todayData);
+        this.fetchData();
       } 
       catch (error) {
         this.todayData = 
@@ -152,7 +152,7 @@ export default {
     }
   },
   mounted() {
-    this.fetchData();
+    // this.fetchData();
   },
   create(){
     this.getHistoryData();

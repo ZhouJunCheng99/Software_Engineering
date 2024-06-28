@@ -184,7 +184,7 @@ export default {
           this.options2.yAxis = {
             type: 'value',
             axisLabel: {
-              formatter: '{value} 克'
+              formatter: '{value} 千克'
             }
           };
           // this.options2.series[0].data = [820, 932, 901, 934, 1290, 1330, 1320];
