@@ -175,7 +175,7 @@ export default {
     fetchFishData() {
       this.getFishData();
       // 生成时间戳并格式化为 [time, data] 格式
-      const baseYear = 2000;
+      // const baseYear = 2000;
       const filteredData = this.all_fish_data
         .filter(d => d.species === '鲤鱼')
         .map((d, index) => [(2000 + index), d.fish_group_total]);
@@ -196,7 +196,7 @@ export default {
         if (response.data.length > 0) {
           this.all_fish_data = response.data; // 保存所有数据
           // 只获取一种species鱼群的fish_group_total总体数据，然后根据一个index索引生成时间戳
-          this.need_fish_data = 
+          // this.need_fish_data =
         } else {
           console.warn('数据不足');
         }
