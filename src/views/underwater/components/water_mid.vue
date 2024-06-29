@@ -227,6 +227,7 @@ export default {
       // 设置图表数据格式为[time, data]
       this.options2.series[0].data = dataMap[selectedOption];
     },
+    
     async getFishData(){
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/fish_data/');
