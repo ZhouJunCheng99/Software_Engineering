@@ -198,30 +198,37 @@ export default {
     setTimeRange(range) {
       const now = new Date();
       let start;
+      let interval;
+      let interval_num;
       switch (range) {
         case 'day':
           start = new Date(now.setDate(now.getDate() - 1));
+          interval_num = 12;
           break;
         case 'week':
           start = new Date(now.setDate(now.getDate() - 7));
+          interval_num = 7;
           break;
         case 'month':
           start = new Date(now.setMonth(now.getMonth() - 1));
+          interval_num = 10;
           break;
         case 'year':
           start = new Date(now.setFullYear(now.getFullYear() - 1));
+          interval_num = 12;
           break;
         case 'custom':
           // 用户多选框选择时间
           start = this.startDate;
           break;
       }
+
       this.startDate = start;
       this.endDate = new Date();
-
-      const interval = (this.endDate.getTime() - this.startDate.getTime()) / 12;
+      interval = (this.endDate.getTime() - this.startDate.getTime()) / interval_num;
+      
       let intervals = [];
-      for (let i = 0; i <= 12; i++) {
+      for (let i = 0; i <= interval_num; i++) {
         intervals.push(new Date(start.getTime() + interval * i));
       }
       const formattedIntervals = intervals.map(interval => this.formatDate(interval, range));
@@ -254,7 +261,6 @@ export default {
       return date.toLocaleString('en-US', options);
     },
     fetchHistoryData() {
-      // Get data based on selected time range and update chart options
       const data = {
         '选项1': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130],
         '选项2': [15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135],
