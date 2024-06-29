@@ -1,3 +1,4 @@
+src\views\intelligent\index.vue：
 <template>
   <div>
     <div class="env_content">
