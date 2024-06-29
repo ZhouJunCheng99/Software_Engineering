@@ -225,9 +225,6 @@ export default {
       const random = this.allWaterData[this.index].water_temperature? this.allWaterData[this.index].water_temperature.toFixed(2):'';
       this.index=(this.index+1)%this.allWaterData.length;
       const color = random > 25 ? 'red' : '#FFC0CB'; // 浅粉色
-      if (random > 25) {
-        alert(`水温过高！已达到 ${random}℃，请尽快处理！`);
-      }
       this.$refs.myChart.chart.setOption({
         series: [
           {
@@ -249,6 +246,9 @@ export default {
           }
         ]
       });
+      if (random > 25) {
+        alert(`水温过高！已达到 ${random}℃，请尽快处理！`);
+      }
     }
   }
 };
