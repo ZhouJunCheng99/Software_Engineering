@@ -63,14 +63,6 @@ const config3 = {
   formatter
 }
 
-let base = +new Date(1988, 9, 3);
-let oneDay = 24 * 3600 * 1000;
-let data = [[base, Math.random() * 300]];
-for (let i = 1; i < 20000; i++) {
-  let now = new Date((base += oneDay));
-  data.push([+now, Math.round((Math.random() - 0.5) * 20 + data[i - 1][1])]);
-}
-
 export default {
   components: { Echart },
   data() {
@@ -172,6 +164,13 @@ export default {
     };
   },
   methods:{
+    fetchConfig(){
+      // 确保生成 10000 到 30000 之间的整数
+      config1.number = [Math.floor(Math.random() * (30000 - 10000 + 1)) + 10000];
+      // 确保生成 0 到 40 之间的整数
+      config2.number = [Math.floor(Math.random() * 41)];
+      config3.number = [Math.floor(Math.random() * 41)];
+    },
     fetchFishData() {
       // this.getFishData();
       // 生成时间戳并格式化为 [time, data] 格式
@@ -186,16 +185,47 @@ export default {
       // 设置图表数据格式为[time, data]
       // 这里需要获取某种鱼类的历史数量
       // this.options2.series[0].data = filteredData;
-      let data = [];
 
-      for (let year = 2020; year <= 2024; year++) {
-        for (let month = 0; month < 12; month++) {
-          let currentDate = new Date(year, month, 1);
-          let fishCount = Math.random() * 300;
-          data.push([currentDate, fishCount]);
-        }
+      // 
+      // let base = +new Date(1988, 9, 3);
+      // let oneDay = 24 * 3600 * 1000;
+      // let data = [[base, Math.random() * 300]];
+      // for (let i = 1; i < 20000; i++) {
+      //   let now = new Date((base += oneDay));
+      //   data.push([+now, Math.round((Math.random() - 0.5) * 20 + data[i - 1][1])]);
+      // }
+      // this.options2.series.data = data;
+
+      let base = +new Date(1988, 9, 3);
+      let oneDay = 24 * 3600 * 1000;
+      let data = [[base, Math.random() * (10000 - 3000) + 3000]];
+
+      for (let i = 1; i < 13000; i++) {
+        let now = new Date((base += oneDay));
+        let previousValue = data[i - 1][1];
+        let randomValue = Math.round((Math.random() - 0.5) * 20 + previousValue);
+        randomValue = Math.max(3000, Math.min(10000, randomValue));
+        data.push([+now, randomValue]);
       }
-      this.options2.series[0].data = data;
+      this.$set(this.options2.series[0], 'data', data);
+      console.log("this.options2.series.data: ", this.options2.series[0].data);
+
+      this.$nextTick(() => {
+        this.$refs.chart && this.$refs.chart.resize();
+      });
+
+
+      // let data = [];
+
+      // for (let year = 2020; year <= 2024; year++) {
+      //   for (let month = 0; month < 12; month++) {
+      //     let currentDate = new Date(year, month, 1);
+      //     let fishCount = Math.random() * 300;
+      //     data.push([currentDate, fishCount]);
+      //   }
+      // }
+      // this.options2.series.data = data;
+
     },
     async getFishData(){
       // fields = ('url', 'species', 'body_length', 'body_weight', 'health_status',
@@ -219,7 +249,8 @@ export default {
     }
   },
   created(){
-    this.getFishData();
+    this.fetchFishData();
+    this.fetchConfig();
   }
 };
 </script>
