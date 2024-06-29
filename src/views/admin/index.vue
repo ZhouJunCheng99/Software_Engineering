@@ -5,9 +5,9 @@
         <h1>管理员界面</h1>
         <nav>
           <ul>
-            <li><router-link to="/Aindex/admin/dashboard">海洋牧场总体得分</router-link></li>
-            <li><router-link to="/Aindex/admin/users">用户管理</router-link></li>
-            <li><router-link to="/Aindex/admin/settings">设置</router-link></li>
+<!--            <li><router-link to="/Aindex/admin/dashboard">海洋牧场总体得分</router-link></li>-->
+<!--            <li><router-link to="/Aindex/admin/users">用户管理</router-link></li>-->
+<!--            <li><router-link to="/Aindex/admin/settings">设置</router-link></li>-->
           </ul>
         </nav>
       </div>
@@ -31,18 +31,23 @@
               <input type="text" id="username" v-model="newUser.username">
             </div>
             <div>
-              <label for="email">邮箱:</label>
+              <label for="email">电话:</label>
               <input type="email" id="email" v-model="newUser.email">
+            </div>
+            <div>
+              <label for="password">密码:</label>
+              <input type="password" id="password" v-model="newUser.password">
             </div>
             <div>
               <label for="userType">用户类别:</label>
               <select id="userType" v-model="newUser.userType">
                 <option value="" disabled>请选择用户类别</option>
                 <option value="管理员">管理员</option>
-                <option value="普通用户（养殖户）">普通用户（养殖户）</option>
-                <option value="科研工作者">科研工作者</option>
-                <option value="供应链合作伙伴">供应链合作伙伴</option>
-                <option value="投资者及财务分析专家">投资者及财务分析专家</option>
+                <option value="养殖户">养殖户</option>
+                <option value="食品购买者">食品购买者</option>
+<!--                <option value="科研工作者">科研工作者</option>-->
+<!--                <option value="供应链合作伙伴">供应链合作伙伴</option>-->
+<!--                <option value="投资者及财务分析专家">投资者及财务分析专家</option>-->
               </select>
             </div>
             <button type="submit">添加用户</button>

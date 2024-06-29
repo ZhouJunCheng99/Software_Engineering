@@ -21,9 +21,9 @@
           },
           legend: {
             data: [
+              'Administator',
               'Farmer',
-              'Researcher',
-              'Economist',
+              'Food Buyer',
               'Emma',
               'Zhou',
               'Yang',
@@ -47,9 +47,9 @@
                 show: false
               },
               data: [
-                { value: 1548, name: 'Economist' },
-                { value: 775, name: 'Farmer' },
-                { value: 679, name: 'Researcher', selected: true }
+                { value: 12, name: 'Administator' },
+                { value: 75, name: 'Farmer' },
+                { value: 279, name: 'Food Buyer', selected: true }
               ]
             },
             {
@@ -93,14 +93,14 @@
                 }
               },
               data: [
-                { value: 1048, name: 'Zhu' },
-                { value: 335, name: 'Farmer' },
-                { value: 310, name: 'Emma' },
-                { value: 251, name: 'Gao' },
-                { value: 234, name: 'Zhou' },
-                { value: 147, name: 'Feng' },
-                { value: 135, name: 'Yang' },
-                { value: 102, name: 'Others' }
+                { value: 48, name: 'Zhu' },
+                { value: 35, name: 'Farmer' },
+                { value: 10, name: 'Emma' },
+                { value: 51, name: 'Gao' },
+                { value: 34, name: 'Zhou' },
+                { value: 17, name: 'Feng' },
+                { value: 15, name: 'Yang' },
+                { value: 12, name: 'Others' }
               ]
             }
           ]

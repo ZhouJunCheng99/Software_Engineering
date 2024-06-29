@@ -73,7 +73,7 @@
             </div>
 
             <div class="react-left react-item" :class="{ bgc: tabbarIndex == 5 }">
-              <router-link to="/Uindex/prediction"
+              <router-link to="/Buyer_index/prediction"
                 ><span class="text" @click="changeTabbarIndex(4)"
                   >智能预测</span
                 ></router-link
