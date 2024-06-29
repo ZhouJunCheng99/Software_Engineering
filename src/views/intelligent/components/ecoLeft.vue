@@ -40,10 +40,13 @@
 
 <script>
 import Echart from "@/common/echart/index.vue";
+import axios from "axios";
 export default {
   components: { Echart },
   data() {
     return {
+      allWaterData:[],
+      index:0,
       options1: {
         series: [
           {
@@ -195,12 +198,32 @@ export default {
     };
   },
   mounted() {
-    this.updateChart();
-    setInterval(this.updateChart, 10000);
+    // this.updateChart();
+    // setInterval(this.updateChart, 10000);
+  },
+  created() {
+    this.fetchWaterData();
+    this.startDataUpdateInterval();
   },
   methods: {
+    async fetchWaterData(){
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/water-data/');
+        if (response.data.length > 0) {
+          // this.waterData = response.data[0];  // 获取第一条数据
+          this.allWaterData = response.data; // 保存所有数据
+          this.updateChart(); // 初始化第一次数据
+        }
+      } catch (error) {
+        console.error('Error fetching water data:', error);
+      }
+    },
+    startDataUpdateInterval() {
+      setInterval(this.updateChart, 10000);
+    },
     updateChart() {
-      const random = (Math.random() * 10 + 20).toFixed(2);
+      const random = this.allWaterData[this.index].water_temperature? this.allWaterData[this.index].water_temperature.toFixed(2):'';
+      this.index=(this.index+1)%this.allWaterData.length;
       const color = random > 25 ? 'red' : '#FFC0CB'; // 浅粉色
       if (random > 25) {
         alert(`水温过高！已达到 ${random}℃，请尽快处理！`);
