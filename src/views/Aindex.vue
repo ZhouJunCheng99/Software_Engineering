@@ -72,6 +72,20 @@
                 ></router-link
               >
             </div>
+
+
+            <div class="react-left react-item" :class="{ bgc: tabbarIndex == 5 }">
+              <router-link to="/Aindex/prediction"
+                ><span class="text" @click="changeTabbarIndex(5)"
+                  >智能预测</span
+                ></router-link
+              >
+            </div>
+
+
+
+
+
           </div>
 
                    

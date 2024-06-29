@@ -170,6 +170,16 @@ const routes = [
           }
         ]
       },
+      {
+        path: "/Aindex/prediction",
+        name: "prediction",
+        component: () => import("../views/prediction/index.vue"),
+        meta: {
+          title: '系统管理界面-智能预测'
+        },
+      },
+
+
     ],
 
   },
