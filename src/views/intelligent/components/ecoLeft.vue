@@ -15,7 +15,18 @@
             <h1>预警</h1>
           </div>
           <div class="bottom">
-            <h2>水温过高</h2>
+            <div class="info">
+              <p>当前温度: {{ currentTemperature }}℃</p>
+              <p>当前湿度: {{ currentHumidity }}%</p>
+              <p>最近警告</p>
+              <div class="warnings">
+                <ul>
+                  <li v-for="warning in warnings" :key="warning.time" class="warning-message">
+                    {{ warning.time }} - {{ warning.message }}
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </dv-border-box-8>
@@ -27,12 +38,6 @@
     </div>
   </div>
 </template>
-
-
-
-
-
-
 
 
 
@@ -105,7 +110,7 @@ export default {
               lineHeight: 40,
               borderRadius: 8,
               offsetCenter: [0, '-15%'],
-              fontSize: 30, // 显示温度的字体小点
+              fontSize: 30, // 改小显示温度的字体大小
               fontWeight: 'bolder',
               formatter: '{value} °C',
               color: 'inherit'
@@ -261,7 +266,6 @@ export default {
 
 
 
-
 <style scoped>
 .content {
   width: 23%;
@@ -286,7 +290,7 @@ export default {
   margin-top: 10px;
 }
 .alarm {
-  height: 80px;
+  height: 200px; /* 调整高度以适应滚动条 */
   display: flex;
   flex-direction: column;
   margin-top: 10px;
@@ -298,10 +302,21 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-grow: 1; 
+  flex-grow: 1;
+  overflow: hidden; /* 确保内容不溢出 */
 }
-.body {
-  margin-top: 10px;
+.info {
+  text-align: left;
+  font-size: 18px; /* 增加字体大小 */
+  line-height: 1.5; /* 增加行高 */
+  font-family: Arial, sans-serif; /* 更改字体 */
+}
+.warnings {
+  max-height: 100px; /* 限制警告区域的最大高度，调整为适合的大小 */
+  overflow-y: auto; /* 增加垂直滚动条 */
+}
+.warning-message {
+  color: red; /* 设置警告消息的颜色为红色 */
 }
 h2 {
   text-align: center;
