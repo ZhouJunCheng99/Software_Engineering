@@ -24,7 +24,8 @@ router.register('fish_data', GetFishData, basename='fish_data')
 
 # router.register('upload_water_quality', WaterQualityDataViewSet)
 router.register('export', ExportDataViewSet, basename='export_data')
-router.register('fish-data', FishDataViewSet)
+
+router.register('fish-data', FishDataViewSet, basename='fish-data')
 
 
 

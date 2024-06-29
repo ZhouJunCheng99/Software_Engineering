@@ -63,6 +63,7 @@ export default {
         tooltip: {
           trigger: 'item'
         },
+        color: ['#FF7F50', '#87CEFA', '#DA70D6', '#32CD32', '#6495ED', '#FF69B4', '#BA55D3'],
         series: [
           {
             name: 'Access From',
@@ -84,15 +85,11 @@ export default {
   methods:{
     fetchFishData() {
       this.getFishData();
+
       // 还需要对all_fish_data进行处理
-      
       // 鱼类数量
       // 设置图表数据格式为{ value: 32, name: '种类一' }
-      const dataMap = this.need_fish_data.map(d => ({
-        value: d.fish_group_total,
-        name: d.species
-      }));
-      this.options2.series[0].data = dataMap;
+
     },
     async getFishData(){
       try {
@@ -100,6 +97,11 @@ export default {
         if (response.data.length > 0) {
           this.all_fish_data = response.data; // 保存所有数据
           this.need_fish_data = this.all_fish_data.slice(0, 7);
+          const dataMap = this.need_fish_data.map(d => ({
+            value: d.fish_group_total,
+            name: d.species
+          }));
+          this.options2.series[0].data = dataMap;
         } else {
           console.warn('数据不足');
         }

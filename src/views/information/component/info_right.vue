@@ -289,6 +289,7 @@ export default {
         const response = await axios.get('http://127.0.0.1:8000/api/history_data/');
         if (response.data.length > 0) {
           this.allWaterData = response.data; // 保存所有数据
+          // console.log(this.allWaterData);
           this.history_data = [];
 
           // 获取与时间匹配的 13 条数据
@@ -301,10 +302,10 @@ export default {
           while (randomIndices.length < numberOfData) {
             const randomIndex = Math.floor(Math.random() * totalData);
             if (!randomIndices.includes(randomIndex)) {
-              randomIndices.push(randomIndex);
+              randomIndices.push(this.allWaterData[randomIndex]);
             }
           }
-          const latestData = this.randomIndices.slice(-13);
+          const latestData = randomIndices.slice(-13);
           // 根据所选的类型处理历史数据
           latestData.forEach((dataPoint) => {
             this.history_data.push({
@@ -313,7 +314,7 @@ export default {
               permanganate_index: dataPoint.permanganate_index,
               dissolved_oxygen: dataPoint.dissolved_oxygen,
               turbidity: dataPoint.turbidity,
-              total_phosphorus: dataPoint.total_phosphorus,
+              total_phosphorus: dataPoint.pH,
             });
           });
         } else {
@@ -326,6 +327,7 @@ export default {
       catch (error) {
         console.error('获取历史数据失败', error);
       }
+      this.fetchHistoryData();
     }
   },
   watch: {
@@ -336,7 +338,7 @@ export default {
   },
   mounted() {
     this.fetchHistoryData();
-    this.setTimeRange('week'); // 默认显示近一周的数据
+    this.setTimeRange('month'); // 默认显示近一周的数据
   },
   created(){
     this.getHistoryData();
