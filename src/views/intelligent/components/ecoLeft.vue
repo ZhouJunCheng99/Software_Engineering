@@ -33,7 +33,7 @@
     </div>
     <div class="body">
       <dv-border-box-6 style="padding: 10px">
-        <Echart :options="options2" height="380px" />
+        <Echart :options="options2" height="380px" class="echart"/>
       </dv-border-box-6>
     </div>
   </div>
@@ -290,7 +290,7 @@ export default {
   margin-top: 10px;
 }
 .alarm {
-  height: 200px; /* 调整高度以适应滚动条 */
+  height: 200px; /* 调整高度，适应滚动条 */
   display: flex;
   flex-direction: column;
   margin-top: 10px;
@@ -321,6 +321,20 @@ export default {
 h2 {
   text-align: center;
 }
+
+.body {
+  margin-top: 10px;
+  height: 300px; /* 设置高度为自动，以便根据内容调整 */
+  overflow-y: auto; /* 增加垂直滚动条，以防内容溢出 */
+}
+.dv-border-box-6 {
+  height: 100%; /* 确保容器高度为100% */
+  padding: 10px;
+}
+.echart {
+  height: 100%; /* 确保图表高度为100% */
+}
+
 </style>
 
 
