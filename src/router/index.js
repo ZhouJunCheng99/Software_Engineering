@@ -66,6 +66,14 @@ const routes = [
           title: '养殖户界面-智能中心'
         },
       },
+      {
+        path: "/Uindex/prediction",
+        name: "prediction",
+        component: () => import("../views/prediction/index.vue"),
+        meta: {
+          title: '养殖户界面-智能预测'
+        },
+      },
     ],
   },
   {
@@ -100,6 +108,14 @@ const routes = [
         component: () => import("../views/intelligent/index.vue"),
         meta: {
           title: '食品购买者界面-智能中心'
+        },
+      },
+      {
+        path: "/Buyer_index/prediction",
+        name: "prediction",
+        component: () => import("../views/prediction/index.vue"),
+        meta: {
+          title: '食品购买者界面-智能预测'
         },
       },
     ],
