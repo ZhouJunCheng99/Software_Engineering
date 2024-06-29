@@ -220,6 +220,7 @@ export default {
         case 'custom':
           // 用户多选框选择时间
           start = this.startDate;
+          interval_num = 12;
           break;
       }
 
@@ -276,9 +277,16 @@ export default {
         '选项4': this.history_data.map(d => d.turbidity),
         '选项5': this.history_data.map(d => d.total_phosphorus),
       };
-
       // 根据时间获取数据
-      this.options1.series[0].data = dataMap['选项1'];
+      // 确保数据长度一致
+      const xAxisDataLength = this.options1.xAxis[0].data.length;
+      const selectedOptionData0 = dataMap['选项1'];
+      if (selectedOptionData0.length > xAxisDataLength) {
+        this.options1.series[0].data = selectedOptionData0.slice(0, xAxisDataLength);
+      } else {
+        this.options1.series[0].data = selectedOptionData0;
+      }
+      // this.options1.series[0].data = dataMap['选项1'];
       
       // 设置图表的第二属性
       const selectedOption = this.data_options.find(option => option.value === this.selected_data_option);
@@ -287,7 +295,16 @@ export default {
       this.options1.yAxis[1].min = 0;
       this.options1.yAxis[1].max = Math.max(...data[this.selected_data_option]);
       this.options1.yAxis[1].interval = Math.round((this.options1.yAxis[0].max - this.options1.yAxis[0].min) / 5);
-      this.options1.series[1].data = dataMap[this.selected_data_option];
+
+      // 确保数据长度一致
+      const selectedOptionData1 = dataMap[this.selected_data_option];
+      if (selectedOptionData1.length > xAxisDataLength) {
+        this.options1.series[1].data = selectedOptionData1.slice(0, xAxisDataLength);
+      } else {
+        this.options1.series[1].data = selectedOptionData1;
+      }
+
+      // this.options1.series[1].data = dataMap[this.selected_data_option];
       this.options1.legend.data = [this.options1.series[0].name, this.options1.series[1].name];
     },
     async getHistoryData(){
